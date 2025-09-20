@@ -1,4 +1,6 @@
 
+import CarrouselHomepage from "@/components/organisms/CarrouselHomepage";
+
 export default function HomePageClient() {
-  return null;
+  return <CarrouselHomepage />;
 }
