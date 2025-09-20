@@ -106,40 +106,6 @@ export default function CarrouselHomepage() {
           ))}
         </div>
       </div>
-      {/* Sección Hotel Regatta cuida de ti */}
-      <div style={{
-        width: "100vw",
-        background: "#0a174e",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "stretch",
-        justifyContent: "center",
-        minHeight: "400px",
-        marginTop: "0",
-        marginBottom: "0"
-      }}>
-        <div style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "48px 40px",
-          color: "#fff",
-          fontFamily: "inherit"
-        }}>
-          <h2 style={{ fontSize: "2.2rem", fontWeight: "500", marginBottom: "24px" }}>Hotel Regatta cuida de ti</h2>
-          <p style={{ fontSize: "1.4rem", lineHeight: 1.7 }}>
-            Nos esforzamos para que vivas una experiencia única y de ensueño al estar frente a las playas de Bocagrande, por eso ponemos toda nuestra atención en el cuidado hacia ti y cumplimos con un estricto protocolo una vez ingresas a nuestro hotel.
-          </p>
-        </div>
-        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "400px" }}>
-          <img
-            src="https://images.unsplash.com/photo-1588776814546-ec7e8c8b1b1b?auto=format&fit=crop&w=800&q=80"
-            alt="Control de temperatura en hotel"
-            style={{ width: "100%", maxWidth: "600px", height: "100%", objectFit: "cover" }}
-          />
-        </div>
-      </div>
       {/* Sección de Comodidades */}
       <div style={{
         width: "100vw",
@@ -217,6 +183,40 @@ export default function CarrouselHomepage() {
               fontSize: "1.3rem"
             }}>Room service</div>
           </div>
+        </div>
+      </div>
+      {/* Sección Hotel Regatta cuida de ti debajo de comodidades */}
+      <div style={{
+        width: "100vw",
+        background: "#0a174e",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "stretch",
+        justifyContent: "center",
+        minHeight: "400px",
+        marginTop: "0",
+        marginBottom: "0"
+      }}>
+        <div style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "48px 40px",
+          color: "#fff",
+          fontFamily: "inherit"
+        }}>
+          <h2 style={{ fontSize: "2.2rem", fontWeight: "500", marginBottom: "24px" }}>Hotel Regatta cuida de ti</h2>
+          <p style={{ fontSize: "1.4rem", lineHeight: 1.7 }}>
+            Nos esforzamos para que vivas una experiencia única y de ensueño al estar frente a las playas de Bocagrande, por eso ponemos toda nuestra atención en el cuidado hacia ti y cumplimos con un estricto protocolo una vez ingresas a nuestro hotel.
+          </p>
+        </div>
+        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "400px" }}>
+          <img
+            src="https://static.wixstatic.com/media/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg/v1/fill/w_881,h_455,al_tr,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg"
+            alt="Hotel Regatta cuida de ti"
+            style={{ width: "100%", maxWidth: "600px", height: "100%", objectFit: "cover" }}
+          />
         </div>
       </div>
     </>
