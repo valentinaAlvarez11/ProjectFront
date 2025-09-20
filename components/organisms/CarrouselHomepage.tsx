@@ -106,139 +106,6 @@ export default function CarrouselHomepage() {
           ))}
         </div>
       </div>
-      {/* Tarjetas de habitaciones */}
-      <div style={{
-        width: "100vw",
-        background: "#fff",
-        display: "flex",
-        justifyContent: "center",
-        gap: "40px",
-        padding: "20px 0 60px 0"
-      }}>
-        {/* Estándar */}
-        <div style={{
-          width: "350px",
-          background: "#fff",
-          borderRadius: "12px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        }}>
-          <div style={{ width: "100%", position: "relative" }}>
-            <img src="https://regattacartagena.com/wp-content/uploads/2022/09/estandar.jpg" alt="Habitación Estándar" style={{ width: "100%", height: "220px", objectFit: "cover" }} />
-            <div style={{
-              position: "absolute",
-              top: "16px",
-              left: "16px",
-              background: "#0a174e",
-              color: "#fff",
-              borderRadius: "16px",
-              padding: "8px 24px",
-              fontWeight: "bold",
-              fontSize: "1.3rem",
-              letterSpacing: "0.05em"
-            }}>Estándar</div>
-          </div>
-          <div style={{ padding: "24px 20px 0 20px", textAlign: "left", fontSize: "1.15rem", color: "#233876", minHeight: "80px" }}>
-            Cómodas y amplias habitaciones que cuentan con cama King o Twin.
-          </div>
-          <button style={{
-            background: "#0a174e",
-            color: "#fff",
-            border: "none",
-            borderRadius: "30px",
-            padding: "12px 0",
-            width: "70%",
-            margin: "24px 0 24px 0",
-            fontSize: "1.15rem",
-            cursor: "pointer"
-          }}>Ver más</button>
-        </div>
-        {/* Superior */}
-        <div style={{
-          width: "350px",
-          background: "#fff",
-          borderRadius: "12px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        }}>
-          <div style={{ width: "100%", position: "relative" }}>
-            <img src="https://regattacartagena.com/wp-content/uploads/2022/09/superior.jpg" alt="Habitación Superior" style={{ width: "100%", height: "220px", objectFit: "cover" }} />
-            <div style={{
-              position: "absolute",
-              top: "16px",
-              left: "16px",
-              background: "#0a174e",
-              color: "#fff",
-              borderRadius: "16px",
-              padding: "8px 24px",
-              fontWeight: "bold",
-              fontSize: "1.3rem",
-              letterSpacing: "0.05em"
-            }}>Superior</div>
-          </div>
-          <div style={{ padding: "24px 20px 0 20px", textAlign: "left", fontSize: "1.15rem", color: "#233876", minHeight: "80px" }}>
-            Habitación doble con hermosa vista al mar. Cuenta con cama king size o twin.
-          </div>
-          <button style={{
-            background: "#0a174e",
-            color: "#fff",
-            border: "none",
-            borderRadius: "30px",
-            padding: "12px 0",
-            width: "70%",
-            margin: "24px 0 24px 0",
-            fontSize: "1.15rem",
-            cursor: "pointer"
-          }}>Ver más</button>
-        </div>
-        {/* Deluxe */}
-        <div style={{
-          width: "350px",
-          background: "#fff",
-          borderRadius: "12px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        }}>
-          <div style={{ width: "100%", position: "relative" }}>
-            <img src="https://regattacartagena.com/wp-content/uploads/2022/09/deluxe.jpg" alt="Habitación Deluxe" style={{ width: "100%", height: "220px", objectFit: "cover" }} />
-            <div style={{
-              position: "absolute",
-              top: "16px",
-              left: "16px",
-              background: "#0a174e",
-              color: "#fff",
-              borderRadius: "16px",
-              padding: "8px 24px",
-              fontWeight: "bold",
-              fontSize: "1.3rem",
-              letterSpacing: "0.05em"
-            }}>Deluxe</div>
-          </div>
-          <div style={{ padding: "24px 20px 0 20px", textAlign: "left", fontSize: "1.15rem", color: "#233876", minHeight: "80px" }}>
-            Habitación doble King con hermosa vista a la ciudad. La habitación Deluxe no tiene la opción de separar la cama. Ideal para parejas.
-          </div>
-          <button style={{
-            background: "#0a174e",
-            color: "#fff",
-            border: "none",
-            borderRadius: "30px",
-            padding: "12px 0",
-            width: "70%",
-            margin: "24px 0 24px 0",
-            fontSize: "1.15rem",
-            cursor: "pointer"
-          }}>Ver más</button>
-        </div>
-      </div>
       {/* Sección de Comodidades */}
       <div style={{
         width: "100vw",
@@ -375,6 +242,139 @@ export default function CarrouselHomepage() {
           color: "#0a174e",
           margin: "32px 0 0 0"
         }}>HABITACIONES</h2>
+          {/* Tarjetas de habitaciones */}
+          <div style={{
+            width: "100vw",
+            background: "#fff",
+            display: "flex",
+            justifyContent: "center",
+            gap: "40px",
+            padding: "20px 0 60px 0"
+          }}>
+            {/* Estándar */}
+            <div style={{
+              width: "350px",
+              background: "#fff",
+              borderRadius: "12px",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}>
+              <div style={{ width: "100%", position: "relative" }}>
+                <img src="https://regattacartagena.com/wp-content/uploads/2022/09/estandar.jpg" alt="Habitación Estándar" style={{ width: "100%", height: "220px", objectFit: "cover" }} />
+                <div style={{
+                  position: "absolute",
+                  top: "16px",
+                  left: "16px",
+                  background: "#0a174e",
+                  color: "#fff",
+                  borderRadius: "16px",
+                  padding: "8px 24px",
+                  fontWeight: "bold",
+                  fontSize: "1.3rem",
+                  letterSpacing: "0.05em"
+                }}>Estándar</div>
+              </div>
+              <div style={{ padding: "24px 20px 0 20px", textAlign: "left", fontSize: "1.15rem", color: "#233876", minHeight: "80px" }}>
+                Cómodas y amplias habitaciones que cuentan con cama King o Twin.
+              </div>
+              <button style={{
+                background: "#0a174e",
+                color: "#fff",
+                border: "none",
+                borderRadius: "30px",
+                padding: "12px 0",
+                width: "70%",
+                margin: "24px 0 24px 0",
+                fontSize: "1.15rem",
+                cursor: "pointer"
+              }}>Ver más</button>
+            </div>
+            {/* Superior */}
+            <div style={{
+              width: "350px",
+              background: "#fff",
+              borderRadius: "12px",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}>
+              <div style={{ width: "100%", position: "relative" }}>
+                <img src="https://regattacartagena.com/wp-content/uploads/2022/09/superior.jpg" alt="Habitación Superior" style={{ width: "100%", height: "220px", objectFit: "cover" }} />
+                <div style={{
+                  position: "absolute",
+                  top: "16px",
+                  left: "16px",
+                  background: "#0a174e",
+                  color: "#fff",
+                  borderRadius: "16px",
+                  padding: "8px 24px",
+                  fontWeight: "bold",
+                  fontSize: "1.3rem",
+                  letterSpacing: "0.05em"
+                }}>Superior</div>
+              </div>
+              <div style={{ padding: "24px 20px 0 20px", textAlign: "left", fontSize: "1.15rem", color: "#233876", minHeight: "80px" }}>
+                Habitación doble con hermosa vista al mar. Cuenta con cama king size o twin.
+              </div>
+              <button style={{
+                background: "#0a174e",
+                color: "#fff",
+                border: "none",
+                borderRadius: "30px",
+                padding: "12px 0",
+                width: "70%",
+                margin: "24px 0 24px 0",
+                fontSize: "1.15rem",
+                cursor: "pointer"
+              }}>Ver más</button>
+            </div>
+            {/* Deluxe */}
+            <div style={{
+              width: "350px",
+              background: "#fff",
+              borderRadius: "12px",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}>
+              <div style={{ width: "100%", position: "relative" }}>
+                <img src="https://regattacartagena.com/wp-content/uploads/2022/09/deluxe.jpg" alt="Habitación Deluxe" style={{ width: "100%", height: "220px", objectFit: "cover" }} />
+                <div style={{
+                  position: "absolute",
+                  top: "16px",
+                  left: "16px",
+                  background: "#0a174e",
+                  color: "#fff",
+                  borderRadius: "16px",
+                  padding: "8px 24px",
+                  fontWeight: "bold",
+                  fontSize: "1.3rem",
+                  letterSpacing: "0.05em"
+                }}>Deluxe</div>
+              </div>
+              <div style={{ padding: "24px 20px 0 20px", textAlign: "left", fontSize: "1.15rem", color: "#233876", minHeight: "80px" }}>
+                Habitación doble King con hermosa vista a la ciudad. La habitación Deluxe no tiene la opción de separar la cama. Ideal para parejas.
+              </div>
+              <button style={{
+                background: "#0a174e",
+                color: "#fff",
+                border: "none",
+                borderRadius: "30px",
+                padding: "12px 0",
+                width: "70%",
+                margin: "24px 0 24px 0",
+                fontSize: "1.15rem",
+                cursor: "pointer"
+              }}>Ver más</button>
+            </div>
+          </div>
       </div>
     </>
   );
