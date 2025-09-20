@@ -16,7 +16,6 @@ export default function WebpageLayout({
   return (
     <main>
       <HeaderComponent />
-      <CarrouselHomepage />
       { children }
     </main>
   );
