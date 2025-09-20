@@ -140,7 +140,7 @@ export default function CarrouselHomepage() {
         }}>
           {/* Wifi */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"/assets/enviog.png"} alt="Wifi" style={{ width: "100px", marginBottom: "10px" }} />
+            <img src={"https://static.wixstatic.com/media/820831_5e26e7ba0e6f4da1a4413388c3fc1a36~mv2.png/v1/fill/w_120,h_120,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/free-wifi.png"} alt="Wifi" style={{ width: "100px", marginBottom: "10px" }} />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>FREE</span>
             <div style={{
               background: "#0a174e",
