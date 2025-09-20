@@ -21,20 +21,20 @@ export default function CarrouselHomepage() {
   return (
     <div style={{
       position: "relative",
-      width: "100%",
-      maxWidth: "900px",
-      margin: "40px auto",
-      borderRadius: "20px",
+      width: "100vw",
+      height: "100vh",
+      margin: 0,
+      borderRadius: 0,
       overflow: "hidden",
-      boxShadow: "0 4px 24px rgba(0,0,0,0.15)",
+      boxShadow: "none",
       background: "#fff"
     }}>
       <img
         src={images[current]}
         alt={`slide-${current}`}
         style={{
-          width: "100%",
-          height: "500px",
+          width: "100vw",
+          height: "100vh",
           objectFit: "cover",
           transition: "opacity 0.5s",
           display: "block"
