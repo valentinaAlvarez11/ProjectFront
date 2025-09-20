@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import HeaderComponent from "@/components/organisms/HeaderComponent";
+import CarrouselHomepage from "@/components/organisms/CarrouselHomepage";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,6 +16,7 @@ export default function WebpageLayout({
   return (
     <main>
       <HeaderComponent />
+      <CarrouselHomepage />
       { children }
     </main>
   );
