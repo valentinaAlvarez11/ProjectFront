@@ -229,6 +229,20 @@ export default function CarrouselHomepage() {
           />
         </div>
       </div>
+      {/* Sección título HABITACIONES con líneas decorativas */}
+      <div style={{ width: "100vw", background: "#fff", padding: "60px 0 40px 0", textAlign: "center" }}>
+        <div style={{ width: "90vw", margin: "0 auto 32px auto" }}>
+          <hr style={{ border: "none", borderTop: "4px solid #0a174e", marginBottom: "2px" }} />
+          <hr style={{ border: "none", borderTop: "2px solid #0a174e", marginTop: "0" }} />
+        </div>
+        <h2 style={{
+          fontSize: "3rem",
+          fontWeight: "bold",
+          letterSpacing: "0.3em",
+          color: "#0a174e",
+          margin: "32px 0 0 0"
+        }}>HABITACIONES</h2>
+      </div>
     </>
   );
 }
