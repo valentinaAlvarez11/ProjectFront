@@ -155,7 +155,7 @@ export default function CarrouselHomepage() {
           </div>
           {/* Habitaciones familiares */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"/assets/mercadolibre.png"} alt="Habitaciones familiares" style={{ width: "100px", marginBottom: "10px" }} />
+            <img src={"https://static.wixstatic.com/media/820831_533e51163b814b2ab51561b825baa86a~mv2.png/v1/fill/w_144,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_533e51163b814b2ab51561b825baa86a~mv2.png"} alt="Habitaciones familiares" style={{ width: "100px", marginBottom: "10px" }} />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>&nbsp;</span>
             <div style={{
               background: "#0a174e",
