@@ -106,6 +106,40 @@ export default function CarrouselHomepage() {
           ))}
         </div>
       </div>
+      {/* Sección Hotel Regatta cuida de ti */}
+      <div style={{
+        width: "100vw",
+        background: "#0a174e",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "stretch",
+        justifyContent: "center",
+        minHeight: "400px",
+        marginTop: "0",
+        marginBottom: "0"
+      }}>
+        <div style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "48px 40px",
+          color: "#fff",
+          fontFamily: "inherit"
+        }}>
+          <h2 style={{ fontSize: "2.2rem", fontWeight: "500", marginBottom: "24px" }}>Hotel Regatta cuida de ti</h2>
+          <p style={{ fontSize: "1.4rem", lineHeight: 1.7 }}>
+            Nos esforzamos para que vivas una experiencia única y de ensueño al estar frente a las playas de Bocagrande, por eso ponemos toda nuestra atención en el cuidado hacia ti y cumplimos con un estricto protocolo una vez ingresas a nuestro hotel.
+          </p>
+        </div>
+        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "400px" }}>
+          <img
+            src="https://images.unsplash.com/photo-1588776814546-ec7e8c8b1b1b?auto=format&fit=crop&w=800&q=80"
+            alt="Control de temperatura en hotel"
+            style={{ width: "100%", maxWidth: "600px", height: "100%", objectFit: "cover" }}
+          />
+        </div>
+      </div>
       {/* Sección de Comodidades */}
       <div style={{
         width: "100vw",
@@ -170,7 +204,7 @@ export default function CarrouselHomepage() {
           </div>
           {/* Room service */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"/assets/mercadolibre1.png"} alt="Room service" style={{ width: "100px", marginBottom: "10px" }} />
+            <img src={"https://static.wixstatic.com/media/820831_ace526efee464b0e957e1ce362f696d3~mv2.png/v1/fill/w_150,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_ace526efee464b0e957e1ce362f696d3~mv2.png"} alt="Room service" style={{ width: "100px", marginBottom: "10px" }} />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>&nbsp;</span>
             <div style={{
               background: "#0a174e",
