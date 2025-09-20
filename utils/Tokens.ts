@@ -1,0 +1,1 @@
+export const standardInput = "mt-1 w-full border border-gray-400 rounded-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"

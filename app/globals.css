@@ -1,0 +1,107 @@
+/* Mercado Libre custom styles for create product form */
+.ml-container {
+	max-width: 480px;
+	margin: 40px auto;
+	padding: 32px 28px 28px 28px;
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 4px 24px 0 rgba(52, 131, 250, 0.10), 0 1.5px 6px 0 rgba(0,0,0,0.08);
+	border: 1.5px solid #ffe600;
+}
+.ml-title {
+	color: #3483fa;
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 18px;
+	text-align: center;
+	letter-spacing: 0.5px;
+}
+.ml-form {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+.ml-label {
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 2px;
+	letter-spacing: 0.2px;
+}
+.ml-input {
+	padding: 10px 14px;
+	border: 1.5px solid #d9d9d9;
+	border-radius: 8px;
+	font-size: 1rem;
+	outline: none;
+	transition: border 0.2s, box-shadow 0.2s;
+	background: #fafafa;
+}
+.ml-input:focus {
+	border: 1.5px solid #3483fa;
+	box-shadow: 0 0 0 2px #ffe60055;
+}
+.ml-desc-row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+.ml-desc-btn {
+	background: #ffe600;
+	border: none;
+	color: #3483fa;
+	font-size: 1.2rem;
+	font-weight: 700;
+	border-radius: 50%;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	transition: background 0.18s, color 0.18s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 1px 4px 0 rgba(52, 131, 250, 0.08);
+}
+.ml-desc-btn-add:hover {
+	background: #fff200;
+	color: #1a237e;
+}
+.ml-desc-btn-remove {
+	background: #fff;
+	color: #e53935;
+	border: 1.5px solid #e53935;
+}
+.ml-desc-btn-remove:hover {
+	background: #ffe6e6;
+	color: #b71c1c;
+}
+.ml-btn {
+	background: #ffe600;
+	color: #3483fa;
+	font-weight: 700;
+	font-size: 1.1rem;
+	border: none;
+	border-radius: 8px;
+	padding: 12px 0;
+	margin-top: 10px;
+	cursor: pointer;
+	box-shadow: 0 2px 8px 0 rgba(52, 131, 250, 0.08);
+	transition: background 0.18s, color 0.18s;
+}
+.ml-btn:hover {
+	background: #fff200;
+	color: #1a237e;
+}
+.ml-message {
+	margin-top: 18px;
+	font-weight: 600;
+	text-align: center;
+	font-size: 1.05rem;
+}
+.ml-message-success {
+	color: #43a047;
+}
+.ml-message-error {
+	color: #e53935;
+}
+@import "tailwindcss";
+
