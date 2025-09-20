@@ -185,37 +185,62 @@ export default function CarrouselHomepage() {
           </div>
         </div>
       </div>
-      {/* Sección Hotel Regatta cuida de ti debajo de comodidades */}
+      {/* Sección Hotel Regatta cuida de ti con distribución de la imagen adjunta */}
       <div style={{
         width: "100vw",
-        background: "#0a174e",
+        background: "#fff",
         display: "flex",
         flexDirection: "row",
-        alignItems: "stretch",
+        alignItems: "center",
         justifyContent: "center",
-        minHeight: "400px",
-        marginTop: "0",
-        marginBottom: "0"
+        minHeight: "480px",
+        margin: "0 auto",
+        position: "relative"
       }}>
+        {/* Íconos de redes sociales */}
         <div style={{
-          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: "32px",
+          height: "100%",
+          marginLeft: "32px"
+        }}>
+          <img src="/public/file.svg" alt="Facebook" style={{ width: "40px", height: "40px", opacity: 0.5 }} />
+          <img src="/public/globe.svg" alt="Instagram" style={{ width: "40px", height: "40px", opacity: 0.5 }} />
+        </div>
+        {/* Bloque azul con texto */}
+        <div style={{
+          background: "#0a174e",
+          color: "#fff",
+          padding: "48px 40px",
+          maxWidth: "500px",
+          minHeight: "400px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "48px 40px",
-          color: "#fff",
-          fontFamily: "inherit"
+          fontFamily: "inherit",
+          marginLeft: "32px"
         }}>
-          <h2 style={{ fontSize: "2.2rem", fontWeight: "500", marginBottom: "24px" }}>Hotel Regatta cuida de ti</h2>
-          <p style={{ fontSize: "1.4rem", lineHeight: 1.7 }}>
+          <h2 style={{ fontSize: "2.2rem", fontWeight: "500", marginBottom: "24px", fontFamily: 'inherit', letterSpacing: '0.02em' }}>Hotel Regatta cuida de ti</h2>
+          <p style={{ fontSize: "1.4rem", lineHeight: 1.7, fontFamily: 'inherit' }}>
             Nos esforzamos para que vivas una experiencia única y de ensueño al estar frente a las playas de Bocagrande, por eso ponemos toda nuestra atención en el cuidado hacia ti y cumplimos con un estricto protocolo una vez ingresas a nuestro hotel.
           </p>
         </div>
-        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "400px" }}>
+        {/* Imagen */}
+        <div style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          minHeight: "400px",
+          marginLeft: "0"
+        }}>
           <img
             src="https://static.wixstatic.com/media/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg/v1/fill/w_881,h_455,al_tr,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg"
             alt="Hotel Regatta cuida de ti"
-            style={{ width: "100%", maxWidth: "600px", height: "100%", objectFit: "cover" }}
+            style={{ width: "100%", maxWidth: "900px", height: "455px", objectFit: "cover", borderRadius: "0 8px 8px 0" }}
           />
         </div>
       </div>
