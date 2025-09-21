@@ -18,16 +18,15 @@ export default function FooterBooking() {
 
           {/* Fechas */}
           <div className="flex items-center gap-2 flex-wrap">
+             <label className="text-gray-500">Check-in</label>
             <div className="flex flex-col text-xs md:text-sm">
-              <label className="text-gray-500">Check-in</label>
               <input
                 type="date"
                 className="border px-2 py-1 rounded-md text-sm w-32"
               />
             </div>
-
+            <label className="text-gray-500">Check-out</label>
             <div className="flex flex-col text-xs md:text-sm">
-              <label className="text-gray-500">Check-out</label>
               <input
                 type="date"
                 className="border px-2 py-1 rounded-md text-sm w-32"
