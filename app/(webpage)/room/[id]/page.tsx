@@ -3,29 +3,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import RoomDetails from '../../../../components/molecules/roomDetailsComponent';
-import { RoomInfo } from '../../../../interfaces/roomDetails'; // Importamos la interfaz actualizada
+import { RoomInfo } from '../../../../interfaces/roomDetails';
 
+// Datos de ejemplo con la nueva URL de la imagen y estructura
 const sampleRooms: RoomInfo[] = [
   {
     id: "1",
     roomType: "ESTANDARD",
-    images: ["https://i.imgur.com/eDty1uX.jpeg", "https://i.imgur.com/qR56k9N.jpeg"],
+    images: ["https://www.cataloniahotels.com/es/blog/wp-content/uploads/2024/01/tipos-habitaciones-hotel.jpg"],
     size: "30 - 38 m²",
     bedDetails: "1x Cama Doble",
     view: "Vista a la ciudad",
     description: "Cómodas y amplias habitaciones con cama doble o twin.",
-    amenities: ["Wi-Fi", "Aire acondicionado", "Televisión"],
+    amenities: ["Wi-Fi", "Aire acondicionado", "Televisión", "Baño con ducha", "Plancha y mesa de planchar", "Toallas", "Smart TV", "Refrigerador"],
     currentPrice: "373.296"
   },
   {
     id: "2",
     roomType: "DELUXE",
-    images: ["https://i.imgur.com/gK96v7u.jpeg", "https://i.imgur.com/h5vYp5l.jpeg"],
+    images: ["https://www.cataloniahotels.com/es/blog/wp-content/uploads/2024/01/tipos-habitaciones-hotel.jpg"],
     size: "45 - 55 m²",
     bedDetails: "1x Cama King Size",
     view: "Vista al mar",
     description: "Espaciosa habitación con vistas privilegiadas y un baño de lujo.",
-    amenities: ["Wi-Fi", "Aire acondicionado", "Televisión", "Minibar", "Jacuzzi"],
+    amenities: ["Wi-Fi", "Aire acondicionado", "Televisión", "Minibar", "Jacuzzi", "Baño con ducha", "Plancha y mesa de planchar", "Toallas", "Smart TV", "Refrigerador"],
     currentPrice: "650.000"
   },
 ];
@@ -42,7 +43,6 @@ const RoomPage = () => {
     setLoading(true);
     setError("");
 
-    // Simulación de la llamada a la API
     setTimeout(() => {
       const foundRoom = sampleRooms.find((r) => r.id === id);
       if (foundRoom) {
@@ -53,7 +53,7 @@ const RoomPage = () => {
         setError("Habitación no encontrada");
       }
       setLoading(false);
-    }, 500); // Simulamos un retraso de 500ms
+    }, 500);
   }, [id]);
 
   return (
