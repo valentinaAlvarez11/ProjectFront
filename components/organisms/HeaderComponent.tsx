@@ -15,7 +15,8 @@ export default function HeaderComponent() {
           <a href="/reservas" className="text-white text-lg font-light px-10 border-r border-[#222a54] h-[60px] flex items-center">Reservas</a>
           <a href="/servicios" className="text-white text-lg font-light px-10 border-r border-[#222a54] h-[60px] flex items-center">Servicios</a>
           <a href="/restaurante-bar" className="text-white text-lg font-light px-10 border-r border-[#222a54] h-[60px] flex items-center">Restaurante &amp; Bar</a>
-          <a href="/politicas" className="text-white text-lg font-light px-10 h-[60px] flex items-center">Políticas y reglas</a>
+          <a href="/politicas" className="text-white text-lg font-light px-10 border-r border-[#222a54] h-[60px] flex items-center">Políticas y reglas</a>
+          <a href="/login" className="text-white text-lg font-light px-10 h-[60px] flex items-center hover:text-[#b6a253]">Ingresar</a>
         </nav>
       </div>
     </header>
