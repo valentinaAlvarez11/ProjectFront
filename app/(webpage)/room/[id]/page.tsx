@@ -2,7 +2,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import RoomDetails from '../../../../components/molecules/roomDetailsComponent';
+import RoomDetails from '../../../../components/molecules/RoomDetailsComponent';
 import { RoomInfo } from '../../../../interfaces/roomDetails';
 
 // Datos de ejemplo con la nueva URL de la imagen y estructura
