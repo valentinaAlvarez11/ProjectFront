@@ -25,19 +25,19 @@ const roomCards = [
     id: 'familiar',
     type: 'Familiar',
     description: 'Habitación con dos camas dobles, ideal para familias con niños.',
-    imageUrl: '[https://regattacartagena.com/wp-content/uploads/2022/09/familiar.jpg](https://regattacartagena.com/wp-content/uploads/2022/09/familiar.jpg)',
+    imageUrl: 'https://static.wixstatic.com/media/820831_513ee7ccd25e4bad8eb06b0c39516ff7~mv2.jpg/v1/fill/w_367,h_473,al_r,q_80,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_513ee7ccd25e4bad8eb06b0c39516ff7~mv2.jpg',
   },
   {
     id: 'suite',
     type: 'Suite',
     description: 'Espaciosa suite con sala de estar, vistas panorámicas y bañera de hidromasaje.',
-    imageUrl: '[https://regattacartagena.com/wp-content/uploads/2022/09/suite.jpg](https://regattacartagena.com/wp-content/uploads/2022/09/suite.jpg)',
+    imageUrl: 'https://static.wixstatic.com/media/820831_2b32740a67f34c0396bb422ad6eccb01~mv2.jpg/v1/fill/w_367,h_473,al_c,q_80,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_2b32740a67f34c0396bb422ad6eccb01~mv2.jpg',
   },
   {
     id: 'ejecutiva',
     type: 'Ejecutiva',
     description: 'Diseñada para viajes de negocios, con escritorio de trabajo y comodidades premium.',
-    imageUrl: '[https://regattacartagena.com/wp-content/uploads/2022/09/ejecutiva.jpg](https://regattacartagena.com/wp-content/uploads/2022/09/ejecutiva.jpg)',
+    imageUrl: 'https://static.wixstatic.com/media/820831_18d472a3c8824368af61159f79193fe5~mv2.jpg/v1/fill/w_367,h_473,al_r,q_80,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_18d472a3c8824368af61159f79193fe5~mv2.jpg',
   },
   {
     id: 'king-estandar',
