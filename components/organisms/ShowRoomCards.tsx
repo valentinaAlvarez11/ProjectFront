@@ -7,19 +7,19 @@ const roomCards = [
     id: 'estandar',
     type: 'Estándar',
     description: 'Cómodas y amplias habitaciones que cuentan con cama King o Twin.',
-    imageUrl: '[https://regattacartagena.com/wp-content/uploads/2022/09/estandar.jpg](https://regattacartagena.com/wp-content/uploads/2022/09/estandar.jpg)',
+    imageUrl: 'https://static.wixstatic.com/media/820831_9fe6e39a57a941e2880fdc852413a649~mv2.jpg/v1/fill/w_367,h_473,al_c,q_80,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_9fe6e39a57a941e2880fdc852413a649~mv2.jpg',
   },
   {
     id: 'superior',
     type: 'Superior',
     description: 'Habitación doble con hermosa vista al mar. Cuenta con cama king size o twin.',
-    imageUrl: '[https://regattacartagena.com/wp-content/uploads/2022/09/superior.jpg](https://regattacartagena.com/wp-content/uploads/2022/09/superior.jpg)',
+    imageUrl: 'https://static.wixstatic.com/media/820831_bf3684d0cf024ecbbb031eac48129ec1~mv2.jpg/v1/fill/w_367,h_473,al_tl,q_80,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_bf3684d0cf024ecbbb031eac48129ec1~mv2.jpg',
   },
   {
     id: 'deluxe',
     type: 'Deluxe',
     description: 'Habitación doble King con hermosa vista a la ciudad. Ideal para parejas.',
-    imageUrl: '[https://regattacartagena.com/wp-content/uploads/2022/09/deluxe.jpg](https://regattacartagena.com/wp-content/uploads/2022/09/deluxe.jpg)',
+    imageUrl: 'https://static.wixstatic.com/media/820831_3a3fd2bc977e431993d2cca2e906f47e~mv2.png/v1/fill/w_367,h_473,al_c,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_3a3fd2bc977e431993d2cca2e906f47e~mv2.png',
   },
   {
     id: 'familiar',
