@@ -3,9 +3,9 @@ import HomePageClient from '../(webpage)/home/page';
 
 // Definimos y exportamos el objeto 'metadata' desde el Server Component
 export const metadata: Metadata = {
-  title: 'Mercado Libre Colombia - Envíos Gratis en el día',
-  description: 'Descubre las mejores ofertas en productos electrónicos, ropa, hogar y más. ¡Encuentra lo que buscas en Mercado Libre!',
-  keywords: ['Mercado Libre', 'ecommerce', 'compras online', 'ofertas', 'envíos gratis'],
+  title: 'Regatta Hotel | Home',
+  description: 'Hotel Regatta Cartagena ubicado frente a las playas de Bocagrande, a solo 5 minutos del centro histórico. Reserva tu habitación con vista al mar.',
+  keywords: ['Hotel Regatta', 'hotel cartagena', 'bocagrande', 'hotel frente al mar', 'reserva hotel cartagena', 'hotel en cartagena'],
 };
 
 // Este componente ahora es un Server Component
