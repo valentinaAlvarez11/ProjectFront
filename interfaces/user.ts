@@ -10,3 +10,11 @@ export interface UserDAO extends UserDTO {
   id_user: number | string
   state_id: number | string
 }
+
+export interface UserWithRoles {
+  email: string
+  nombre: string
+  telefono: string
+  rol_comprador: boolean
+  rol_vendedor: boolean
+}

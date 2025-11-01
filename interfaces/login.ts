@@ -1,4 +1,11 @@
+import { UserWithRoles } from "./user";
+
 export interface LoginDTO {
-  user: string
-  password: string
+  email: string
+  contraseña: string
+}
+
+export interface LoginResponse {
+  token: string
+  usuario: UserWithRoles
 }
