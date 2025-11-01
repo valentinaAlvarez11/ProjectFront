@@ -3,6 +3,7 @@
 import CarrouselHomepage from "@/components/organisms/CarrouselHomepage";
 import RoomCards from "@/components/organisms/ShowRoomCards";
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function HomePageClient() {
   return (
@@ -41,9 +42,9 @@ export default function HomePageClient() {
           gap: "60px",
           flexWrap: "wrap"
         }}>
-          {/* Wifi */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"https://static.wixstatic.com/media/820831_5e26e7ba0e6f4da1a4413388c3fc1a36~mv2.png/v1/fill/w_120,h_120,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/free-wifi.png"} alt="Wifi" style={{ width: "100px", marginBottom: "10px" }} />
+          {/* Wifi */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
+            <Image src={"https://static.wixstatic.com/media/820831_5e26e7ba0e6f4da1a4413388c3fc1a36~mv2.png/v1/fill/w_120,h_120,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/free-wifi.png"} alt="Wifi" width={100} height={100} style={{ marginBottom: "10px" }} />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>FREE</span>
             <div style={{
               background: "#0a174e",
@@ -56,9 +57,9 @@ export default function HomePageClient() {
               fontSize: "1.3rem"
             }}>Wifi gratuito</div>
           </div>
-          {/* Habitaciones familiares */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"https://static.wixstatic.com/media/820831_533e51163b814b2ab51561b825baa86a~mv2.png/v1/fill/w_144,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_533e51163b814b2ab51561b825baa86a~mv2.png"} alt="Habitaciones familiares" style={{ width: "100px", marginBottom: "10px" }} />
+          {/* Habitaciones familiares */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
+            <Image src={"https://static.wixstatic.com/media/820831_533e51163b814b2ab51561b825baa86a~mv2.png/v1/fill/w_144,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_533e51163b814b2ab51561b825baa86a~mv2.png"} alt="Habitaciones familiares" width={100} height={100} style={{ marginBottom: "10px" }} />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>&nbsp;</span>
             <div style={{
               background: "#0a174e",
@@ -71,9 +72,9 @@ export default function HomePageClient() {
               fontSize: "1.3rem"
             }}>Habitaciones familiares</div>
           </div>
-          {/* Room service */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"https://static.wixstatic.com/media/820831_ace526efee464b0e957e1ce362f696d3~mv2.png/v1/fill/w_150,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_ace526efee464b0e957e1ce362f696d3~mv2.png"} alt="Room service" style={{ width: "100px", marginBottom: "10px" }} />
+          {/* Room service */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
+            <Image src={"https://static.wixstatic.com/media/820831_ace526efee464b0e957e1ce362f696d3~mv2.png/v1/fill/w_150,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_ace526efee464b0e957e1ce362f696d3~mv2.png"} alt="Room service" width={100} height={100} style={{ marginBottom: "10px" }} />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>&nbsp;</span>
             <div style={{
               background: "#0a174e",
@@ -116,21 +117,23 @@ export default function HomePageClient() {
             Nos esforzamos para que vivas una experiencia única y de ensueño al estar frente a las playas de Bocagrande, por eso ponemos toda nuestra atención en el cuidado hacia ti y cumplimos con un estricto protocolo una vez ingresas a nuestro hotel.
           </p>
         </div>
-        {/* Imagen ocupa mitad derecha */}
-        <div style={{
-          flex: 1,
-          minWidth: 0,
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end"
-        }}>
-          <img
-            src="https://static.wixstatic.com/media/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg/v1/fill/w_881,h_455,al_tr,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg"
-            alt="Hotel Regatta cuida de ti"
-            style={{ width: "100%", height: "100%", objectFit: "cover", maxHeight: "460px" }}
-          />
-        </div>
+        {/* Imagen ocupa mitad derecha */}
+        <div style={{
+          flex: 1,
+          minWidth: 0,
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          position: "relative"
+        }}>
+          <Image
+            src="https://static.wixstatic.com/media/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg/v1/fill/w_881,h_455,al_tr,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg"
+            alt="Hotel Regatta cuida de ti"
+            fill
+            style={{ objectFit: "cover", maxHeight: "460px" }}
+          />
+        </div>
       </div>
       {/* Sección de habitaciones */}
       <RoomCards />
