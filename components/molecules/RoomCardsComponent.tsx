@@ -17,7 +17,6 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
         style={{
           width: '350px',
           height: '450px',
-          background: `url(${imageUrl}) center center / cover no-repeat`,
           borderRadius: '12px',
           boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
           overflow: 'hidden',
@@ -35,6 +34,20 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
         onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
         onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       >
+        {/* Imagen de fondo */}
+        <img
+          src={imageUrl}
+          alt={type}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0,
+          }}
+        />
         {/* Superposición oscura para mejorar la legibilidad del texto */}
         <div
           style={{
