@@ -2,7 +2,7 @@
 export interface RoomInfo {
   id: string; // Identificador único de la habitación.
   roomType: string; // Tipo de cuarto (ej. "Estandar", "Deluxe").
-  images: string[]; // Un array de URLs para las imágenes de la habitación.
+  images: string; // Un array de URLs para las imágenes de la habitación.
   size: string; // El tamaño en metros cuadrados (ej. "30 - 38 m²").
   bedDetails: string; // Descripción de las camas (ej. "1 doble y 2 sencillas").
   view: string; // Hacia dónde tiene vista la habitación (ej. "Vista a la ciudad").
