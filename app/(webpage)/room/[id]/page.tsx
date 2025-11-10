@@ -2,11 +2,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import RoomDetails from '../../../../components/molecules/roomDetailsComponent';
 import { RoomInfo } from '../../../../interfaces/roomDetails';
 import LoadingState from '../../../../components/molecules/LoadingState';
 import EmptyState from '../../../../components/molecules/EmptyState';
 import PageContainer from '../../../../components/atoms/PageContainer';
+import ButtonComponent from '../../../../components/atoms/ButtonComponent';
 
 const sampleRooms: RoomInfo[] = [
   {
@@ -38,36 +40,53 @@ const RoomPage = () => {
   const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
   const [room, setRoom] = useState<RoomInfo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setNotFound(true);
+      setLoading(false);
+      return;
+    }
+    
     setLoading(true);
-    setError("");
+    setNotFound(false);
 
     setTimeout(() => {
       const foundRoom = sampleRooms.find((r) => r.id === id);
       if (foundRoom) {
         setRoom(foundRoom);
-        setError("");
       } else {
         setRoom(null);
-        setError("Habitación no encontrada");
+        setNotFound(true);
       }
       setLoading(false);
     }, 500);
   }, [id]);
 
+  if (notFound && !loading) {
+    return (
+      <PageContainer>
+        <EmptyState
+          title="Habitación no encontrada"
+          description="Lo sentimos, la habitación que buscas no existe o ha sido eliminada."
+          icon={<span className="text-6xl">🏨</span>}
+          action={
+            <Link href="/">
+              <ButtonComponent variant="primary">
+                Volver al inicio
+              </ButtonComponent>
+            </Link>
+          }
+        />
+      </PageContainer>
+    );
+  }
+
   return (
     <PageContainer>
       <LoadingState isLoading={loading} loadingText="Cargando habitación...">
-        {error ? (
-          <EmptyState
-            title="Habitación no encontrada"
-            description={error}
-            icon={<span className="text-6xl">🏨</span>}
-          />
-        ) : room ? (
+        {room ? (
           <RoomDetails room={room} />
         ) : null}
       </LoadingState>

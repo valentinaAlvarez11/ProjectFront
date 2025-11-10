@@ -1,7 +1,5 @@
 // components/organisms/CarrouselHomepage.tsx
-"use client";
-import React, { useState } from "react";
-import Image from 'next/image';
+import Carousel from "../molecules/Carousel";
 
 const images = [
   "https://static.wixstatic.com/media/820831_c1a822eeac9c491b82556da918086b59~mv2.png/v1/crop/x_183,y_223,w_686,h_627/fill/w_636,h_568,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_c1a822eeac9c491b82556da918086b59~mv2.png",
@@ -10,87 +8,14 @@ const images = [
 
 export default function CarrouselHomepage() {
   return (
-    <div style={{
-      position: "relative",
-      width: "100vw",
-      height: "100vh",
-      margin: 0,
-      borderRadius: 0,
-      overflow: "hidden",
-      boxShadow: "none",
-      background: "#fff"
-    }}>
-      <Image
-        src={images[current]}
-        alt={`slide-${current}`}
-        layout="fill"
-        objectFit="cover"
-        style={{ transition: "opacity 0.5s" }}
-      />
-      <button
-        onClick={prevSlide}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "20px",
-          transform: "translateY(-50%)",
-          background: "rgba(0,0,0,0.4)",
-          color: "#fff",
-          border: "none",
-          borderRadius: "50%",
-          width: "40px",
-          height: "40px",
-          fontSize: "24px",
-          cursor: "pointer"
-        }}
-        aria-label="Anterior"
-      >
-        &#8592;
-      </button>
-      <button
-        onClick={nextSlide}
-        style={{
-          position: "absolute",
-          top: "50%",
-          right: "20px",
-          transform: "translateY(-50%)",
-          background: "rgba(0,0,0,0.4)",
-          color: "#fff",
-          border: "none",
-          borderRadius: "50%",
-          width: "40px",
-          height: "40px",
-          fontSize: "24px",
-          cursor: "pointer"
-        }}
-        aria-label="Siguiente"
-      >
-        &#8594;
-      </button>
-      <div style={{
-        position: "absolute",
-        bottom: "20px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        display: "flex",
-        gap: "10px"
-      }}>
-        {images.map((_, idx) => (
-          <span
-            key={idx}
-            style={{
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
-              background: current === idx ? "#00204A" : "#d1d1d1",
-              display: "inline-block",
-              cursor: "pointer",
-              border: current === idx ? "2px solid #E2C044" : "none"
-            }}
-            onClick={() => setCurrent(idx)}
-          />
-        ))}
-      </div>
-    </div>
+    <Carousel
+      images={images}
+      altText="Hotel Regatta Cartagena"
+      height="100vh"
+      showControls={true}
+      showIndicators={true}
+      autoPlay={true}
+      autoPlayInterval={5000}
+    />
   );
 }

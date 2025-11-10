@@ -16,12 +16,11 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
     <Link href={`/room/${id}`} className="no-underline">
       <div className="w-[350px] h-[450px] rounded-xl shadow-lg overflow-hidden relative flex flex-col justify-between items-start text-white text-left p-5 cursor-pointer transition-transform duration-200 hover:scale-105">
         {/* Imagen de fondo */}
-        <img
+        <Image
           src={imageUrl}
           alt={type}
-          layout="fill"
-          objectFit="cover"
-          style={{ zIndex: 0 }}
+          fill
+          className="object-cover z-0"
         />
         {/* Superposición oscura para mejorar la legibilidad del texto */}
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/70 via-black/30 to-black/10 z-[1]" />

@@ -1,5 +1,6 @@
 // components/molecules/RoomDetails.tsx
 import React from 'react';
+import Image from 'next/image';
 import { RoomInfo } from '../../interfaces/roomDetails';
 import ButtonComponent from '../atoms/ButtonComponent';
 
@@ -11,11 +12,13 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
     return (
         <div className="max-w-7xl mx-auto">
             {/* Sección de la imagen */}
-            <div className="relative">
-                <img 
+            <div className="relative w-full h-[600px]">
+                <Image 
                     src={room.images[0]} 
-                    alt={room.roomType} 
-                    className="w-full h-[600px] object-cover" 
+                    alt={room.roomType}
+                    fill
+                    className="object-cover" 
+                    priority
                 />
                 <div className="absolute top-4 left-4 text-white text-lg font-bold bg-black bg-opacity-50 px-4 py-2 rounded-lg">
                     {room.roomType.toUpperCase()}

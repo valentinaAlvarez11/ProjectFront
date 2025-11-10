@@ -2,7 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["logodownload.org", "static.wixstatic.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "static.wixstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "logodownload.org",
+      },
+      {
+        protocol: "https",
+        hostname: "www.cataloniahotels.com",
+      },
+    ],
   },
 };
 
