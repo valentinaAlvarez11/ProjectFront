@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authService } from "@/libs/authService";
+import { loginService } from "@/libs/authService";
 import type { LoginDTO } from "@/interfaces/login";
 import { useAuthStore } from "@/store/authStore";
 import { loginScheme } from "@/schemas/login";
@@ -28,10 +28,10 @@ export default function useLoginForm({ onSuccess }: { onSuccess?: () => void } =
 
       const payload: LoginDTO = { 
         email: data.email, 
-        contraseña: data.password 
+        password: data.password 
       };
 
-      const response = await authService.login(payload);
+      const response = await loginService.login(payload);
       
       // Guardar en el store
       login(response.usuario);
