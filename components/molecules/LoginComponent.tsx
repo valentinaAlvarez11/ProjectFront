@@ -1,43 +1,43 @@
-'use client'
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+"use client";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import InputComponents from "../atoms/InputComponents"
+import InputComponents from "../atoms/InputComponents";
 
-import { LoginDTO, LoginResponse } from "@/interfaces/login"
-import { loginScheme } from "@/schemas/login"
+import { LoginDTO, LoginResponse } from "@/interfaces/login";
+import { loginScheme } from "@/schemas/login";
 
-import { loginService } from "@/libs/authService"
+import { loginService } from "@/libs/authService";
 
 export default function LoginComponent() {
-
-  const { 
+  const {
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme)
-  })
-  
+    resolver: zodResolver(loginScheme),
+  });
+
   const onSubmit: SubmitHandler<LoginDTO> = (data) => {
-    loginService.login(data)
-    .then((info: LoginResponse) => {
-      localStorage.setItem('token', info.token);
-    })
-    .catch(() => {
-      console.error('Error en solicitud');
-    });
-  }
+    loginService
+      .login(data)
+      .then((info: LoginResponse) => {
+        localStorage.setItem("token", info.token);
+      })
+      .catch(() => {
+        console.error("Error en solicitud");
+      });
+  };
 
   const onErrors = () => {
-    console.log('Errores', errors);
-    
-    alert('Informacion incompleta')
+    console.log("Errores", errors);
+
+    alert("Informacion incompleta");
   };
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmit, onErrors)} className="space-y-4">
       <div>
-        <InputComponents 
+        <InputComponents
           label="Introduce el usuario"
           typeElement="text"
           idElement="email"
@@ -45,7 +45,7 @@ export default function LoginComponent() {
         />
       </div>
       <div>
-        <InputComponents 
+        <InputComponents
           label="Introduce la contraseña"
           typeElement="password"
           idElement="password"
@@ -60,5 +60,5 @@ export default function LoginComponent() {
         Continuar
       </button>
     </form>
-  )
+  );
 }
