@@ -1,6 +1,7 @@
 // components/organisms/CarrouselHomepage.tsx
 "use client";
 import React, { useState } from "react";
+import Image from 'next/image';
 
 const images = [
   "https://static.wixstatic.com/media/820831_c1a822eeac9c491b82556da918086b59~mv2.png/v1/crop/x_183,y_223,w_686,h_627/fill/w_636,h_568,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_c1a822eeac9c491b82556da918086b59~mv2.png",
@@ -8,15 +9,6 @@ const images = [
 ];
 
 export default function CarrouselHomepage() {
-  const [current, setCurrent] = useState(0);
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
-  const prevSlide = () => {
-    setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
   return (
     <div style={{
       position: "relative",
@@ -28,16 +20,12 @@ export default function CarrouselHomepage() {
       boxShadow: "none",
       background: "#fff"
     }}>
-      <img
+      <Image
         src={images[current]}
         alt={`slide-${current}`}
-        style={{
-          width: "100vw",
-          height: "100vh",
-          objectFit: "cover",
-          transition: "opacity 0.5s",
-          display: "block"
-        }}
+        layout="fill"
+        objectFit="cover"
+        style={{ transition: "opacity 0.5s" }}
       />
       <button
         onClick={prevSlide}

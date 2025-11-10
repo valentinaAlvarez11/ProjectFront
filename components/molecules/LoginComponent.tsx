@@ -2,7 +2,7 @@
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import InputComponents from "../atoms/InputComponents"
+import InputComponents from "../atoms/InputComponents";
 
 import { LoginDTO } from "@/interfaces/login"
 import { loginScheme } from "@/schemas/login"
@@ -12,9 +12,7 @@ import { loginService } from "@/libs/authService"
 import { standardInput } from "@/utils/Tokens"
 
 export default function LoginComponent() {
-
-  const { 
-    register, 
+  const {
     handleSubmit,
     formState: { errors }
   } = useForm<LoginDTO>({
@@ -32,15 +30,15 @@ export default function LoginComponent() {
   }
 
   const onErrors = () => {
-    console.log('Errores', errors);
-    
-    alert('Informacion incompleta')
+    console.log("Errores", errors);
+
+    alert("Informacion incompleta");
   };
   
   return (
     <form onSubmit={handleSubmit(onSubmit, onErrors)} className="space-y-4">
       <div>
-        <InputComponents 
+        <InputComponents
           label="Introduce el usuario"
           typeElement="text"
           idElement="email"
@@ -48,7 +46,7 @@ export default function LoginComponent() {
         />
       </div>
       <div>
-        <InputComponents 
+        <InputComponents
           label="Introduce la contraseña"
           typeElement="password"
           idElement="password"
@@ -58,10 +56,12 @@ export default function LoginComponent() {
 
       <button
         type="submit"
-        className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-medium py-2 rounded-lg transition"
+        variant="primary"
+        fullWidth
+        className="bg-yellow-400 hover:bg-yellow-300 text-black"
       >
         Continuar
-      </button>
+      </ButtonComponent>
     </form>
   )
 }

@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import RoomDetails from '../../../../components/molecules/roomDetailsComponent';
 import { RoomInfo } from '../../../../interfaces/roomDetails';
+import LoadingState from '../../../../components/molecules/LoadingState';
+import EmptyState from '../../../../components/molecules/EmptyState';
+import PageContainer from '../../../../components/atoms/PageContainer';
 
 const sampleRooms: RoomInfo[] = [
   {
@@ -56,15 +59,19 @@ const RoomPage = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-      {loading && <div className="text-center text-lg text-gray-600">Cargando habitación...</div>}
-      {!loading && room && (
-        <RoomDetails room={room} />
-      )}
-      {!loading && !room && error && (
-        <div className="text-center text-red-600 font-semibold">{error}</div>
-      )}
-    </div>
+    <PageContainer>
+      <LoadingState isLoading={loading} loadingText="Cargando habitación...">
+        {error ? (
+          <EmptyState
+            title="Habitación no encontrada"
+            description={error}
+            icon={<span className="text-6xl">🏨</span>}
+          />
+        ) : room ? (
+          <RoomDetails room={room} />
+        ) : null}
+      </LoadingState>
+    </PageContainer>
   );
 };
 

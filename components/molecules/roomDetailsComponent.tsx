@@ -1,6 +1,7 @@
 // components/molecules/RoomDetails.tsx
 import React from 'react';
 import { RoomInfo } from '../../interfaces/roomDetails';
+import ButtonComponent from '../atoms/ButtonComponent';
 
 interface RoomDetailsProps {
     room: RoomInfo;
@@ -68,9 +69,13 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
                 <div className="bg-white rounded-lg shadow-xl p-6 lg:p-8 w-full h-[250px] flex flex-col items-center justify-center">
                     <div className="text-center">
                         <h2 className="text-4xl font-bold text-gray-900 mt-2">$ {room.currentPrice}</h2>
-                        <button className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition duration-200">
+                        <ButtonComponent 
+                            variant="primary" 
+                            fullWidth 
+                            className="mt-6 bg-blue-600 hover:bg-blue-700"
+                        >
                             SELECCIONE OFERTA
-                        </button>
+                        </ButtonComponent>
                         <p className="mt-2 text-xs text-gray-500">Excluye impuestos y cargos</p>
                     </div>
                 </div>
