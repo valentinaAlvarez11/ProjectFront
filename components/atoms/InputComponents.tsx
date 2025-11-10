@@ -33,32 +33,37 @@ export default function InputComponents({
   className = "",
   disabled = false
 }: InputComponentsProps) {
-  const inputRegister = register || (nameRegister ? { name: nameRegister } : {})
-  
   return (
     <div className="w-full">
       <label htmlFor={idElement} className="font-semibold block mb-1">
         {label}
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
-      {
-        listValues?.length ? (
-          <select name="" id="">
-            {
-              listValues.map((item, index) => (
-                <option key={index} value={item.value}>{item.label}</option>
-              ))
-            }
-          </select>
-        ) : (
-          <input
-            {...register(nameRegister)}
-            type={ typeElement === "text" ? "text" : "password" }
-            id={ idElement }
-            className={standardInput}
-          />
-        )
-      }
-    </>
+      {listValues?.length ? (
+        <select 
+          id={idElement}
+          {...register}
+          className={`${standardInput} ${error ? "border-red-500" : ""} ${className}`}
+          disabled={disabled}
+        >
+          <option value="">Seleccione una opción</option>
+          {listValues.map((item, index) => (
+            <option key={index} value={item.value}>
+              {item.label}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input
+          {...register}
+          type={typeElement}
+          id={idElement}
+          placeholder={placeholder}
+          className={`${standardInput} ${error ? "border-red-500" : ""} ${className}`}
+          disabled={disabled}
+        />
+      )}
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+    </div>
   )
 }

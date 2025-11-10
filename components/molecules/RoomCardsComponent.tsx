@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import ButtonComponent from '../atoms/ButtonComponent';
 
 interface RoomCardProps {
   id: string;

@@ -2,8 +2,35 @@
 // app/(webpage)/home/page
 import CarrouselHomepage from "@/components/organisms/CarrouselHomepage";
 import RoomCards from "@/components/organisms/ShowRoomCards";
+import SectionTitle from "@/components/molecules/SectionTitle";
+import FeatureCard from "@/components/molecules/FeatureCard";
+import SectionWithImage from "@/components/molecules/SectionWithImage";
 import React from 'react';
-import Image from 'next/image';
+
+const features = [
+  {
+    imageUrl: "https://static.wixstatic.com/media/820831_5e26e7ba0e6f4da1a4413388c3fc1a36~mv2.png/v1/fill/w_120,h_120,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/free-wifi.png",
+    imageAlt: "Wifi",
+    title: "FREE",
+    description: "Wifi gratuito",
+    imageWidth: 120,
+    imageHeight: 120,
+  },
+  {
+    imageUrl: "https://static.wixstatic.com/media/820831_533e51163b814b2ab51561b825baa86a~mv2.png/v1/fill/w_144,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_533e51163b814b2ab51561b825baa86a~mv2.png",
+    imageAlt: "Habitaciones familiares",
+    description: "Habitaciones familiares",
+    imageWidth: 144,
+    imageHeight: 144,
+  },
+  {
+    imageUrl: "https://static.wixstatic.com/media/820831_ace526efee464b0e957e1ce362f696d3~mv2.png/v1/fill/w_150,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_ace526efee464b0e957e1ce362f696d3~mv2.png",
+    imageAlt: "Room service",
+    description: "Room service",
+    imageWidth: 150,
+    imageHeight: 144,
+  },
+];
 
 export default function HomePageClient() {
   return (
