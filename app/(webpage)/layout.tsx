@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import HeaderComponent from "@/components/organisms/HeaderComponent";
-import CarrouselHomepage from "@/components/organisms/CarrouselHomepage";
 import FooterBooking from "@/components/organisms/FooterBooking";
 
 export const metadata: Metadata = {

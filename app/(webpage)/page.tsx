@@ -1,5 +1,6 @@
 import CarrouselHomepage from "@/components/organisms/CarrouselHomepage";
 import RoomCards from "@/components/organisms/ShowRoomCards";
+import Image from 'next/image';
 import React from 'react';
 
 export default function HomePageClient() {
@@ -41,7 +42,13 @@ export default function HomePageClient() {
         }}>
           {/* Wifi */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"https://static.wixstatic.com/media/820831_5e26e7ba0e6f4da1a4413388c3fc1a36~mv2.png/v1/fill/w_120,h_120,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/free-wifi.png"} alt="Wifi" style={{ width: "100px", marginBottom: "10px" }} />
+            <Image
+              src="https://static.wixstatic.com/media/820831_5e26e7ba0e6f4da1a4413388c3fc1a36~mv2.png/v1/fill/w_120,h_120,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/free-wifi.png"
+              alt="Wifi"
+              width={120}
+              height={120}
+              style={{ marginBottom: "10px" }}
+            />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>FREE</span>
             <div style={{
               background: "#0a174e",
@@ -56,7 +63,13 @@ export default function HomePageClient() {
           </div>
           {/* Habitaciones familiares */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"https://static.wixstatic.com/media/820831_533e51163b814b2ab51561b825baa86a~mv2.png/v1/fill/w_144,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_533e51163b814b2ab51561b825baa86a~mv2.png"} alt="Habitaciones familiares" style={{ width: "100px", marginBottom: "10px" }} />
+            <Image
+              src="https://static.wixstatic.com/media/820831_533e51163b814b2ab51561b825baa86a~mv2.png/v1/fill/w_144,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_533e51163b814b2ab51561b825baa86a~mv2.png"
+              alt="Habitaciones familiares"
+              width={144}
+              height={144}
+              style={{ marginBottom: "10px" }}
+            />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>&nbsp;</span>
             <div style={{
               background: "#0a174e",
@@ -71,7 +84,13 @@ export default function HomePageClient() {
           </div>
           {/* Room service */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "300px" }}>
-            <img src={"https://static.wixstatic.com/media/820831_ace526efee464b0e957e1ce362f696d3~mv2.png/v1/fill/w_150,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_ace526efee464b0e957e1ce362f696d3~mv2.png"} alt="Room service" style={{ width: "100px", marginBottom: "10px" }} />
+            <Image
+              src="https://static.wixstatic.com/media/820831_ace526efee464b0e957e1ce362f696d3~mv2.png/v1/fill/w_150,h_144,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_ace526efee464b0e957e1ce362f696d3~mv2.png"
+              alt="Room service"
+              width={150}
+              height={144}
+              style={{ marginBottom: "10px" }}
+            />
             <span style={{ fontSize: "2rem", fontWeight: "bold", letterSpacing: "0.1em", color: "#0a174e" }}>&nbsp;</span>
             <div style={{
               background: "#0a174e",
@@ -123,10 +142,12 @@ export default function HomePageClient() {
           alignItems: "center",
           justifyContent: "flex-end"
         }}>
-          <img
+          <Image
             src="https://static.wixstatic.com/media/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg/v1/fill/w_881,h_455,al_tr,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg"
             alt="Hotel Regatta cuida de ti"
-            style={{ width: "100%", height: "100%", objectFit: "cover", maxHeight: "460px" }}
+            width={881}
+            height={455}
+            style={{ objectFit: "cover", maxHeight: "460px" }}
           />
         </div>
       </div>

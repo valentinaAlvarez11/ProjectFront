@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface RoomCardProps {
   id: string;
@@ -35,18 +36,12 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
         onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       >
         {/* Imagen de fondo */}
-        <img
+        <Image
           src={imageUrl}
           alt={type}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 0,
-          }}
+          layout="fill"
+          objectFit="cover"
+          style={{ zIndex: 0 }}
         />
         {/* Superposición oscura para mejorar la legibilidad del texto */}
         <div
