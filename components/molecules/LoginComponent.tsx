@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import InputComponents from "../atoms/InputComponents"
 
-import { LoginDTO } from "@/interfaces/login"
+import { LoginDTO, LoginResponse } from "@/interfaces/login"
 import { loginScheme } from "@/schemas/login"
 
 import { loginService } from "@/libs/authService"
@@ -19,13 +19,13 @@ export default function LoginComponent() {
   })
   
   const onSubmit: SubmitHandler<LoginDTO> = (data) => {
-    loginService(data)
-    .then((info) => {
-      localStorage.setItem('token', info.access_token)
+    loginService.login(data)
+    .then((info: LoginResponse) => {
+      localStorage.setItem('token', info.token);
     })
     .catch(() => {
       console.error('Error en solicitud');
-    })
+    });
   }
 
   const onErrors = () => {
