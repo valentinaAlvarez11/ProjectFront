@@ -7,7 +7,7 @@ import InputComponents from "../atoms/InputComponents"
 import { LoginDTO } from "@/interfaces/login"
 import { loginScheme } from "@/schemas/login"
 
-import { loginService } from "@/libs/authService"
+import { loginService } from "@/libs/auth.service"
 
 import { standardInput } from "@/utils/Tokens"
 

@@ -1,6 +1,6 @@
 // components/molecules/RoomDetails.tsx
 import React from 'react';
-import { RoomInfo } from '../../interfaces/roomDetails';
+import { RoomInfo } from '../../interfaces/rooms';
 
 interface RoomDetailsProps {
     room: RoomInfo;

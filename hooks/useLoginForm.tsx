@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authService } from "@/libs/authService";
+import { authService } from "@/libs/auth.service";
 import type { LoginDTO } from "@/interfaces/login";
 import { useAuthStore } from "@/store/authStore";
 import { loginScheme } from "@/schemas/login";

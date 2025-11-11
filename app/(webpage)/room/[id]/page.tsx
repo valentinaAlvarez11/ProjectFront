@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import RoomDetails from '../../../../components/molecules/roomDetailsComponent';
-import { RoomInfo } from '../../../../interfaces/roomDetails';
+import { RoomInfo } from '../../../../interfaces/rooms';
 
 const sampleRooms: RoomInfo[] = [
   {
