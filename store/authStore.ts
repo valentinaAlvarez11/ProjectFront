@@ -1,58 +1,69 @@
 // store/authStore.ts
 import { create } from 'zustand';
-import { UserWithRoles } from '@/interfaces/user';
-
-interface AuthUser extends UserWithRoles {
-  id?: number;
-}
+import { IUser} from '@/interfaces/users';
+import AuthService from '@/libs/auth.service'; 
 
 interface AuthState {
   isLoggedIn: boolean;
-  user: AuthUser | null;
+  user: IUser | null;
+  loadingAuth: boolean;
   
   // Acciones
-  login: (userData: AuthUser) => void;
-  logout: () => void;
-  checkAuthStatus: () => Promise<void>;
+  login: (userData: IUser) => void; 
+  logout: () => Promise<void>;
+  checkAuthStatus: () => Promise<void>;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+// Creación del Store
+export const useAuthStore = create<AuthState>((set, get) => ({
   isLoggedIn: false,
   user: null,
+  loadingAuth: true,
 
-  login: (userData) => set({ isLoggedIn: true, user: userData }),
-  
-  logout: () => {
-    set({ isLoggedIn: false, user: null });
-    fetch('http://localhost:3000/logout', { method: 'POST', credentials: 'include' })
-      .catch(error => console.error("Error al cerrar sesión en el BE:", error));
+  // Login
+  login: (userData) => {
+    set({ 
+      isLoggedIn: true, 
+      user: userData, 
+      loadingAuth: false,
+    });
   },
   
-  checkAuthStatus: async () => {
+  // Logout
+  logout: async () => {
+    set({ loadingAuth: true });
     try {
-      const res = await fetch('http://localhost:3000/user-data', {
-        method: 'GET',
-        credentials: 'include',
+      // 1. Llama al servicio para borrar la cookie del servidor
+      await AuthService.logout(); 
+      
+      // 2. Limpia el estado
+      set({ isLoggedIn: false, user: null, loadingAuth: false });
+      
+    } catch (error) {
+       console.error("Error al cerrar sesión, limpiando estado local:", error);
+       set({ isLoggedIn: false, user: null, loadingAuth: false }); 
+    }
+  },
+  
+  // Estado
+  checkAuthStatus: async () => {
+    if (get().user && get().isLoggedIn && !get().loadingAuth) return;
+    
+    set({ loadingAuth: true });
+
+    try {
+      // 1. Llama a la ruta protegida /users/status
+      const { usuario } = await AuthService.checkStatus(); 
+      
+      // 2. Si es exitoso, el token es válido y el usuario está activo.
+      set({ 
+        isLoggedIn: true, 
+        user: usuario,
+        loadingAuth: false,
       });
       
-      if (res.ok) {
-        const data = await res.json();
-        set({ 
-          isLoggedIn: true, 
-          user: { 
-            email: data.email, 
-            nombre: data.nombre,
-            telefono: data.telefono || '',
-            rol_comprador: data.rol_comprador || false,
-            rol_vendedor: data.rol_vendedor || false
-          } 
-        });
-      } else {
-        set({ isLoggedIn: false, user: null });
-      }
-    } catch (error) {
-      console.error("Fallo al verificar la autenticación:", error);
-      set({ isLoggedIn: false, user: null });
+    } catch (error: any) {
+      set({ isLoggedIn: false, user: null, loadingAuth: false });
     } 
   },
 }));
