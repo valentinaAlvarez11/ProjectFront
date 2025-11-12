@@ -2,57 +2,48 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { IRoom } from '../../../../interfaces/rooms'; // Usar IRoom, no RoomInfo
+import RoomsService from '@/libs/rooms.service'; // Asumiendo que esta es la ruta a tu servicio
 import RoomDetails from '../../../../components/molecules/roomDetailsComponent';
-import { RoomInfo } from '../../../../interfaces/roomDetails';
 
-const sampleRooms: RoomInfo[] = [
-  {
-    id: "1",
-    roomType: "ESTANDARD",
-    images: ["https://www.cataloniahotels.com/es/blog/wp-content/uploads/2024/01/tipos-habitaciones-hotel.jpg"],
-    size: "30 - 38 m²",
-    bedDetails: "1x Cama Doble",
-    view: "Vista a la ciudad",
-    description: "Cómodas y amplias habitaciones con cama doble o twin.",
-    amenities: ["Wi-Fi", "Aire acondicionado", "Televisión", "Baño con ducha", "Plancha y mesa de planchar", "Toallas", "Smart TV", "Refrigerador"],
-    currentPrice: "373.296"
-  },
-  {
-    id: "2",
-    roomType: "DELUXE",
-    images: ["https://www.cataloniahotels.com/es/blog/wp-content/uploads/2024/01/tipos-habitaciones-hotel.jpg"],
-    size: "45 - 55 m²",
-    bedDetails: "1x Cama King Size",
-    view: "Vista al mar",
-    description: "Espaciosa habitación con vistas privilegiadas y un baño de lujo.",
-    amenities: ["Wi-Fi", "Aire acondicionado", "Televisión", "Minibar", "Jacuzzi", "Baño con ducha", "Plancha y mesa de planchar", "Toallas", "Smart TV", "Refrigerador"],
-    currentPrice: "650.000"
-  },
-];
 
 const RoomPage = () => {
   const params = useParams();
-  const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
-  const [room, setRoom] = useState<RoomInfo | null>(null);
+  const id = Array.isArray(params?.id) 
+           ? parseInt(params.id[0]) 
+           : params?.id ? parseInt(params.id) : null;
+  const [room, setRoom] = useState<IRoom | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    if (!id) return;
-    setLoading(true);
-    setError("");
-
-    setTimeout(() => {
-      const foundRoom = sampleRooms.find((r) => r.id === id);
-      if (foundRoom) {
-        setRoom(foundRoom);
-        setError("");
-      } else {
-        setRoom(null);
-        setError("Habitación no encontrada");
+      if (id === null || isNaN(id)) { // Manejar el caso donde el ID no es válido
+        setLoading(false);
+        setError("ID de habitación no válido.");
+        return;
       }
-      setLoading(false);
-    }, 500);
+
+      setLoading(true);
+      setError("");
+
+      const fetchRoom = async (roomId: number) => {
+        try {
+          const response = await RoomsService.getByIdPublic(roomId);
+                
+          setRoom(response.habitacion);
+          setError("");
+                
+        } catch (err: any) {
+          console.error("Error al cargar la habitación:", err);
+          setRoom(null);
+          const msg = err.status === 404 ? "Habitación no encontrada." : "Error de conexión con el servidor.";
+          setError(msg);
+                
+        } finally {
+          setLoading(false);
+        }
+      };
+    fetchRoom(id);
   }, [id]);
 
   return (

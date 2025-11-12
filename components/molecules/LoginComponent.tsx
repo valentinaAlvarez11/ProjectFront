@@ -1,67 +1,81 @@
-'use client'
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+"use client";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from 'next/navigation';
+import InputComponents from "../atoms/InputComponents";
+import { ILoginPayload } from "@/interfaces/users"; 
+import { loginScheme } from "@/schemas/login";
+import AuthService from "@/libs/auth.service"; 
+import { useAuthStore } from "@/store/authStore";
 
-import InputComponents from "../atoms/InputComponents"
+type LoginFormData = { email: string; password: string; };
 
-import { LoginDTO } from "@/interfaces/login"
-import { loginScheme } from "@/schemas/login"
-
-import { loginService } from "@/libs/authService"
-
-import { standardInput } from "@/utils/Tokens"
 
 export default function LoginComponent() {
+  const loginStoreAction = useAuthStore((state) => state.login);
+  const router = useRouter();
 
-  const { 
-    register, 
+  const {
     handleSubmit,
-    formState: { errors }
-  } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme)
-  })
-  
-  const onSubmit: SubmitHandler<LoginDTO> = (data) => {
-    loginService(data)
-    .then((info) => {
-      localStorage.setItem('token', info.access_token)
-    })
-    .catch(e => {
-      console.error('Error en solicitud');
-    })
-  }
+    formState: { errors },
+    setError,
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginScheme),
+  });
+
+  const mapToPayload = (data: LoginFormData): ILoginPayload => ({
+      email: data.email,
+      contraseña: data.password,
+  });
+
+  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
+    try {
+      const payload = mapToPayload(data);
+      const response = await AuthService.login(payload); 
+
+      loginStoreAction(response.usuario); 
+      router.push('/'); 
+        
+    } catch (err: any) {
+      const errorMessage = err?.message || "Error de conexión o credenciales incorrectas.";
+      console.error("Error en solicitud:", errorMessage);
+      alert(errorMessage);
+    }
+  };
 
   const onErrors = () => {
-    console.log('Errores', errors);
-    
-    alert('Informacion incompleta')
-  };
-  
-  return (
-    <form onSubmit={handleSubmit(onSubmit, onErrors)} className="space-y-4">
-      <div>
-        <InputComponents 
-          label="Introduce el usuario"
-          typeElement="text"
-          idElement="email"
-          nameRegister="user"
-        />
-      </div>
-      <div>
-        <InputComponents 
-          label="Introduce la contraseña"
-          typeElement="password"
-          idElement="password"
-          nameRegister="password"
-        />
-      </div>
+    console.log("Errores", errors);
 
-      <button
-        type="submit"
-        className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-medium py-2 rounded-lg transition"
-      >
-        Continuar
-      </button>
-    </form>
-  )
+    alert("Informacion incompleta");
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit, onErrors)} className="space-y-4">
+      <div>
+        <InputComponents
+          label="Introduce el email" // Corregir label a email
+          typeElement="text"
+          idElement="email"
+          nameRegister="email" // ⚠️ CORRECCIÓN: El campo debe ser 'email'
+          // register={register('email')} si se usara el hook completo
+        />
+      </div>
+      <div>
+        <InputComponents
+          label="Introduce la contraseña"
+          typeElement="password"
+          idElement="password"
+          nameRegister="password" // ⚠️ CORRECCIÓN: El campo debe ser 'password'
+          // register={register('password')}
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-medium py-2 rounded-lg transition"
+      >
+        Continuar
+      </button>
+    </form>
+  );
 }
