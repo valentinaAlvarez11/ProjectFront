@@ -47,10 +47,12 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
     return (
         <div className="max-w-7xl mx-auto">
             <div className="relative">
-                <img
-                    src={imageUrl} 
-                    alt={room.tipo} 
-                    className="w-full h-[600px] object-cover" 
+                <Image
+                    src={imageUrl}
+                    alt={`Imagen de la habitación ${room.numero}`}
+                    width={800}
+                    height={600}
+                    className="rounded-lg"
                 />
                 <div className="absolute top-4 left-4 text-white text-lg font-bold bg-black bg-opacity-50 px-4 py-2 rounded-lg">
                     {room.tipo.toUpperCase()} 

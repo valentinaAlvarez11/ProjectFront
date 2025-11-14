@@ -18,7 +18,6 @@ export default function LoginComponent() {
   const {
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginScheme),
   });
