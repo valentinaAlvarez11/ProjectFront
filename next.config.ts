@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["logodownload.org", "static.wixstatic.com"],
+    domains: ["logodownload.org", "static.wixstatic.com", "ejemplo.com"],
   },
 };
 
