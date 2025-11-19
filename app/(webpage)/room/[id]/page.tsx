@@ -2,8 +2,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { IRoom } from '../../../../interfaces/rooms'; // Usar IRoom, no RoomInfo
-import RoomsService from '@/libs/rooms.service'; // Asumiendo que esta es la ruta a tu servicio
+import { IRoom } from '../../../../interfaces/rooms';
+import RoomsService from '@/libs/rooms.service'; 
 import RoomDetails from '../../../../components/molecules/roomDetailsComponent';
 
 
@@ -17,7 +17,7 @@ const RoomPage = () => {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-      if (id === null || isNaN(id)) { // Manejar el caso donde el ID no es válido
+      if (id === null || isNaN(id)) {
         setLoading(false);
         setError("ID de habitación no válido.");
         return;
