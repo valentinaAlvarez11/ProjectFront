@@ -5,7 +5,7 @@ export interface IUser {
   id: number;
   email: string;
   nombre: string;
-  rol: 'admin' | 'cliente';
+  rol: 'admin' | 'recepcionista' | 'cliente';
   telefono: string;
 }
 
