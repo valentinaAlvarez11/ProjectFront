@@ -2,8 +2,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { IRoom } from '../../../../interfaces/rooms'; // Usar IRoom, no RoomInfo
-import RoomsService from '@/libs/rooms.service'; // Asumiendo que esta es la ruta a tu servicio
+import { IRoom } from '../../../../interfaces/rooms';
+import RoomsService from '@/libs/rooms.service'; 
 import RoomDetails from '../../../../components/molecules/roomDetailsComponent';
 
 
@@ -17,7 +17,7 @@ const RoomPage = () => {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-      if (id === null || isNaN(id)) { // Manejar el caso donde el ID no es válido
+      if (id === null || isNaN(id)) {
         setLoading(false);
         setError("ID de habitación no válido.");
         return;
@@ -26,24 +26,29 @@ const RoomPage = () => {
       setLoading(true);
       setError("");
 
-      const fetchRoom = async (roomId: number) => {
+      const fetchRoom = async (roomId: number): Promise<{ habitacion: IRoom }> => {
         try {
           const response = await RoomsService.getByIdPublic(roomId);
-                
+          return response;
+        } catch (err) {
+          throw err;
+        }
+      };
+
+      fetchRoom(id)
+        .then(response => {
           setRoom(response.habitacion);
           setError("");
-                
-        } catch (err: any) {
+        })
+        .catch(err => {
           console.error("Error al cargar la habitación:", err);
           setRoom(null);
           const msg = err.status === 404 ? "Habitación no encontrada." : "Error de conexión con el servidor.";
           setError(msg);
-                
-        } finally {
+        })
+        .finally(() => {
           setLoading(false);
-        }
-      };
-    fetchRoom(id);
+        });
   }, [id]);
 
   return (
