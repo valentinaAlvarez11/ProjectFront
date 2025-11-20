@@ -11,6 +11,12 @@ import {
 
 const UsersService = {
 
+  // Registrar un usuario como admin
+
+  register: async (data: IUser): Promise<IMessageResponse> => {
+    return apiFetch('users/admin/register', 'POST', data) as Promise<IMessageResponse>;
+  },
+
   // Obtiene todos los usuarios del sistema.
 
   getAllUsersAdmin: async (): Promise<IUsersListResponse> => {

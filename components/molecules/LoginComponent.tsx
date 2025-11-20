@@ -18,7 +18,6 @@ export default function LoginComponent() {
   const {
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginScheme),
   });
@@ -30,16 +29,16 @@ export default function LoginComponent() {
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     try {
-      const payload = mapToPayload(data);
-      const response = await AuthService.login(payload); 
+        const payload = mapToPayload(data);
+        const response = await AuthService.login(payload); 
 
-      loginStoreAction(response.usuario); 
-      router.push('/'); 
-        
-    } catch (err: any) {
-      const errorMessage = err?.message || "Error de conexión o credenciales incorrectas.";
-      console.error("Error en solicitud:", errorMessage);
-      alert(errorMessage);
+        loginStoreAction(response.usuario); 
+        router.push('/'); 
+            
+    } catch (err: unknown) {
+        const errorMessage = (err as Error)?.message || "Error de conexión o credenciales incorrectas.";
+        console.error("Error en solicitud:", errorMessage);
+        alert(errorMessage);
     }
   };
 
