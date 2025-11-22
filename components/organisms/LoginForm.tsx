@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FiUser } from "react-icons/fi";
 import LoginComponent from "../molecules/LoginComponent";
 import TextLink from "../atoms/TextLink";
+import { loginCardContainer, loginTitle, loginTextLink } from "@/utils/Tokens";
 
 export default function LoginForm() {
   
@@ -26,13 +27,13 @@ export default function LoginForm() {
 
       {/* Centered Login Form */}
       <div className="relative z-10 w-full max-w-md mx-4 flex items-center justify-center">
-        <div className="w-full bg-[#2a2f4a] rounded-lg shadow-2xl p-8 lg:p-10">
+        <div className={loginCardContainer}>
           {/* Icon and Title */}
           <div className="flex flex-col items-center mb-4">
             <div className="w-16 h-16 bg-[#b6a253]/20 rounded-full flex items-center justify-center mb-4">
               <FiUser className="w-8 h-8 text-[#b6a253]" />
             </div>
-            <h2 className="text-2xl font-semibold text-white text-center mb-2">
+            <h2 className={loginTitle}>
               Login to your account
             </h2>
           </div>
@@ -42,7 +43,7 @@ export default function LoginForm() {
 
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
-            <TextLink href="/register" className="text-white hover:text-[#b6a253]">
+            <TextLink href="/register" className={loginTextLink}>
               Don&apos;t have an account? <span className="underline text-white">Sign up</span>
             </TextLink>
           </div>

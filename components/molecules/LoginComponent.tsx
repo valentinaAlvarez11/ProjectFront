@@ -8,6 +8,7 @@ import SocialButton from "./SocialButton";
 import Button from "../atoms/ButtonAuth";
 import TextLink from "../atoms/TextLink";
 import Separator from "../atoms/Separator";
+import { formFieldContainer, formLabel, formErrorTextCenter, formSuccessText, loginTextLinkSmall } from "@/utils/Tokens";
 
 export default function LoginComponent() {
   const router = useRouter();
@@ -38,15 +39,15 @@ export default function LoginComponent() {
         placeholder="mail@example.com"
       />
       
-      <div className="space-y-1">
+      <div className={formFieldContainer}>
         <div className="flex items-center justify-between">
-          <label htmlFor="password" className="block text-sm font-medium text-white">
+          <label htmlFor="password" className={formLabel}>
             Password
           </label>
-          <TextLink href="/forgot-password" className="text-sm text-white hover:text-[#b6a253]">
+          <TextLink href="/forgot-password" className={loginTextLinkSmall}>
             Forgot your password?
           </TextLink>
-      </div>
+        </div>
         <PasswordField
           label=""
           register={register("password")}
@@ -57,11 +58,11 @@ export default function LoginComponent() {
       </div>
 
       {serverError && (
-        <p className="text-sm text-red-400 text-center">{serverError}</p>
+        <p className={formErrorTextCenter}>{serverError}</p>
       )}
 
       {successMessage && (
-        <p className="text-sm text-green-400 text-center">{successMessage}</p>
+        <p className={formSuccessText}>{successMessage}</p>
       )}
 
       <Button

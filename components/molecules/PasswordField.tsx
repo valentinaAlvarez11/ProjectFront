@@ -4,6 +4,7 @@ import { useState } from "react";
 import { UseFormRegisterReturn, FieldError } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Input from "../atoms/Input";
+import { formFieldContainer, formLabel } from "@/utils/Tokens";
 
 interface PasswordFieldProps {
   label: string;
@@ -23,9 +24,9 @@ export default function PasswordField({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="space-y-1">
+    <div className={formFieldContainer}>
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-white">
+        <label htmlFor={id} className={formLabel}>
           {label}
         </label>
       )}
