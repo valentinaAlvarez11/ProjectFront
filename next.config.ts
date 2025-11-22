@@ -1,8 +1,16 @@
+// next.config.ts
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["logodownload.org", "static.wixstatic.com", "ejemplo.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",   // acepta cualquier host (wildcard)
+        port: "",
+        pathname: "/**",  // acepta cualquier path
+      },
+    ],
   },
 };
 

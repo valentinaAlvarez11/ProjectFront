@@ -1,80 +1,80 @@
 "use client";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useRouter } from 'next/navigation';
-import InputComponents from "../atoms/InputComponents";
-import { ILoginPayload } from "@/interfaces/users"; 
-import { loginScheme } from "@/schemas/login";
-import AuthService from "@/libs/auth.service"; 
-import { useAuthStore } from "@/store/authStore";
-
-type LoginFormData = { email: string; password: string; };
-
+import useLoginForm from "@/hooks/useLoginForm";
+import FormField from "./FormField";
+import PasswordField from "./PasswordField";
+import SocialButton from "./SocialButton";
+import Button from "../atoms/ButtonAuth";
+import TextLink from "../atoms/TextLink";
+import Separator from "../atoms/Separator";
 
 export default function LoginComponent() {
-  const loginStoreAction = useAuthStore((state) => state.login);
   const router = useRouter();
 
   const {
+    register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginScheme),
+    submit,
+    serverError,
+    successMessage,
+  } = useLoginForm({
+    onSuccess: () => {
+      router.push('/');
+    },
   });
 
-  const mapToPayload = (data: LoginFormData): ILoginPayload => ({
-      email: data.email,
-      contraseña: data.password,
-  });
-
-  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
-    try {
-        const payload = mapToPayload(data);
-        const response = await AuthService.login(payload); 
-
-        loginStoreAction(response.usuario); 
-        router.push('/'); 
-            
-    } catch (err: unknown) {
-        const errorMessage = (err as Error)?.message || "Error de conexión o credenciales incorrectas.";
-        console.error("Error en solicitud:", errorMessage);
-        alert(errorMessage);
-    }
-  };
-
-  const onErrors = () => {
-    console.log("Errores", errors);
-
-    alert("Informacion incompleta");
-  };
+  const onSubmit = handleSubmit(submit);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onErrors)} className="space-y-4">
-      <div>
-        <InputComponents
-          label="Introduce el email" // Corregir label a email
-          typeElement="text"
-          idElement="email"
-          nameRegister="email" // ⚠️ CORRECCIÓN: El campo debe ser 'email'
-          // register={register('email')} si se usara el hook completo
-        />
+    <form onSubmit={onSubmit} className="space-y-5">
+      <FormField
+        label="Email"
+        register={register("email")}
+        error={errors.email}
+        type="email"
+        id="email"
+        placeholder="mail@example.com"
+      />
+      
+      <div className="space-y-1">
+        <div className="flex items-center justify-between">
+          <label htmlFor="password" className="block text-sm font-medium text-white">
+            Password
+          </label>
+          <TextLink href="/forgot-password" className="text-sm text-white hover:text-[#b6a253]">
+            Forgot your password?
+          </TextLink>
       </div>
-      <div>
-        <InputComponents
-          label="Introduce la contraseña"
-          typeElement="password"
-          idElement="password"
-          nameRegister="password" // ⚠️ CORRECCIÓN: El campo debe ser 'password'
-          // register={register('password')}
+        <PasswordField
+          label=""
+          register={register("password")}
+          error={errors.password}
+          id="password"
+          placeholder="Password"
         />
       </div>
 
-      <button
+      {serverError && (
+        <p className="text-sm text-red-400 text-center">{serverError}</p>
+      )}
+
+      {successMessage && (
+        <p className="text-sm text-green-400 text-center">{successMessage}</p>
+      )}
+
+      <Button
         type="submit"
-        className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-medium py-2 rounded-lg transition"
+        variant="light"
+        className="mt-4"
       >
-        Continuar
-      </button>
+        Login
+      </Button>
+
+      <Separator />
+
+      <SocialButton />
     </form>
   );
 }
