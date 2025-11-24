@@ -1,8 +1,11 @@
 // components/molecules/RoomDetails.tsx (REFRACTORIZADO Y CORREGIDO)
 
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { IRoom } from '@/interfaces/rooms'; 
+import { IRoom } from '@/interfaces/rooms';
+import AuthRequiredModal from './AuthRequiredModal'; 
 
 interface RoomDetailsProps {
     room: IRoom;
@@ -41,6 +44,7 @@ const getActiveAmenities = (features: IRoom['caracteristicas'] | string[] | null
 
 
 const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // 🔑 Paso 1: Debugging del Objeto Completo
     console.log("Datos de la habitación recibidos:", room); 
@@ -165,7 +169,10 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
                                         </div>
                                         <p className="text-sm text-gray-500">Excluye impuestos y cargos</p>
                                     </div>
-                                    <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 whitespace-nowrap">
+                                    <button 
+                                        onClick={() => setIsModalOpen(true)}
+                                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 whitespace-nowrap"
+                                    >
                                         SELECCIONE OFERTA
                                     </button>
                                 </div>
@@ -189,6 +196,12 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
                     </div>
                 </div>
             </div>
+
+            {/* Modal de autenticación requerida */}
+            <AuthRequiredModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+            />
         </div>
     );
 };
