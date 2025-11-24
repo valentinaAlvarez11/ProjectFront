@@ -26,7 +26,7 @@ export interface IRoom {
   precio_noche: number;
   descripcion: string | null;
   disponible: boolean;
-  caracteristicas: IRoomFeatures | null; 
+  caracteristicas: IRoomFeatures | string[] | null; // Puede ser objeto estructurado o array de strings
   imagenes: string[]; 
 }
 

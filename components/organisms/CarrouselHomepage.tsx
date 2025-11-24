@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import Image from 'next/image';
 
 const images = [
-  "https://static.wixstatic.com/media/820831_c1a822eeac9c491b82556da918086b59~mv2.png/v1/crop/x_183,y_223,w_686,h_627/fill/w_636,h_568,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/820831_c1a822eeac9c491b82556da918086b59~mv2.png",
-  "https://static.wixstatic.com/media/820831_8a7dfaed785d4461aa1614b220f9b652~mv2.jpeg/v1/fill/w_1600,h_870,al_c,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_8a7dfaed785d4461aa1614b220f9b652~mv2.jpeg"
+  "https://static.wixstatic.com/media/820831_a09d6a32b1604be084a86df021608ecd~mv2.jpg/v1/fit/w_739,h_541,q_90,enc_avif,quality_auto/820831_a09d6a32b1604be084a86df021608ecd~mv2.jpg",
+  "https://static.wixstatic.com/media/820831_10c9b96c06f847368f80df8f1d3f03cc~mv2.jpg/v1/fit/w_739,h_541,q_90,enc_avif,quality_auto/820831_10c9b96c06f847368f80df8f1d3f03cc~mv2.jpg",
+  "https://static.wixstatic.com/media/820831_b7cbcb946ea148889909a719055904ff~mv2.jpg/v1/fit/w_739,h_541,q_90,enc_avif,quality_auto/820831_b7cbcb946ea148889909a719055904ff~mv2.jpg",
+  "https://static.wixstatic.com/media/820831_df25723fb969414f9a92a4933dbfd52f~mv2.jpg/v1/fit/w_739,h_541,q_90,enc_avif,quality_auto/820831_df25723fb969414f9a92a4933dbfd52f~mv2.jpg"
 ];
 
 export default function CarrouselHomepage() {
@@ -32,9 +34,10 @@ export default function CarrouselHomepage() {
       <Image
         src={images[current]}
         alt={`slide-${current}`}
-        layout="fill"
-        objectFit="cover"
-        style={{ transition: "opacity 0.5s" }}
+        fill
+        style={{ objectFit: "cover", objectPosition: "50% 50%", transition: "opacity 0.5s" }}
+        priority={current === 0}
+        loading={current === 0 ? "eager" : "lazy"}
       />
       <button
         onClick={prevSlide}
@@ -50,7 +53,8 @@ export default function CarrouselHomepage() {
           width: "40px",
           height: "40px",
           fontSize: "24px",
-          cursor: "pointer"
+          cursor: "pointer",
+          zIndex: 10
         }}
         aria-label="Anterior"
       >
@@ -70,7 +74,8 @@ export default function CarrouselHomepage() {
           width: "40px",
           height: "40px",
           fontSize: "24px",
-          cursor: "pointer"
+          cursor: "pointer",
+          zIndex: 10
         }}
         aria-label="Siguiente"
       >
@@ -82,7 +87,8 @@ export default function CarrouselHomepage() {
         left: "50%",
         transform: "translateX(-50%)",
         display: "flex",
-        gap: "10px"
+        gap: "10px",
+        zIndex: 10
       }}>
         {images.map((_, idx) => (
           <span

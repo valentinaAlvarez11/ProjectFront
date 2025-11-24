@@ -2,7 +2,7 @@
 const rawApiUrl = process.env.NEXT_PUBLIC_API_URL;
 const API_URL = (rawApiUrl && rawApiUrl !== "undefined")
   ? rawApiUrl.replace(/\/$/, "")
-  : "http://localhost:3000/api";
+  : "http://localhost:3000";
 
 type methods = "GET" | "POST" | "PUT" | "DELETE";
 

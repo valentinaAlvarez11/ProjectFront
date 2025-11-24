@@ -88,54 +88,8 @@ export default function HomePageClient() {
             }}>Room service</div>
           </div>
         </div>
-      </div>
-      {/* Sección Hotel Regatta cuida de ti con distribución de la imagen adjunta */}
-      <div style={{
-        width: "100vw",
-        background: "#0a174e",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "stretch",
-        justifyContent: "flex-start",
-        minHeight: "460px",
-        margin: 0,
-        position: "relative"
-      }}>
-        {/* Bloque azul con texto, ocupa mitad izquierda */}
-        <div style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "40px 40px 40px 40px",
-          color: "#fff",
-          fontFamily: "inherit",
-          minWidth: 0
-        }}>
-          <h2 style={{ fontSize: "2.2rem", fontWeight: "500", marginBottom: "24px", fontFamily: 'inherit', letterSpacing: '0.02em' }}>Hotel Regatta cuida de ti</h2>
-          <p style={{ fontSize: "1.4rem", lineHeight: 1.7, fontFamily: 'inherit' }}>
-            Nos esforzamos para que vivas una experiencia única y de ensueño al estar frente a las playas de Bocagrande, por eso ponemos toda nuestra atención en el cuidado hacia ti y cumplimos con un estricto protocolo una vez ingresas a nuestro hotel.
-          </p>
-        </div>
-        {/* Imagen ocupa mitad derecha */}
-        <div style={{
-          flex: 1,
-          minWidth: 0,
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          position: "relative"
-        }}>
-          <Image
-            src="https://static.wixstatic.com/media/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg/v1/fill/w_881,h_455,al_tr,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/820831_c7cbafe210a64f37aa1362a9a0df7435~mv2.jpg"
-            alt="Hotel Regatta cuida de ti"
-            fill
-            style={{ objectFit: "cover", maxHeight: "460px" }}
-          />
-        </div>
-      </div>
-      {/* Sección de habitaciones */}
+      </div>
+      {/* Sección de habitaciones */}
       <RoomCards />
     </>
   );
