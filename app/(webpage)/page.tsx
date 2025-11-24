@@ -5,7 +5,7 @@ import React from 'react';
 
 export default function HomePageClient() {
   return (
-    <>
+    <div style={{ overflow: 'hidden' }}>
       <CarrouselHomepage />
 
       {/* Sección de Comodidades */}
@@ -107,6 +107,6 @@ export default function HomePageClient() {
       </div>
       {/* Sección de habitaciones */}
       <RoomCards />
-    </>
+    </div>
   );
 }
