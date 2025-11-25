@@ -14,7 +14,7 @@ export default function WebpageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
+    <main className="pb-20 sm:pb-24 md:pb-28">
       <HeaderComponent />
       { children }
       <FooterBooking />
