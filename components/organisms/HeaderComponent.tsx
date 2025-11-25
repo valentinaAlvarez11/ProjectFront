@@ -1,10 +1,38 @@
+// components/organisms/HeaderComponent.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useAuthStore } from "@/store/authStore";
 import { headerLinkBase, headerLinkSeparator } from "@/utils/Tokens";
+import { UserNav } from "@/components/organisms/UserNav"; 
 
 export default function HeaderComponent() {
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const loadingAuth = useAuthStore((state) => state.loadingAuth);
+  
+  const allLinks = [
+    { name: 'Inicio', href: '/', requiredAuth: 'none' },
+    { name: 'Reservas', href: '/reservas', requiredAuth: 'logged' },
+    { name: 'Servicios', href: '/servicios', requiredAuth: 'none' },
+    { name: 'Restaurante & Bar', href: '/restaurante-bar', requiredAuth: 'none' },
+    { name: 'Políticas y reglas', href: '/politicas', requiredAuth: 'logged' }, 
+  ];
+
+  const filteredLinks = allLinks.filter(link => 
+    link.requiredAuth === 'none' || (link.requiredAuth === 'logged' && isLoggedIn)
+  );
+
+  if (loadingAuth) {
+    return (
+      <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253]">
+        <div className="flex items-center max-w-[1400px] mx-auto px-8 py-6">
+          <div className="text-white">Cargando sesión...</div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253]">
       <div className="flex items-center max-w-[1400px] mx-auto px-8 py-6">
@@ -17,13 +45,21 @@ export default function HeaderComponent() {
             priority
           />
         </div>
+        
         <nav className="flex items-center flex-1 justify-center">
-          <Link href="/" className={`${headerLinkBase} ${headerLinkSeparator}`}>Inicio</Link>
-          <Link href="/reservas" className={`${headerLinkBase} ${headerLinkSeparator}`}>Reservas</Link>
-          <Link href="/servicios" className={`${headerLinkBase} ${headerLinkSeparator}`}>Servicios</Link>
-          <Link href="/restaurante-bar" className={`${headerLinkBase} ${headerLinkSeparator}`}>Restaurante &amp; Bar</Link>
-          <Link href="/politicas" className={headerLinkBase}>Políticas y reglas</Link>
+          {filteredLinks.map((link, index) => {
+            const isLast = index === filteredLinks.length - 1;
+            const className = isLast ? headerLinkBase : `${headerLinkBase} ${headerLinkSeparator}`;
+
+            return (
+              <Link key={link.name} href={link.href} className={className}>
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
+
+        <UserNav /> 
       </div>
     </header>
   );
