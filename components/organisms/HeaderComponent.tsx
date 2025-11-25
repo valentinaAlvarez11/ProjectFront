@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { headerLinkBase, headerLinkSeparator } from "@/utils/Tokens";
 
 export default function HeaderComponent() {
   return (
@@ -17,11 +18,11 @@ export default function HeaderComponent() {
           />
         </div>
         <nav className="flex items-center flex-1 justify-center">
-          <Link href="/" className="text-[#b6a253] text-lg font-light px-10 border-r border-[#222a54] h-[60px] flex items-center">Inicio</Link>
-          <Link href="/reservas" className="text-white text-lg font-light px-10 border-r border-[#222a54] h-[60px] flex items-center">Reservas</Link>
-          <Link href="/servicios" className="text-white text-lg font-light px-10 border-r border-[#222a54] h-[60px] flex items-center">Servicios</Link>
-          <Link href="/restaurante-bar" className="text-white text-lg font-light px-10 border-r border-[#222a54] h-[60px] flex items-center">Restaurante &amp; Bar</Link>
-          <Link href="/politicas" className="text-white text-lg font-light px-10 h-[60px] flex items-center">Políticas y reglas</Link>
+          <Link href="/" className={`${headerLinkBase} ${headerLinkSeparator}`}>Inicio</Link>
+          <Link href="/reservas" className={`${headerLinkBase} ${headerLinkSeparator}`}>Reservas</Link>
+          <Link href="/servicios" className={`${headerLinkBase} ${headerLinkSeparator}`}>Servicios</Link>
+          <Link href="/restaurante-bar" className={`${headerLinkBase} ${headerLinkSeparator}`}>Restaurante &amp; Bar</Link>
+          <Link href="/politicas" className={headerLinkBase}>Políticas y reglas</Link>
         </nav>
       </div>
     </header>

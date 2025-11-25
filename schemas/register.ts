@@ -25,11 +25,9 @@ const phoneRule = z.string()
 
 export const registerSchema = z.object({
   email: emailRule,
-  phone: phoneRule,
-  name: nameRule,
-  password: passwordRule,
-  acceptSMS: z.boolean(),
-  acceptTerms: z.boolean().refine((v) => v === true, { message: 'Debes aceptar los términos y condiciones' }),
+  telefono: phoneRule,
+  nombre: nameRule,
+  contraseña: passwordRule,
 })
 
 export type RegisterFormSchema = z.infer<typeof registerSchema>

@@ -14,6 +14,7 @@ export type LoginFormData = z.infer<typeof loginScheme>;
 
 export default function useLoginForm({ onSuccess }: { onSuccess?: () => void } = {}) {
   const [serverError, setServerError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const { login } = useAuthStore();
 
   const form = useForm<LoginFormData>({
@@ -25,6 +26,7 @@ export default function useLoginForm({ onSuccess }: { onSuccess?: () => void } =
   const submit = async (data: LoginFormData) => {
     try {
       setServerError(null);
+      setSuccessMessage(null);
 
       const payload: ILoginPayload = { 
         email: data.email, 
@@ -33,12 +35,26 @@ export default function useLoginForm({ onSuccess }: { onSuccess?: () => void } =
 
       const response = await AuthService.login(payload);
       
+      // Capturar mensaje de éxito del backend
+      if (response.mensaje) {
+        // Traducir "Login exitoso" a "Inicio de sesión exitoso"
+        const message = response.mensaje === "Login exitoso" 
+          ? "Inicio de sesión exitoso" 
+          : response.mensaje;
+        setSuccessMessage(message);
+      }
+      
       // Guardar en el store
       login(response.usuario);
 
-      onSuccess?.();
-      form.reset();
+      // Esperar un momento para mostrar el mensaje antes de redirigir
+      setTimeout(() => {
+        onSuccess?.();
+        form.reset();
+      }, 1500);
     } catch (err: any) {
+      setSuccessMessage(null);
+      // El mensaje de error viene del backend (ej: "Credenciales incorrectas.")
       setServerError(err?.message ?? "Error en el login");
     }
   };
@@ -50,5 +66,6 @@ export default function useLoginForm({ onSuccess }: { onSuccess?: () => void } =
     reset: form.reset,
     submit,
     serverError,
+    successMessage,
   };
 }

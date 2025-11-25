@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { FiUser } from "react-icons/fi";
-import LoginComponent from "../molecules/LoginComponent";
+import { FiUserPlus } from "react-icons/fi";
+import RegisterComponent from "../molecules/RegisterComponent";
 import TextLink from "../atoms/TextLink";
 import { loginCardContainer, loginTitle, loginTextLink } from "@/utils/Tokens";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   
   const backgroundImageUrl = "https://www.realhotelsandresorts.com/wp-content/uploads/2024/08/Hotel-Facade_6128-1536x1024.jpg";
 
@@ -25,26 +25,29 @@ export default function LoginForm() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a1445]/90 via-[#0a1445]/70 to-[#1a1f3a]/80" />
       </div>
 
-      {/* Centered Login Form */}
+      {/* Centered Register Form */}
       <div className="relative z-10 w-full max-w-md mx-4 flex items-center justify-center">
         <div className={loginCardContainer}>
           {/* Icon and Title */}
           <div className="flex flex-col items-center mb-4">
             <div className="w-16 h-16 bg-[#b6a253]/20 rounded-full flex items-center justify-center mb-4">
-              <FiUser className="w-8 h-8 text-[#b6a253]" />
+              <FiUserPlus className="w-8 h-8 text-[#b6a253]" />
             </div>
             <h2 className={loginTitle}>
-              Login to your account
+              Create an account
             </h2>
+            <p className="text-sm text-white text-center mb-6">
+              Enter your information to create your account
+            </p>
           </div>
 
-          {/* Login Form */}
-          <LoginComponent />
+          {/* Register Form */}
+          <RegisterComponent />
 
-          {/* Sign Up Link */}
+          {/* Sign In Link */}
           <div className="mt-6 text-center">
-            <TextLink href="/register" className={loginTextLink}>
-              Don&apos;t have an account? <span className="underline text-white">Sign up</span>
+            <TextLink href="/login" className={loginTextLink}>
+              Already have an account? <span className="underline text-white">Sign in</span>
             </TextLink>
           </div>
         </div>
