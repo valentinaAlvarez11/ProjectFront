@@ -24,100 +24,88 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
   const hasValidImage = validImageUrl !== null;
 
   return (
-    <Link href={`/room/${id}`} style={{ textDecoration: 'none' }}>
-      <div
-        style={{
-          width: '350px',
-          height: '450px',
-          borderRadius: '12px',
-          boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
-          overflow: 'hidden',
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          color: '#fff',
-          textAlign: 'left',
-          padding: '20px',
-          cursor: 'pointer',
-          transition: 'transform 0.2s ease-in-out',
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-      >
+    <Link href={`/room/${id}`} className="no-underline">
+      <div className="
+        w-full max-w-[350px] 
+        h-[400px] sm:h-[450px] 
+        rounded-xl 
+        shadow-lg 
+        overflow-hidden 
+        relative 
+        flex 
+        flex-col 
+        justify-between 
+        items-start 
+        text-white 
+        text-left 
+        p-4 sm:p-5 
+        cursor-pointer 
+        transition-transform 
+        duration-200 
+        ease-in-out
+        hover:scale-[1.03]
+        mx-auto
+      ">
         {/* Imagen de fondo */}
         {hasValidImage ? (
           <Image
             src={validImageUrl}
             alt={type}
             fill
-            style={{ objectFit: 'cover', zIndex: 0 }}
+            className="object-cover z-0"
           />
         ) : (
-          <div 
-            style={{ 
-              position: 'absolute', 
-              top: 0, 
-              left: 0, 
-              width: '100%', 
-              height: '100%', 
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              zIndex: 0 
-            }}
-          />
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 z-0" />
         )}
+        
         {/* Superposición oscura para mejorar la legibilidad del texto */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)',
-            zIndex: 1,
-          }}
-        ></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/70 via-black/30 to-black/10 z-[1]" />
 
         {/* Contenido de la tarjeta */}
-        <div style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-          <div
-            style={{
-              background: '#0a174e',
-              borderRadius: '16px',
-              padding: '8px 20px',
-              fontWeight: 'bold',
-              fontSize: '1.4rem',
-              letterSpacing: '0.05em',
-              display: 'inline-block',
-              marginBottom: '10px',
-            }}
-          >
+        <div className="relative z-[2] w-full">
+          <div className="
+            bg-[#0a174e] 
+            rounded-2xl 
+            px-4 sm:px-5 
+            py-2 
+            font-bold 
+            text-lg sm:text-xl 
+            tracking-wide 
+            inline-block 
+            mb-2 sm:mb-3
+          ">
             {type}
           </div>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.5 }}>{description}</p>
+          <p className="text-sm sm:text-base lg:text-lg leading-relaxed line-clamp-3 sm:line-clamp-4">
+            {description}
+          </p>
         </div>
 
         {/* Botón Ver más */}
         <button
-          style={{
-            position: 'relative',
-            zIndex: 2,
-            background: '#E2C044',
-            color: '#0a174e',
-            border: 'none',
-            borderRadius: '30px',
-            padding: '12px 28px',
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            alignSelf: 'center',
-            marginTop: '20px',
-            transition: 'background 0.2s ease-in-out',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = '#ffd700')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = '#E2C044')}
+          className="
+            relative 
+            z-[2] 
+            bg-[#E2C044] 
+            hover:bg-[#ffd700] 
+            text-[#0a174e] 
+            border-none 
+            rounded-full 
+            px-5 sm:px-7 
+            py-2.5 sm:py-3 
+            text-sm sm:text-base 
+            font-bold 
+            cursor-pointer 
+            self-center 
+            mt-4 sm:mt-5 
+            transition-colors 
+            duration-200 
+            ease-in-out
+            focus:outline-none 
+            focus:ring-2 
+            focus:ring-[#E2C044] 
+            focus:ring-offset-2
+          "
         >
           Ver más
         </button>

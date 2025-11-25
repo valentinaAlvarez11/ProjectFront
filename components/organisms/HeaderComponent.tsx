@@ -2,21 +2,38 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { headerLinkBase, headerLinkSeparator } from "@/utils/Tokens";
 
 export default function HeaderComponent() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253]">
-      <div className="flex items-center max-w-[1400px] mx-auto px-8 py-6">
-        <div className="flex items-center min-w-[120px]">
-          <Image
-            src="https://static.wixstatic.com/media/820831_c1a822eeac9c491b82556da918086b59~mv2.png/v1/crop/x_185,y_232,w_649,h_602/fill/w_222,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO-SIN-FONDO.png"
-            alt="Hotel Regatta Cartagena"
-            width={90}
-            height={80}
-            priority
-          />
+    <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253] sticky top-0 z-50">
+      <div className="flex items-center justify-between max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+        {/* Logo */}
+        <div className="flex items-center min-w-[80px] sm:min-w-[120px]">
+          <Link href="/" onClick={closeMenu}>
+            <Image
+              src="https://static.wixstatic.com/media/820831_c1a822eeac9c491b82556da918086b59~mv2.png/v1/crop/x_185,y_232,w_649,h_602/fill/w_222,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO-SIN-FONDO.png"
+              alt="Hotel Regatta Cartagena"
+              width={90}
+              height={80}
+              priority
+              className="w-16 h-14 sm:w-[90px] sm:h-[80px]"
+            />
+          </Link>
         </div>
+
+        {/* Desktop Navigation */}
         <nav className="flex items-center flex-1 justify-center">
           <Link href="/" className={`${headerLinkBase} ${headerLinkSeparator}`}>Inicio</Link>
           <Link href="/reservas" className={`${headerLinkBase} ${headerLinkSeparator}`}>Reservas</Link>
@@ -24,7 +41,76 @@ export default function HeaderComponent() {
           <Link href="/restaurante-bar" className={`${headerLinkBase} ${headerLinkSeparator}`}>Restaurante &amp; Bar</Link>
           <Link href="/politicas" className={headerLinkBase}>Políticas y reglas</Link>
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={toggleMenu}
+          className="lg:hidden text-white p-2 focus:outline-none focus:ring-2 focus:ring-[#b6a253] rounded"
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            {isMenuOpen ? (
+              <path d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile Navigation Menu */}
+      <nav
+        className={`lg:hidden bg-[#0a1445] border-t border-[#222a54] transition-all duration-300 ease-in-out ${
+          isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        }`}
+      >
+        <div className="flex flex-col">
+          <Link
+            href="/"
+            onClick={closeMenu}
+            className="text-[#b6a253] text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] transition-colors"
+          >
+            Inicio
+          </Link>
+          <Link
+            href="/reservas"
+            onClick={closeMenu}
+            className="text-white text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] hover:text-[#b6a253] transition-colors"
+          >
+            Reservas
+          </Link>
+          <Link
+            href="/servicios"
+            onClick={closeMenu}
+            className="text-white text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] hover:text-[#b6a253] transition-colors"
+          >
+            Servicios
+          </Link>
+          <Link
+            href="/restaurante-bar"
+            onClick={closeMenu}
+            className="text-white text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] hover:text-[#b6a253] transition-colors"
+          >
+            Restaurante &amp; Bar
+          </Link>
+          <Link
+            href="/politicas"
+            onClick={closeMenu}
+            className="text-white text-base font-light px-6 py-4 hover:bg-[#222a54] hover:text-[#b6a253] transition-colors"
+          >
+            Políticas y reglas
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 }

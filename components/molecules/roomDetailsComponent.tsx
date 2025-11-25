@@ -2,10 +2,13 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { IRoom } from '@/interfaces/rooms';
-import AuthRequiredModal from './AuthRequiredModal'; 
+import { useAuthStore } from '@/store/authStore';
+import AuthRequiredModal from './AuthRequiredModal';
+import RoomsService from '@/libs/rooms.service'; 
 
 interface RoomDetailsProps {
     room: IRoom;
@@ -44,7 +47,40 @@ const getActiveAmenities = (features: IRoom['caracteristicas'] | string[] | null
 
 
 const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
+    const router = useRouter();
+    const { isLoggedIn, user, checkAuthStatus } = useAuthStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [deleteError, setDeleteError] = useState<string | null>(null);
+
+    useEffect(() => {
+        checkAuthStatus();
+    }, [checkAuthStatus]);
+
+    const isAdmin = isLoggedIn && user?.rol === 'admin';
+
+    const handleEdit = () => {
+        router.push(`/rooms/edit/${room.id}`);
+    };
+
+    const handleDelete = async () => {
+        if (!confirm(`¿Está seguro de que desea eliminar la habitación ${room.numero}? Esta acción no se puede deshacer.`)) {
+            return;
+        }
+
+        try {
+            setIsDeleting(true);
+            setDeleteError(null);
+            await RoomsService.deleteRoom(room.id);
+            alert('Habitación eliminada exitosamente');
+            router.push('/');
+        } catch (err: any) {
+            console.error('Error al eliminar habitación:', err);
+            setDeleteError(err?.message || 'Error al eliminar la habitación');
+        } finally {
+            setIsDeleting(false);
+        }
+    };
 
     // 🔑 Paso 1: Debugging del Objeto Completo
     console.log("Datos de la habitación recibidos:", room); 
@@ -101,11 +137,11 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Imagen más grande */}
-            <div className="relative mb-8">
+            <div className="relative mb-6 sm:mb-8">
                 {hasValidImage ? (
-                    <div className="relative w-full h-[70vh] min-h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+                    <div className="relative w-full h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[600px] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
                         <Image
                             src={imageUrl}
                             alt={`Imagen de la habitación ${room.numero}`}
@@ -115,63 +151,85 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
                         />
                     </div>
                 ) : (
-                    <div 
-                        className="rounded-2xl bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center shadow-2xl"
-                        style={{ width: '100%', height: '70vh', minHeight: '600px' }}
-                    >
+                    <div className="w-full h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[600px] rounded-xl sm:rounded-2xl bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center shadow-2xl">
                         <div className="text-center text-gray-600">
-                            <div className="text-6xl mb-4">🏨</div>
-                            <p className="text-xl font-semibold">Imagen no disponible</p>
-                            <p className="text-sm mt-2">Habitación {room.numero}</p>
+                            <div className="text-4xl sm:text-5xl lg:text-6xl mb-4">🏨</div>
+                            <p className="text-base sm:text-lg lg:text-xl font-semibold">Imagen no disponible</p>
+                            <p className="text-xs sm:text-sm mt-2">Habitación {room.numero}</p>
                         </div>
                     </div>
                 )}
-                <div className="absolute top-6 left-6 text-white text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-3 rounded-xl shadow-lg backdrop-blur-sm">
+                <div className="absolute top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 text-white text-sm sm:text-base md:text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg sm:rounded-xl shadow-lg backdrop-blur-sm">
                     {room.tipo.toUpperCase()} 
                 </div>
             </div>
 
-            <div className="px-4 lg:px-6 mx-auto">
+            <div className="px-0 sm:px-2 lg:px-6 mx-auto">
+                {/* Botones de administración (solo para admin) */}
+                {isAdmin && (
+                    <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-end">
+                        <button
+                            onClick={handleEdit}
+                            className="bg-[#0a1445] hover:bg-[#222a54] text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl border-2 border-[#b6a253] hover:border-[#b6a253] text-sm sm:text-base"
+                        >
+                            ✏️ Editar
+                        </button>
+                        <button
+                            onClick={handleDelete}
+                            disabled={isDeleting}
+                            className="bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl disabled:cursor-not-allowed text-sm sm:text-base"
+                        >
+                            {isDeleting ? 'Eliminando...' : '🗑️ Eliminar'}
+                        </button>
+                    </div>
+                )}
+
+                {deleteError && (
+                    <div className="mb-6 bg-red-50 border-2 border-red-400 text-red-700 px-4 py-3 rounded-lg">
+                        <p className="font-semibold">{deleteError}</p>
+                    </div>
+                )}
+
                 {/* Tarjeta única con información, precio e instalaciones lado a lado */}
-                <div className="bg-white rounded-2xl shadow-xl p-8 w-full border border-gray-100">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 w-full border border-gray-100">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                         {/* Columna izquierda: Información de la habitación y precio */}
                         <div className="flex flex-col">
                             {/* Información de la habitación */}
-                            <div className="space-y-5 mb-6">
+                            <div className="space-y-4 sm:space-y-5 mb-4 sm:mb-6">
                                 <div className="flex items-center space-x-3 text-gray-800">
-                                    <span className="text-2xl">🏠</span>
-                                    <span className="text-lg font-medium">{size}</span>
+                                    <span className="text-xl sm:text-2xl">🏠</span>
+                                    <span className="text-base sm:text-lg font-medium">{size}</span>
                                 </div>
                                 <div className="flex items-center space-x-3 text-gray-800">
-                                    <span className="text-2xl">🛏️</span>
-                                    <span className="text-lg font-medium">{bedDetails}</span>
+                                    <span className="text-xl sm:text-2xl">🛏️</span>
+                                    <span className="text-base sm:text-lg font-medium">{bedDetails}</span>
                                 </div>
                                 <div className="flex items-center space-x-3 text-gray-800">
-                                    <span className="text-2xl">🏙️</span>
-                                    <span className="text-lg font-medium">{view}</span>
+                                    <span className="text-xl sm:text-2xl">🏙️</span>
+                                    <span className="text-base sm:text-lg font-medium">{view}</span>
                                 </div>
                             </div>
 
                             {/* Descripción */}
                             {room.descripcion && (
-                                <div className="mb-6">
-                                    <p className="text-gray-600 leading-relaxed">{room.descripcion}</p>
+                                <div className="mb-4 sm:mb-6">
+                                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{room.descripcion}</p>
                                 </div>
                             )}
 
                             {/* Precio y botón */}
                             <div className="mt-auto">
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                <div className="flex flex-col gap-4">
                                     <div className="flex-1">
-                                        <div className="text-5xl font-bold text-gray-900 mb-2">
+                                        <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
                                             $ {room.precio_noche.toFixed(2)}
                                         </div>
-                                        <p className="text-sm text-gray-500">Excluye impuestos y cargos</p>
+                                        <p className="text-xs sm:text-sm text-gray-500">Excluye impuestos y cargos</p>
                                     </div>
                                     <button 
                                         onClick={() => setIsModalOpen(true)}
-                                        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 whitespace-nowrap"
+                                        className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-base"
                                     >
                                         SELECCIONE OFERTA
                                     </button>
@@ -181,13 +239,13 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
 
                         {/* Columna derecha: Instalaciones */}
                         {amenities.length > 0 && (
-                            <div className="border-l-0 lg:border-l border-gray-200 pl-0 lg:pl-8">
-                                <h3 className="text-2xl font-bold mb-6 text-gray-900">Instalaciones</h3>
-                                <div className="grid grid-cols-1 gap-3">
+                            <div className="border-t lg:border-t-0 lg:border-l border-gray-200 pt-6 lg:pt-0 lg:pl-6 xl:pl-8">
+                                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900">Instalaciones</h3>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-3">
                                     {amenities.map((item, index) => (
                                         <div key={index} className="flex items-center space-x-3 text-gray-700 hover:text-blue-600 transition-colors">
-                                            <span className="text-green-500 text-xl">✔️</span>
-                                            <span className="text-base font-medium">{item}</span>
+                                            <span className="text-green-500 text-lg sm:text-xl">✔️</span>
+                                            <span className="text-sm sm:text-base font-medium">{item}</span>
                                         </div>
                                     ))}
                                 </div>
