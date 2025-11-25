@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",  // acepta cualquier path
       },
-    ],
+      {
         protocol: 'https',
         hostname: 'logodownload.org',
       },

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import AuthInitializer from "@/components/organisms/AuthInitializer";
 import HeaderComponent from "@/components/organisms/HeaderComponent";
 import FooterBooking from "@/components/organisms/FooterBooking";
 
