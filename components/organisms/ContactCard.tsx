@@ -1,6 +1,6 @@
 // components/ContactCard.tsx
 import Image from "next/image";
-import contactImage from "../../app/assets/contact.avif"; // 🔹 Ajusta la ruta a tu imagen
+import contactImage from "../../assets/contact.avif"; // 🔹 Ajusta la ruta a tu imagen
 
 export default function ContactCard() {
   return (

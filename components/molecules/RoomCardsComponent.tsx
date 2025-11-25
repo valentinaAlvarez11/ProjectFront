@@ -5,13 +5,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface RoomCardProps {
-  id: string;
+  id: number;
   type: string;
   description: string;
   imageUrl: string;
 }
 
 const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, imageUrl }) => {
+  // Validar y normalizar URL de imagen
+  const getValidImageUrl = (url: string): string | null => {
+    if (!url) return null;
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (url.startsWith('/')) return url;
+    return null;
+  };
+
+  const validImageUrl = getValidImageUrl(imageUrl);
+  const hasValidImage = validImageUrl !== null;
+
   return (
     <Link href={`/room/${id}`} style={{ textDecoration: 'none' }}>
       <div
@@ -36,13 +47,26 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
         onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       >
         {/* Imagen de fondo */}
-        <Image
-          src={imageUrl}
-          alt={type}
-          layout="fill"
-          objectFit="cover"
-          style={{ zIndex: 0 }}
-        />
+        {hasValidImage ? (
+          <Image
+            src={validImageUrl}
+            alt={type}
+            fill
+            style={{ objectFit: 'cover', zIndex: 0 }}
+          />
+        ) : (
+          <div 
+            style={{ 
+              position: 'absolute', 
+              top: 0, 
+              left: 0, 
+              width: '100%', 
+              height: '100%', 
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              zIndex: 0 
+            }}
+          />
+        )}
         {/* Superposición oscura para mejorar la legibilidad del texto */}
         <div
           style={{
