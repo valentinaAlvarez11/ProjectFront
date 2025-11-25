@@ -1,16 +1,15 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import useLoginForm from "@/hooks/useLoginForm";
+import useRegisterForm from "@/hooks/useRegisterForm";
 import FormField from "./FormField";
 import PasswordField from "./PasswordField";
 import SocialButton from "./SocialButton";
 import Button from "../atoms/ButtonAuth";
-import TextLink from "../atoms/TextLink";
 import Separator from "../atoms/Separator";
-import { formFieldContainer, formLabel, formErrorTextCenter, formSuccessText, loginTextLinkSmall } from "@/utils/Tokens";
+import { formErrorTextCenter, formSuccessText } from "@/utils/Tokens";
 
-export default function LoginComponent() {
+export default function RegisterComponent() {
   const router = useRouter();
 
   const {
@@ -20,15 +19,15 @@ export default function LoginComponent() {
     submit,
     serverError,
     successMessage,
-  } = useLoginForm({
+  } = useRegisterForm({
     onSuccess: () => {
-      router.push('/');
+      router.push('/login');
     },
   });
 
   const onSubmit = handleSubmit(submit);
 
-  return (
+  return (
     <form onSubmit={onSubmit} className="space-y-5">
       <FormField
         label="Email"
@@ -38,24 +37,32 @@ export default function LoginComponent() {
         id="email"
         placeholder="mail@example.com"
       />
+
+      <FormField
+        label="Teléfono"
+        register={register("telefono")}
+        error={errors.telefono}
+        type="text"
+        id="telefono"
+        placeholder="1234567890"
+      />
+
+      <FormField
+        label="Nombre"
+        register={register("nombre")}
+        error={errors.nombre}
+        type="text"
+        id="nombre"
+        placeholder="Tu nombre"
+      />
       
-      <div className={formFieldContainer}>
-        <div className="flex items-center justify-between">
-          <label htmlFor="password" className={formLabel}>
-            Password
-          </label>
-          <TextLink href="/forgot-password" className={loginTextLinkSmall}>
-            Forgot your password?
-          </TextLink>
-        </div>
-        <PasswordField
-          label=""
-          register={register("password")}
-          error={errors.password}
-          id="password"
-          placeholder="Password"
-        />
-      </div>
+      <PasswordField
+        label="Contraseña"
+        register={register("contraseña")}
+        error={errors.contraseña}
+        id="contraseña"
+        placeholder="Password"
+      />
 
       {serverError && (
         <p className={formErrorTextCenter}>{serverError}</p>
@@ -66,16 +73,17 @@ export default function LoginComponent() {
       )}
 
       <Button
-        type="submit"
+        type="submit"
         variant="light"
         className="mt-4"
-      >
-        Login
+      >
+        Register
       </Button>
 
       <Separator />
 
       <SocialButton />
-    </form>
-  );
+    </form>
+  );
 }
+

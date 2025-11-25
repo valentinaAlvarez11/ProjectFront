@@ -6,7 +6,9 @@ import Card from '../../components/organisms/ContactCard';
 export default function ServicesLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
+      <div className="sticky top-0 z-50">
+        <Header />
+      </div>
       <main className='pb-28'>{children}</main>
       <Footer />
       <Card />
