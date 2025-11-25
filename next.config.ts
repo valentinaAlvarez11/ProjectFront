@@ -14,6 +14,31 @@ const nextConfig: NextConfig = {
         hostname: 'www.realhotelsandresorts.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'logodownload.org',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'via.placeholder.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'r.profitroom.pl',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'boraboracartagena.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ejemplo.com',
+        pathname: '/**',
+      },
     ],
   },
 };

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import RoomCardComponent from '@/components/molecules/RoomCardsComponent';
 import RoomsService from '@/libs/rooms.service';
 import { IRoom } from '@/interfaces/rooms';
+import { sectionTitle } from '@/utils/Tokens';
 
 const RoomCards: React.FC = () => {
   const [rooms, setRooms] = useState<IRoom[]>([]);
@@ -79,7 +80,7 @@ const RoomCards: React.FC = () => {
         <hr className="border-none border-t-[4px] border-[#0a174e] mb-0.5" />
         <hr className="border-none border-t-[2px] border-[#0a174e] mt-0" />
       </div>
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.3em] text-[#0a174e] mt-6 sm:mt-8 mb-8 sm:mb-10 lg:mb-12">
+      <h2 className={`${sectionTitle}`}>
         HABITACIONES
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto justify-items-center">

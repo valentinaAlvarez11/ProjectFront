@@ -1,10 +1,11 @@
 import React from 'react';
 import AmenityCard from '@/components/molecules/AmenityCard';
+import { sectionTitle } from '@/utils/Tokens';
 
 export default function ComodidadesSection() {
   return (
     <div className="w-full bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.3em] text-[#0a174e] mb-6 sm:mb-8 text-center">
+      <h2 className={`${sectionTitle}`}>
         COMODIDADES
       </h2>
       <p className="max-w-5xl text-center text-base sm:text-lg md:text-xl lg:text-2xl text-[#233876] mb-8 sm:mb-12 lg:mb-16 leading-relaxed px-4">
