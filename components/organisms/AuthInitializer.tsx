@@ -2,11 +2,9 @@
 'use client'; 
 import { useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore'; 
-import { usePathname } from 'next/navigation';
 
 export function AuthInitializer({ children }: { children: React.ReactNode }) {
-  const { checkAuthStatus, loadingAuth } = useAuthStore();
-  const pathname = usePathname();
+  const { checkAuthStatus } = useAuthStore();
 
   useEffect(() => {
     // Cargar la sesión desde la cookie al montar la app

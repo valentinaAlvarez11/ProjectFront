@@ -14,15 +14,13 @@ export default function WebpageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body>
-        <AuthInitializer>
-          <HeaderComponent />
-            <main>
-              {children}
-            </main>
-        </AuthInitializer>
-      </body>
-    </html>
+    <>
+      <AuthInitializer>
+        <HeaderComponent />
+        <main>
+          {children}
+        </main>
+      </AuthInitializer>
+    </>
   );
 }
