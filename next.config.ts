@@ -5,33 +5,41 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "**",   // acepta cualquier host (wildcard)
-        port: "",
-        pathname: "/**",  // acepta cualquier path
+        protocol: 'https',
+        hostname: 'static.wixstatic.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.realhotelsandresorts.com',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'logodownload.org',
-      },
-      {
-        protocol: 'https',
-        hostname: 'static.wixstatic.com',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'via.placeholder.com',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'r.profitroom.pl',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'boraboracartagena.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ejemplo.com',
+        pathname: '/**',
       },
     ],
-    domains: ["logodownload.org", "static.wixstatic.com", "ejemplo.com", "via.placeholder.com", "r.profitroom.pl", "boraboracartagena.com"],
   },
 };
 

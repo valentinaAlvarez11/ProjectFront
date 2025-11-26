@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import AuthInitializer from "@/components/organisms/AuthInitializer";
 import HeaderComponent from "@/components/organisms/HeaderComponent";
-import FooterBooking from "@/components/organisms/FooterBooking";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +17,6 @@ export default function WebpageLayout({
     <main className="pb-20 sm:pb-24 md:pb-28">
       <HeaderComponent />
       { children }
-      <FooterBooking />
     </main>
   );
 }
