@@ -13,6 +13,8 @@ import FormSelect from '@/components/atoms/FormSelect';
 import FormCheckbox from '@/components/atoms/FormCheckbox';
 import FormButton from '@/components/atoms/FormButton';
 import ImageUrlInput from './ImageUrlInput';
+import SuccessModal from './SuccessModal';
+import { useModal } from '@/hooks/useModal';
 
 interface CreateRoomFormProps {
   onSuccess?: () => void;
@@ -31,6 +33,8 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [disponible, setDisponible] = useState<boolean>(initialData?.disponible ?? true);
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  const successModal = useModal();
 
   // Función para convertir IRoom a CreateRoomFormData
   const convertRoomToFormData = (room: IRoom): CreateRoomFormData => {
@@ -92,6 +96,11 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
         imagenes: [],
       };
 
+  const form = useForm<CreateRoomFormData>({
+    resolver: zodResolver(createRoomSchema) as any,
+    defaultValues,
+  });
+
   const {
     register,
     handleSubmit,
@@ -99,13 +108,10 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
     formState: { errors },
     reset,
     setValue,
-  } = useForm<CreateRoomFormData>({
-    resolver: zodResolver(createRoomSchema),
-    defaultValues,
-  });
+  } = form;
 
   const { fields, append, remove } = useFieldArray({
-    control,
+    control: control as any,
     name: 'imagenes',
   });
 
@@ -209,7 +215,8 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
         };
 
         await RoomsService.updateRoom(initialData.id, updatePayload);
-        alert('Habitación actualizada exitosamente');
+        setSuccessMessage('Habitación actualizada exitosamente');
+        successModal.open();
       } else {
         // Modo creación: crear nueva habitación
         const createPayload = {
@@ -222,15 +229,9 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
         };
 
         const response = await RoomsService.createRoom(createPayload);
-        alert(`Habitación creada exitosamente. ID: ${response.id}`);
+        setSuccessMessage('Habitación creada exitosamente.');
+        successModal.open();
         reset();
-      }
-      
-      // Si hay un callback de éxito, usarlo; si no, redirigir
-      if (onSuccess) {
-        onSuccess();
-      } else if (!isEditing) {
-        router.push('/');
       }
     } catch (err: any) {
       console.error(`Error al ${isEditing ? 'actualizar' : 'crear'} habitación:`, err);
@@ -257,13 +258,20 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
         {/* Header del formulario */}
         {!hideHeader && (
           <div className="bg-[#0a1445] border-b-[3px] border-[#b6a253] px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Crear Nueva Habitación</h1>
-            <p className="text-gray-300 mt-2 text-sm sm:text-base">Complete el formulario para agregar una nueva habitación al sistema</p>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
+              {isEditing ? 'Editar Habitación' : 'Crear Nueva Habitación'}
+            </h1>
+            <p className="text-gray-300 mt-2 text-sm sm:text-base">
+              {isEditing 
+                ? 'Modifique los datos de la habitación según sea necesario' 
+                : 'Complete el formulario para agregar una nueva habitación al sistema'
+              }
+            </p>
           </div>
         )}
 
         {/* Formulario */}
-        <form onSubmit={handleSubmit(onSubmit)} className={hideHeader ? "p-0 space-y-4 sm:space-y-6" : "p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6"}>
+        <form onSubmit={handleSubmit(onSubmit as any)} className={hideHeader ? "p-0 space-y-4 sm:space-y-6" : "p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6"}>
           {serverError && (
             <div className="bg-red-50 border-2 border-red-400 text-red-700 px-4 py-3 rounded-lg">
               <p className="font-semibold">{serverError}</p>
@@ -386,7 +394,7 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
                   label={inst.label}
                   name={`caracteristicas.instalaciones.${inst.key}`}
                   register={register}
-                  error={errors.caracteristicas?.instalaciones?.[inst.key as keyof typeof errors.caracteristicas.instalaciones]}
+                  error={errors.caracteristicas?.instalaciones?.[inst.key as keyof typeof errors.caracteristicas.instalaciones] as any}
                 />
               ))}
             </div>
@@ -402,7 +410,7 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
               register={register}
               append={append}
               remove={remove}
-              error={errors.imagenes}
+              error={errors.imagenes as any}
             />
           </div>
 
@@ -430,6 +438,22 @@ const CreateRoomForm: React.FC<CreateRoomFormProps> = ({
           </div>
         </form>
       </div>
+
+      {/* Modal de éxito */}
+      <SuccessModal
+        isOpen={successModal.isOpen}
+        onClose={() => {
+          successModal.close();
+          // Si hay un callback de éxito, usarlo; si no, redirigir
+          if (onSuccess) {
+            onSuccess();
+          } else if (!isEditing) {
+            router.push('/');
+          }
+        }}
+        title={isEditing ? "Habitación Actualizada" : "Habitación Creada"}
+        message={successMessage}
+      />
     </div>
   );
 };

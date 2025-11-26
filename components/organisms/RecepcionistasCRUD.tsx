@@ -6,6 +6,9 @@ import { IUser } from '@/interfaces/users';
 import RecepcionistaForm from '@/components/molecules/RecepcionistaForm';
 import Modal from '@/components/atoms/Modal';
 import Button from '@/components/atoms/ButtonAuth';
+import ConfirmDeleteModal from '@/components/molecules/ConfirmDeleteModal';
+import SuccessModal from '@/components/molecules/SuccessModal';
+import { useModal } from '@/hooks/useModal';
 
 export default function RecepcionistasCRUD() {
   const [recepcionistas, setRecepcionistas] = useState<IUser[]>([]);
@@ -14,6 +17,13 @@ export default function RecepcionistasCRUD() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingRecepcionista, setEditingRecepcionista] = useState<IUser | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [deletingRecepcionistaId, setDeletingRecepcionistaId] = useState<number | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  
+  // Hooks para manejar los modales
+  const deleteModal = useModal();
+  const successModal = useModal();
 
   useEffect(() => {
     loadRecepcionistas();
@@ -47,18 +57,26 @@ export default function RecepcionistasCRUD() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('¿Está seguro de que desea eliminar este recepcionista?')) {
-      return;
-    }
+  const handleDeleteClick = (id: number) => {
+    setDeletingRecepcionistaId(id);
+    deleteModal.open();
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!deletingRecepcionistaId) return;
 
     try {
-      await UsersService.deleteUserAdmin(id);
-      alert('Recepcionista eliminado exitosamente');
+      setIsDeleting(true);
+      await UsersService.deleteUserAdmin(deletingRecepcionistaId);
+      deleteModal.close();
+      setDeletingRecepcionistaId(null);
       loadRecepcionistas();
     } catch (err: any) {
       console.error('Error al eliminar recepcionista:', err);
-      alert(err?.message || 'Error al eliminar el recepcionista');
+      setError(err?.message || 'Error al eliminar el recepcionista');
+      // No cerramos el modal si hay error, para que el usuario pueda intentar de nuevo
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -73,18 +91,19 @@ export default function RecepcionistasCRUD() {
           ...data,
           rol: 'recepcionista',
         });
-        alert('Recepcionista actualizado exitosamente');
+        setSuccessMessage('Recepcionista actualizado exitosamente');
       } else {
         // Crear
         await UsersService.register({
           ...data,
           rol: 'recepcionista',
         });
-        alert('Recepcionista creado exitosamente');
+        setSuccessMessage('Recepcionista creado exitosamente');
       }
 
       setIsModalOpen(false);
       setEditingRecepcionista(null);
+      successModal.open();
       loadRecepcionistas();
     } catch (err: any) {
       console.error('Error al guardar recepcionista:', err);
@@ -187,7 +206,7 @@ export default function RecepcionistasCRUD() {
                         Editar
                       </button>
                       <button
-                        onClick={() => handleDelete(recepcionista.id)}
+                        onClick={() => handleDeleteClick(recepcionista.id)}
                         className="text-red-600 hover:text-red-800 transition-colors"
                       >
                         Eliminar
@@ -231,6 +250,28 @@ export default function RecepcionistasCRUD() {
           </div>
         )}
       </Modal>
+
+      {/* Modal de confirmación de eliminación */}
+      <ConfirmDeleteModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => {
+          deleteModal.close();
+          setDeletingRecepcionistaId(null);
+          setError(null);
+        }}
+        onConfirm={handleDeleteConfirm}
+        itemName={deletingRecepcionistaId ? recepcionistas.find(r => r.id === deletingRecepcionistaId)?.nombre || '' : ''}
+        itemType="recepcionista"
+        isLoading={isDeleting}
+      />
+
+      {/* Modal de éxito */}
+      <SuccessModal
+        isOpen={successModal.isOpen}
+        onClose={successModal.close}
+        title={editingRecepcionista ? "Recepcionista Actualizado" : "Recepcionista Creado"}
+        message={successMessage}
+      />
     </div>
   );
 }

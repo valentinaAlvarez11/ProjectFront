@@ -1,6 +1,15 @@
 "use client";
 
 import React from 'react';
+import {
+  modalBackdrop,
+  modalBackdropGradient,
+  modalContainer,
+  modalHeader,
+  modalTitle,
+  modalCloseButton,
+  modalContent,
+} from '@/utils/Tokens';
 
 interface ModalProps {
   isOpen: boolean;
@@ -14,20 +23,20 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md transition-opacity"
-      style={{ background: 'linear-gradient(135deg, rgba(10, 20, 69, 0.95) 0%, rgba(34, 42, 84, 0.9) 50%, rgba(10, 20, 69, 0.95) 100%)' }}
+      className={modalBackdrop}
+      style={{ background: modalBackdropGradient }}
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 transform transition-all border-4 border-white/20"
+        className={modalContainer}
         onClick={(e) => e.stopPropagation()}
       >
         {title && (
-          <div className="flex items-center justify-between p-6 border-b-[3px] border-[#b6a253] bg-[#0a1445]">
-            <h2 className="text-2xl font-bold text-white">{title}</h2>
+          <div className={modalHeader}>
+            <h2 className={modalTitle}>{title}</h2>
             <button
               onClick={onClose}
-              className="text-[#b6a253] hover:text-white transition-colors p-2 hover:bg-[#222a54] rounded-full"
+              className={modalCloseButton}
               aria-label="Cerrar modal"
             >
               <svg 
@@ -46,7 +55,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
             </button>
           </div>
         )}
-        <div className="p-6">
+        <div className={modalContent}>
           {children}
         </div>
       </div>
