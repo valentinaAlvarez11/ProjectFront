@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { createRoomSchema, CreateRoomFormData } from '@/schemas/room';
 import RoomsService from '@/libs/rooms.service';
+import { IRoom, IRoomFeatures } from '@/interfaces/rooms';
 import FormInput from '@/components/atoms/FormInput';
 import FormTextarea from '@/components/atoms/FormTextarea';
 import FormSelect from '@/components/atoms/FormSelect';
@@ -13,10 +14,83 @@ import FormCheckbox from '@/components/atoms/FormCheckbox';
 import FormButton from '@/components/atoms/FormButton';
 import ImageUrlInput from './ImageUrlInput';
 
-const CreateRoomForm: React.FC = () => {
+interface CreateRoomFormProps {
+  onSuccess?: () => void;
+  hideHeader?: boolean;
+  initialData?: IRoom;
+  isEditing?: boolean;
+}
+
+const CreateRoomForm: React.FC<CreateRoomFormProps> = ({ 
+  onSuccess, 
+  hideHeader = false, 
+  initialData,
+  isEditing = false 
+}) => {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [disponible, setDisponible] = useState<boolean>(initialData?.disponible ?? true);
+
+  // Función para convertir IRoom a CreateRoomFormData
+  const convertRoomToFormData = (room: IRoom): CreateRoomFormData => {
+    let caracteristicas: IRoomFeatures = {
+      tamano: '',
+      camas: '',
+      vista: '',
+      instalaciones: {
+        wifi: false,
+        television: false,
+        aireAcondicionado: false,
+        banoDucha: false,
+        plancha: false,
+        toallas: false,
+        smartTV: false,
+        refrigerador: false,
+      },
+    };
+
+    // Manejar características que pueden ser objeto o array
+    if (room.caracteristicas) {
+      if (typeof room.caracteristicas === 'object' && !Array.isArray(room.caracteristicas)) {
+        caracteristicas = room.caracteristicas;
+      }
+    }
+
+    return {
+      numero: room.numero,
+      tipo: room.tipo,
+      precio_noche: room.precio_noche,
+      descripcion: room.descripcion || '',
+      caracteristicas,
+      imagenes: room.imagenes || [],
+    };
+  };
+
+  const defaultValues: CreateRoomFormData = initialData 
+    ? convertRoomToFormData(initialData)
+    : {
+        numero: '',
+        tipo: '',
+        precio_noche: 0,
+        descripcion: '',
+        caracteristicas: {
+          tamano: '',
+          camas: '',
+          vista: '',
+          instalaciones: {
+            wifi: false,
+            television: false,
+            aireAcondicionado: false,
+            banoDucha: false,
+            plancha: false,
+            toallas: false,
+            smartTV: false,
+            refrigerador: false,
+          },
+        },
+        imagenes: [],
+      };
 
   const {
     register,
@@ -24,36 +98,50 @@ const CreateRoomForm: React.FC = () => {
     control,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<CreateRoomFormData>({
     resolver: zodResolver(createRoomSchema),
-    defaultValues: {
-      numero: '',
-      tipo: '',
-      precio_noche: 0,
-      descripcion: '',
-      caracteristicas: {
-        tamano: '',
-        camas: '',
-        vista: '',
-        instalaciones: {
-          wifi: false,
-          television: false,
-          aireAcondicionado: false,
-          banoDucha: false,
-          plancha: false,
-          toallas: false,
-          smartTV: false,
-          refrigerador: false,
-        },
-      },
-      imagenes: [],
-    },
+    defaultValues,
   });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'imagenes',
   });
+
+  // Efecto para cargar datos iniciales cuando cambian
+  useEffect(() => {
+    if (initialData && isEditing) {
+      const formData = convertRoomToFormData(initialData);
+      setDisponible(initialData.disponible);
+      
+      // Resetear el formulario con los datos
+      reset({
+        ...formData,
+        imagenes: [], // Inicializar vacío, se poblará después
+      });
+      
+      // Poblar el fieldArray de imágenes después de un pequeño delay
+      const timer = setTimeout(() => {
+        // Limpiar imágenes existentes
+        const currentLength = fields.length;
+        for (let i = currentLength - 1; i >= 0; i--) {
+          remove(i);
+        }
+        // Agregar nuevas imágenes
+        if (formData.imagenes && formData.imagenes.length > 0) {
+          formData.imagenes.forEach((img) => {
+            if (img && img.trim() !== '') {
+              append(img);
+            }
+          });
+        }
+      }, 50);
+      
+      return () => clearTimeout(timer);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialData?.id, isEditing]);
 
   const tipoOptions = [
     { value: 'Estándar', label: 'Estándar' },
@@ -108,22 +196,44 @@ const CreateRoomForm: React.FC = () => {
       // Convertir array de strings a array de URLs
       const imagenesUrls = data.imagenes.filter(url => url && url.trim() !== '');
 
-      const payload = {
-        numero: data.numero,
-        tipo: data.tipo,
-        precio_noche: data.precio_noche,
-        descripcion: data.descripcion || null,
-        caracteristicas: data.caracteristicas,
-        imagenes: imagenesUrls,
-      };
+      if (isEditing && initialData) {
+        // Modo edición: actualizar habitación
+        const updatePayload = {
+          numero: data.numero,
+          tipo: data.tipo,
+          precio_noche: data.precio_noche,
+          descripcion: data.descripcion || null,
+          caracteristicas: data.caracteristicas,
+          imagenes: imagenesUrls,
+          disponible: disponible, // Usar el estado local
+        };
 
-      const response = await RoomsService.createRoom(payload);
+        await RoomsService.updateRoom(initialData.id, updatePayload);
+        alert('Habitación actualizada exitosamente');
+      } else {
+        // Modo creación: crear nueva habitación
+        const createPayload = {
+          numero: data.numero,
+          tipo: data.tipo,
+          precio_noche: data.precio_noche,
+          descripcion: data.descripcion || null,
+          caracteristicas: data.caracteristicas,
+          imagenes: imagenesUrls,
+        };
+
+        const response = await RoomsService.createRoom(createPayload);
+        alert(`Habitación creada exitosamente. ID: ${response.id}`);
+        reset();
+      }
       
-      alert(`Habitación creada exitosamente. ID: ${response.id}`);
-      reset();
-      router.push('/');
+      // Si hay un callback de éxito, usarlo; si no, redirigir
+      if (onSuccess) {
+        onSuccess();
+      } else if (!isEditing) {
+        router.push('/');
+      }
     } catch (err: any) {
-      console.error('Error al crear habitación:', err);
+      console.error(`Error al ${isEditing ? 'actualizar' : 'crear'} habitación:`, err);
       
       // Manejar errores específicos de autenticación
       if (err?.status === 401 || err?.message?.includes('Token requerido')) {
@@ -132,9 +242,9 @@ const CreateRoomForm: React.FC = () => {
           router.push('/login');
         }, 2000);
       } else if (err?.status === 403 || err?.message?.includes('administradores')) {
-        setServerError('Acceso denegado. Solo los administradores pueden crear habitaciones.');
+        setServerError('Acceso denegado. Solo los administradores pueden gestionar habitaciones.');
       } else {
-        setServerError(err?.message || 'Error al crear la habitación. Por favor, intente nuevamente.');
+        setServerError(err?.message || `Error al ${isEditing ? 'actualizar' : 'crear'} la habitación. Por favor, intente nuevamente.`);
       }
     } finally {
       setIsSubmitting(false);
@@ -142,16 +252,18 @@ const CreateRoomForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
-      <div className="bg-white rounded-2xl shadow-xl border-2 border-[#222a54] overflow-hidden">
+    <div className={hideHeader ? "w-full" : "max-w-4xl mx-auto p-4 sm:p-6 lg:p-8"}>
+      <div className={hideHeader ? "w-full" : "bg-white rounded-2xl shadow-xl border-2 border-[#222a54] overflow-hidden"}>
         {/* Header del formulario */}
-        <div className="bg-[#0a1445] border-b-[3px] border-[#b6a253] px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Crear Nueva Habitación</h1>
-          <p className="text-gray-300 mt-2 text-sm sm:text-base">Complete el formulario para agregar una nueva habitación al sistema</p>
-        </div>
+        {!hideHeader && (
+          <div className="bg-[#0a1445] border-b-[3px] border-[#b6a253] px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Crear Nueva Habitación</h1>
+            <p className="text-gray-300 mt-2 text-sm sm:text-base">Complete el formulario para agregar una nueva habitación al sistema</p>
+          </div>
+        )}
 
         {/* Formulario */}
-        <form onSubmit={handleSubmit(onSubmit)} className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className={hideHeader ? "p-0 space-y-4 sm:space-y-6" : "p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6"}>
           {serverError && (
             <div className="bg-red-50 border-2 border-red-400 text-red-700 px-4 py-3 rounded-lg">
               <p className="font-semibold">{serverError}</p>
@@ -206,6 +318,23 @@ const CreateRoomForm: React.FC = () => {
               rows={4}
               maxLength={500}
             />
+
+            {/* Campo Disponible solo en modo edición */}
+            {isEditing && initialData && (
+              <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={disponible}
+                    onChange={(e) => setDisponible(e.target.checked)}
+                    className="w-5 h-5 rounded border-2 border-[#222a54] text-[#b6a253] focus:border-[#b6a253] focus:ring-[#b6a253]/20 cursor-pointer"
+                  />
+                  <span className="text-sm font-semibold text-[#0a1445]">
+                    Habitación Disponible
+                  </span>
+                </label>
+              </div>
+            )}
           </div>
 
           {/* Características */}
@@ -284,15 +413,20 @@ const CreateRoomForm: React.FC = () => {
               disabled={isSubmitting}
               variant="primary"
             >
-              {isSubmitting ? 'Creando...' : 'Crear Habitación'}
+              {isSubmitting 
+                ? (isEditing ? 'Actualizando...' : 'Creando...') 
+                : (isEditing ? 'Actualizar Habitación' : 'Crear Habitación')
+              }
             </FormButton>
-            <FormButton
-              type="button"
-              onClick={() => reset()}
-              variant="secondary"
-            >
-              Limpiar Formulario
-            </FormButton>
+            {!isEditing && (
+              <FormButton
+                type="button"
+                onClick={() => reset()}
+                variant="secondary"
+              >
+                Limpiar Formulario
+              </FormButton>
+            )}
           </div>
         </form>
       </div>

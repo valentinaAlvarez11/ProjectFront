@@ -74,7 +74,7 @@ export default function RegisterComponent() {
 
       <Button
         type="submit"
-        variant="light"
+        variant="register"
         className="mt-4"
       >
         Register
