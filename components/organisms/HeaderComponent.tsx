@@ -36,10 +36,7 @@ export default function HeaderComponent() {
       links.splice(1, 0, { name: "Reservas", href: "/reservas" }); // Insertar después de Inicio
     } 
     return links;
-  }, [isLoggedIn]);
-
-    // Opcional: No renderizar nada si la autenticación está cargando (para prevenir destellos)
-    if (loadingAuth) return null; 
+  }, [isLoggedIn]); 
 
   return (
     <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253] sticky top-0 z-50">
@@ -60,32 +57,32 @@ export default function HeaderComponent() {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center flex-1 justify-center">
-          {mainNavLinks.map((link, index) => (
-            <Link 
-              key={link.name} 
-              href={link.href} 
-              className={`${headerLinkBase} ${headerLinkSeparator}`}
-            >
-              {link.name}
-            </Link>
-          ))}
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center flex-1 justify-center" suppressHydrationWarning>
+          {mainNavLinks.map((link, index) => (
+            <Link 
+              key={link.name} 
+              href={link.href} 
+              className={`${headerLinkBase} ${headerLinkSeparator}`}
+            >
+              {link.name}
+            </Link>
+          ))}
           
           {/* Menú de Gestión/Servicios solo para Admin/Recepcionista */}
           {isAdminOrRecep && user && (
             // AQUI DEBEMOS HACER QUE EL CONTENEDOR DEL DROPDOWN NO TENGA UN PADDING EXTRA
             // Usamos un div limpio y dejamos que el AdminDropdown maneje su propio padding
-            <div className={`text-white`}>
+            <div className={`text-white`} suppressHydrationWarning>
                <AdminDropdown rol={user.rol as 'admin' | 'recepcionista'} />
             </div>
           )}
-        </nav>
+        </nav>
 
-        {/* User Navigation (Dropdown) */}
-        <div className="hidden lg:block">
-          <UserDropdown />
-        </div>
+        {/* User Navigation (Dropdown) */}
+        <div className="hidden lg:block" suppressHydrationWarning>
+          <UserDropdown />
+        </div>
 
         {/* Mobile Menu Button y Lógica Móvil (Omitido para brevedad) */}
         <button
@@ -112,33 +109,34 @@ export default function HeaderComponent() {
         </button>
       </div>
 
-      {/* Mobile Navigation Menu (Asegurando la coherencia) */}
-      <nav
-        className={`lg:hidden bg-[#0a1445] border-t border-[#222a54] transition-all duration-300 ease-in-out ${
-          isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-        }`}
-      >
-        <div className="flex flex-col">
-          {mainNavLinks.map((link, index) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={closeMenu}
-              className={`text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] transition-colors ${
-                index === 0 
-                  ? "text-[#b6a253]" // Asumimos que el primer enlace ('Inicio') tiene el color primario
-                  : "text-white hover:text-[#b6a253]"
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
+      {/* Mobile Navigation Menu (Asegurando la coherencia) */}
+      <nav
+        className={`lg:hidden bg-[#0a1445] border-t border-[#222a54] transition-all duration-300 ease-in-out ${
+          isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        }`}
+        suppressHydrationWarning
+      >
+        <div className="flex flex-col">
+          {mainNavLinks.map((link, index) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={closeMenu}
+              className={`text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] transition-colors ${
+                index === 0 
+                  ? "text-[#b6a253]" // Asumimos que el primer enlace ('Inicio') tiene el color primario
+                  : "text-white hover:text-[#b6a253]"
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
             {/* Aquí deberías incluir los dropdowns en la navegación móvil si es necesario */}
-            <div className="px-6 py-4 border-b border-[#222a54]">
+            <div className="px-6 py-4 border-b border-[#222a54]" suppressHydrationWarning>
                 <UserDropdown />
             </div>
-        </div>
-      </nav>
+        </div>
+      </nav>
     </header>
   );
 }
