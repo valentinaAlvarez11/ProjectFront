@@ -1,7 +1,8 @@
+//webpage layout
 import type { Metadata } from "next";
 
-import AuthInitializer from "@/components/organisms/AuthInitializer";
 import HeaderComponent from "@/components/organisms/HeaderComponent";
+import { AuthInitializer } from "@/components/organisms/AuthInitializer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +15,13 @@ export default function WebpageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="pb-20 sm:pb-24 md:pb-28">
-      <HeaderComponent />
-      { children }
-    </main>
+    <html lang="es">
+      <AuthInitializer>
+        <HeaderComponent />
+          <main>
+            {children}
+          </main>
+      </AuthInitializer>
+    </html>
   );
 }
