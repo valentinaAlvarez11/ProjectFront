@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+<<<<<<< HEAD
         protocol: 'https',
         hostname: 'static.wixstatic.com',
         pathname: '/**',
@@ -43,6 +44,18 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cf.bstatic.com',
         pathname: '/**',
+=======
+        protocol: "https",
+        hostname: "static.wixstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "logodownload.org",
+      },
+      {
+        protocol: "https",
+        hostname: "www.cataloniahotels.com",
+>>>>>>> 061eeea335d7e121eab784ed3091f8f38c10cb0a
       },
     ],
   },

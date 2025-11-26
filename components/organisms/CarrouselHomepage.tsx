@@ -1,7 +1,11 @@
 // components/organisms/CarrouselHomepage.tsx
+<<<<<<< HEAD
 "use client";
 import React, { useState } from "react";
 import Image from 'next/image';
+=======
+import Carousel from "../molecules/Carousel";
+>>>>>>> 061eeea335d7e121eab784ed3091f8f38c10cb0a
 
 const images = [
   "https://static.wixstatic.com/media/820831_a09d6a32b1604be084a86df021608ecd~mv2.jpg/v1/fit/w_739,h_541,q_90,enc_avif,quality_auto/820831_a09d6a32b1604be084a86df021608ecd~mv2.jpg",
@@ -11,16 +15,8 @@ const images = [
 ];
 
 export default function CarrouselHomepage() {
-  const [current, setCurrent] = useState(0);
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
-  const prevSlide = () => {
-    setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
   return (
+<<<<<<< HEAD
     <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-screen max-h-[800px] overflow-hidden bg-white">
       <Image
         src={images[current]}
@@ -112,5 +108,16 @@ export default function CarrouselHomepage() {
         ))}
       </div>
     </div>
+=======
+    <Carousel
+      images={images}
+      altText="Hotel Regatta Cartagena"
+      height="100vh"
+      showControls={true}
+      showIndicators={true}
+      autoPlay={true}
+      autoPlayInterval={5000}
+    />
+>>>>>>> 061eeea335d7e121eab784ed3091f8f38c10cb0a
   );
 }

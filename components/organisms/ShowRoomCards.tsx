@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 "use client";
+=======
+import React from 'react';
+import RoomCardComponent from '@/components/molecules/RoomCardsComponent';
+import SectionTitle from '@/components/molecules/SectionTitle';
+>>>>>>> 061eeea335d7e121eab784ed3091f8f38c10cb0a
 
 import React, { useEffect, useState } from 'react';
 import RoomCardComponent from '@/components/molecules/RoomCardsComponent';
@@ -7,6 +13,7 @@ import { IRoom } from '@/interfaces/rooms';
 import { sectionTitle } from '@/utils/Tokens';
 
 const RoomCards: React.FC = () => {
+<<<<<<< HEAD
   const [rooms, setRooms] = useState<IRoom[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -92,6 +99,14 @@ const RoomCards: React.FC = () => {
             description={getRoomDescription(room)}
             imageUrl={getRoomImage(room)}
           />
+=======
+  return (
+    <div className="w-screen bg-white pb-10 text-center">
+      <SectionTitle title="HABITACIONES" />
+      <div className="flex justify-center gap-5 flex-wrap max-w-[1200px] mx-auto my-10">
+        {roomCards.map((room) => (
+          <RoomCardComponent key={room.id} {...room} />
+>>>>>>> 061eeea335d7e121eab784ed3091f8f38c10cb0a
         ))}
       </div>
     </div>

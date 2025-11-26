@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // components/molecules/RoomDetails.tsx (REFRACTORIZADO Y CORREGIDO)
 
 "use client";
@@ -10,6 +11,13 @@ import { useAuthStore } from '@/store/authStore';
 import AuthRequiredModal from './AuthRequiredModal';
 import Modal from '@/components/atoms/Modal';
 import RoomsService from '@/libs/rooms.service'; 
+=======
+// components/molecules/RoomDetails.tsx
+import React from 'react';
+import Image from 'next/image';
+import { RoomInfo } from '../../interfaces/roomDetails';
+import ButtonComponent from '../atoms/ButtonComponent';
+>>>>>>> 061eeea335d7e121eab784ed3091f8f38c10cb0a
 
 interface RoomDetailsProps {
     room: IRoom;
@@ -161,6 +169,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
     }
 
     return (
+<<<<<<< HEAD
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Imagen más grande */}
             <div className="relative mb-6 sm:mb-8">
@@ -185,6 +194,20 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
                 )}
                 <div className="absolute top-3 sm:top-4 md:top-6 left-3 sm:left-4 md:left-6 text-white text-sm sm:text-base md:text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg sm:rounded-xl shadow-lg backdrop-blur-sm">
                     {room.tipo.toUpperCase()} 
+=======
+        <div className="max-w-7xl mx-auto">
+            {/* Sección de la imagen */}
+            <div className="relative w-full h-[600px]">
+                <Image 
+                    src={room.images[0]} 
+                    alt={room.roomType}
+                    fill
+                    className="object-cover" 
+                    priority
+                />
+                <div className="absolute top-4 left-4 text-white text-lg font-bold bg-black bg-opacity-50 px-4 py-2 rounded-lg">
+                    {room.roomType.toUpperCase()}
+>>>>>>> 061eeea335d7e121eab784ed3091f8f38c10cb0a
                 </div>
             </div>
 
@@ -288,6 +311,25 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
                         )}
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+                {/* Tarjeta de Precios */}
+                <div className="bg-white rounded-lg shadow-xl p-6 lg:p-8 w-full h-[250px] flex flex-col items-center justify-center">
+                    <div className="text-center">
+                        <h2 className="text-4xl font-bold text-gray-900 mt-2">$ {room.currentPrice}</h2>
+                        <ButtonComponent 
+                            variant="primary" 
+                            fullWidth 
+                            className="mt-6 bg-blue-600 hover:bg-blue-700"
+                        >
+                            SELECCIONE OFERTA
+                        </ButtonComponent>
+                        <p className="mt-2 text-xs text-gray-500">Excluye impuestos y cargos</p>
+                    </div>
+                </div>
+
+>>>>>>> 061eeea335d7e121eab784ed3091f8f38c10cb0a
             </div>
 
             {/* Modal de autenticación requerida */}
