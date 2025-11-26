@@ -39,6 +39,11 @@ const nextConfig: NextConfig = {
         hostname: 'ejemplo.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cf.bstatic.com',
+        pathname: '/**',
+      },
     ],
   },
 };

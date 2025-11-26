@@ -6,6 +6,8 @@ import { IRoom } from '@/interfaces/rooms';
 import Modal from '@/components/atoms/Modal';
 import Button from '@/components/atoms/ButtonAuth';
 import CreateRoomForm from '@/components/molecules/CreateRoomForm';
+import ConfirmDeleteModal from '@/components/molecules/ConfirmDeleteModal';
+import { useModal } from '@/hooks/useModal';
 
 export default function HabitacionesCRUD() {
   const [habitaciones, setHabitaciones] = useState<IRoom[]>([]);
@@ -15,6 +17,11 @@ export default function HabitacionesCRUD() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingHabitacion, setEditingHabitacion] = useState<IRoom | null>(null);
   const [loadingHabitacion, setLoadingHabitacion] = useState(false);
+  const [deletingHabitacionId, setDeletingHabitacionId] = useState<number | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  // Hook para manejar el modal de confirmación de eliminación
+  const deleteModal = useModal();
 
   useEffect(() => {
     loadHabitaciones();
@@ -53,18 +60,26 @@ export default function HabitacionesCRUD() {
     }
   };
 
-  const handleDelete = async (id: number) => {
-    if (!confirm('¿Está seguro de que desea eliminar esta habitación?')) {
-      return;
-    }
+  const handleDeleteClick = (id: number) => {
+    setDeletingHabitacionId(id);
+    deleteModal.open();
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!deletingHabitacionId) return;
 
     try {
-      await RoomsService.deleteRoom(id);
-      alert('Habitación eliminada exitosamente');
+      setIsDeleting(true);
+      await RoomsService.deleteRoom(deletingHabitacionId);
+      deleteModal.close();
+      setDeletingHabitacionId(null);
       loadHabitaciones();
     } catch (err: any) {
       console.error('Error al eliminar habitación:', err);
-      alert(err?.message || 'Error al eliminar la habitación');
+      setError(err?.message || 'Error al eliminar la habitación');
+      // No cerramos el modal si hay error, para que el usuario pueda intentar de nuevo
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -184,7 +199,7 @@ export default function HabitacionesCRUD() {
                         Editar
                       </button>
                       <button
-                        onClick={() => handleDelete(habitacion.id)}
+                        onClick={() => handleDeleteClick(habitacion.id)}
                         className="text-red-600 hover:text-red-800 transition-colors"
                       >
                         Eliminar
@@ -236,6 +251,20 @@ export default function HabitacionesCRUD() {
           </div>
         ) : null}
       </Modal>
+
+      {/* Modal de confirmación de eliminación */}
+      <ConfirmDeleteModal
+        isOpen={deleteModal.isOpen}
+        onClose={() => {
+          deleteModal.close();
+          setDeletingHabitacionId(null);
+          setError(null);
+        }}
+        onConfirm={handleDeleteConfirm}
+        itemName={deletingHabitacionId ? habitaciones.find(h => h.id === deletingHabitacionId)?.numero || '' : ''}
+        itemType="habitación"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }
