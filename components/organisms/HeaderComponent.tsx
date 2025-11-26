@@ -7,6 +7,19 @@ import { useState } from "react";
 import { headerLinkBase, headerLinkSeparator } from "@/utils/Tokens";
 import { UserNav } from "@/components/organisms/UserNav"; 
 
+interface NavLink {
+  name: string;
+  href: string;
+}
+
+const navLinks: NavLink[] = [
+  { name: "Inicio", href: "/" },
+  { name: "Reservas", href: "/reservas" },
+  { name: "Servicios", href: "/servicios" },
+  { name: "Restaurante & Bar", href: "/restaurante-bar" },
+  { name: "Políticas y reglas", href: "/politicas" },
+];
+
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -36,9 +49,9 @@ export default function HeaderComponent() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="flex items-center flex-1 justify-center">
-          {filteredLinks.map((link, index) => {
-            const isLast = index === filteredLinks.length - 1;
+        <nav className="hidden lg:flex items-center flex-1 justify-center">
+          {navLinks.map((link, index) => {
+            const isLast = index === navLinks.length - 1;
             const className = isLast ? headerLinkBase : `${headerLinkBase} ${headerLinkSeparator}`;
 
             return (
@@ -48,6 +61,11 @@ export default function HeaderComponent() {
             );
           })}
         </nav>
+
+        {/* User Navigation */}
+        <div className="hidden lg:block">
+          <UserNav />
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -81,41 +99,23 @@ export default function HeaderComponent() {
         }`}
       >
         <div className="flex flex-col">
-          <Link
-            href="/"
-            onClick={closeMenu}
-            className="text-[#b6a253] text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] transition-colors"
-          >
-            Inicio
-          </Link>
-          <Link
-            href="/reservas"
-            onClick={closeMenu}
-            className="text-white text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] hover:text-[#b6a253] transition-colors"
-          >
-            Reservas
-          </Link>
-          <Link
-            href="/servicios"
-            onClick={closeMenu}
-            className="text-white text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] hover:text-[#b6a253] transition-colors"
-          >
-            Servicios
-          </Link>
-          <Link
-            href="/restaurante-bar"
-            onClick={closeMenu}
-            className="text-white text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] hover:text-[#b6a253] transition-colors"
-          >
-            Restaurante &amp; Bar
-          </Link>
-          <Link
-            href="/politicas"
-            onClick={closeMenu}
-            className="text-white text-base font-light px-6 py-4 hover:bg-[#222a54] hover:text-[#b6a253] transition-colors"
-          >
-            Políticas y reglas
-          </Link>
+          {navLinks.map((link, index) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={closeMenu}
+              className={`text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] transition-colors ${
+                index === 0 
+                  ? "text-[#b6a253]" 
+                  : "text-white hover:text-[#b6a253]"
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+          <div className="px-6 py-4 border-b border-[#222a54]">
+            <UserNav />
+          </div>
         </div>
       </nav>
     </header>

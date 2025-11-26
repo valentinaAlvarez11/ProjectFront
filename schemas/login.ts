@@ -7,7 +7,8 @@ export const loginScheme = z.object({
           .regex(/^(?:[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)?@[A-Za-z0-9]+|[A-Za-z0-9]+@[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)?)$/, {
             message: 'Formato inválido: solo letras/números, un "@" y opcionalmente un solo punto'
           }),
-  // Contraseña: máximo 15 caracteres
+  // Contraseña: mínimo 7 caracteres, máximo 15 caracteres
   password: z.string()
+          .min(7, { message: 'La contraseña debe tener al menos 7 caracteres' })
           .max(15, { message: 'La contraseña no puede superar 15 caracteres' })
 })
