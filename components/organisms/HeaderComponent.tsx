@@ -1,9 +1,11 @@
+// components/organisms/HeaderComponent.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { headerLinkBase, headerLinkSeparator } from "@/utils/Tokens";
+import { UserNav } from "@/components/organisms/UserNav"; 
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,11 +37,16 @@ export default function HeaderComponent() {
 
         {/* Desktop Navigation */}
         <nav className="flex items-center flex-1 justify-center">
-          <Link href="/" className={`${headerLinkBase} ${headerLinkSeparator}`}>Inicio</Link>
-          <Link href="/reservas" className={`${headerLinkBase} ${headerLinkSeparator}`}>Reservas</Link>
-          <Link href="/servicios" className={`${headerLinkBase} ${headerLinkSeparator}`}>Servicios</Link>
-          <Link href="/restaurante-bar" className={`${headerLinkBase} ${headerLinkSeparator}`}>Restaurante &amp; Bar</Link>
-          <Link href="/politicas" className={headerLinkBase}>Políticas y reglas</Link>
+          {filteredLinks.map((link, index) => {
+            const isLast = index === filteredLinks.length - 1;
+            const className = isLast ? headerLinkBase : `${headerLinkBase} ${headerLinkSeparator}`;
+
+            return (
+              <Link key={link.name} href={link.href} className={className}>
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Mobile Menu Button */}
