@@ -8,6 +8,7 @@ const emailRule = z.string()
   })
 
 const passwordRule = z.string()
+  .min(7, { message: 'La contraseña debe tener al menos 7 caracteres' })
   .max(15, { message: 'La contraseña no puede superar 15 caracteres' })
   .refine((val) => /[^A-Za-z0-9]/.test(val), {
     message: 'La contraseña debe incluir al menos un carácter especial'
