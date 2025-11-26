@@ -13,16 +13,6 @@ export function AuthInitializer({ children }: { children: React.ReactNode }) {
     checkAuthStatus();
   }, [checkAuthStatus]); 
 
-  // Opcional: Mostrar un loader mientras se verifica la sesión inicial
-  // Esto previene que el contenido se muestre sin protección o con datos incorrectos
-  if (loadingAuth) {
-    return (
-        <div className="flex justify-center items-center h-screen bg-gray-50">
-            <p className="text-xl font-semibold text-[#0a1445]">Verificando sesión...</p>
-        </div>
-    );
-  }
-
   // Una vez verificado, renderizar la aplicación
   return <>{children}</>;
 }

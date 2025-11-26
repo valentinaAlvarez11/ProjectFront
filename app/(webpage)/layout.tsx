@@ -1,6 +1,5 @@
 //webpage layout
 import type { Metadata } from "next";
-
 import HeaderComponent from "@/components/organisms/HeaderComponent";
 import { AuthInitializer } from "@/components/organisms/AuthInitializer";
 
@@ -16,12 +15,14 @@ export default function WebpageLayout({
 }>) {
   return (
     <html lang="es">
-      <AuthInitializer>
-        <HeaderComponent />
-          <main>
-            {children}
-          </main>
-      </AuthInitializer>
+      <body>
+        <AuthInitializer>
+          <HeaderComponent />
+            <main>
+              {children}
+            </main>
+        </AuthInitializer>
+      </body>
     </html>
   );
 }
