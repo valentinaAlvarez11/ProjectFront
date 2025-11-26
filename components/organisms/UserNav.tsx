@@ -22,7 +22,7 @@ export function UserNav() {
       {isLoggedIn ? (
         <>
           <span className="text-white text-sm">
-            Hola, {user?.nombre} "{user?.rol}"
+            Hola, {user?.nombre}
           </span>
           
           {(user?.rol === 'admin' || user?.rol === 'recepcionista') && (

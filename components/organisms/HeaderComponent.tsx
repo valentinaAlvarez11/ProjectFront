@@ -17,7 +17,6 @@ const navLinks: NavLink[] = [
   { name: "Reservas", href: "/reservas" },
   { name: "Servicios", href: "/servicios" },
   { name: "Restaurante & Bar", href: "/restaurante-bar" },
-  { name: "Políticas y reglas", href: "/politicas" },
 ];
 
 export default function HeaderComponent() {

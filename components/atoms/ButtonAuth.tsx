@@ -2,7 +2,7 @@
 
   import React from "react";
 
-  type Variant = "primary" | "ghost" | "outline" | "blue" | "purple" | "light" | "github";
+  type Variant = "primary" | "ghost" | "outline" | "blue" | "purple" | "light" | "github" | "register";
 
   type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: Variant;
@@ -21,13 +21,15 @@
     const base = "rounded-lg text-base font-medium transition-colors";
     const width = fullWidth ? "w-full" : "";
     const padding =
-      variant === "primary" ? "py-3" : variant === "outline" ? "py-2" : variant === "blue" ? "py-2.5" : variant === "purple" ? "py-3" : variant === "light" ? "py-2.5" : variant === "github" ? "py-2.5" : "py-3";
+      variant === "primary" ? "py-3" : variant === "outline" ? "py-2" : variant === "blue" ? "py-2.5" : variant === "purple" ? "py-3" : variant === "light" ? "py-2.5" : variant === "github" ? "py-2.5" : variant === "register" ? "py-2.5" : "py-3";
     
     const uppercaseClass = variant === "purple" ? "uppercase font-semibold" : "";
 
     const variantClass =
       variant === "primary"
         ? "bg-[#b6a253] text-white hover:bg-[#a5924a]"
+        : variant === "register"
+        ? "bg-[#b6a253] text-[#0a1445] hover:bg-[#c0ac66]"
         : variant === "blue"
         ? "bg-blue-600 text-white hover:bg-blue-700"
         : variant === "purple"

@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import useLoginForm from "@/hooks/useLoginForm";
+import { useAuthStore } from "@/store/authStore";
 import FormField from "./FormField";
 import PasswordField from "./PasswordField";
 import SocialButton from "./SocialButton";
@@ -12,6 +13,7 @@ import { formFieldContainer, formLabel, formErrorTextCenter, formSuccessText, lo
 
 export default function LoginComponent() {
   const router = useRouter();
+  const { user } = useAuthStore();
 
   const {
     register,
@@ -22,7 +24,16 @@ export default function LoginComponent() {
     successMessage,
   } = useLoginForm({
     onSuccess: () => {
-      router.push('/');
+      // Verificar el rol del usuario después del login
+      // Usar setTimeout para asegurar que el store se haya actualizado
+      setTimeout(() => {
+        const currentUser = useAuthStore.getState().user;
+        if (currentUser?.rol === 'admin') {
+          router.push('/admin/dashboard');
+        } else {
+          router.push('/');
+        }
+      }, 100);
     },
   });
 
@@ -66,10 +77,10 @@ export default function LoginComponent() {
       )}
 
       <Button
-        type="submit"
-        variant="light"
+        type="submit"
+        variant="register"
         className="mt-4"
-      >
+      >
         Login
       </Button>
 
