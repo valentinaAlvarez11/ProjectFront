@@ -31,12 +31,8 @@ export default function HeaderComponent() {
       { name: "Restaurante & Bar", href: "/restaurante-bar" },
     ];
 
-    // Cliente, Recepcionista y Admin tienen Reservas en la barra
-    if (isLoggedIn) {
-      links.splice(1, 0, { name: "Reservas", href: "/reservas" }); // Insertar después de Inicio
-    } 
     return links;
-  }, [isLoggedIn]); 
+  }, []); 
 
   return (
     <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253] sticky top-0 z-50">

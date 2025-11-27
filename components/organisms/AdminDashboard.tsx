@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import RecepcionistasCRUD from './RecepcionistasCRUD';
 import HabitacionesCRUD from './HabitacionesCRUD';
+import { adminPage } from '@/utils/Tokens';
 
 type TabType = 'recepcionistas' | 'habitaciones';
 
@@ -12,12 +13,12 @@ export default function AdminDashboard() {
   return (
     <div className="max-w-7xl mx-auto">
       {/* Header */}
-      <div className="bg-white rounded-2xl shadow-xl border-2 border-[#222a54] overflow-hidden mb-6">
-        <div className="bg-[#0a1445] border-b-[3px] border-[#b6a253] px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-center">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
+      <div className={adminPage.headerContainer}>
+        <div className={adminPage.headerContent}>
+          <h1 className={adminPage.headerTitle}>
             Panel de Administración
           </h1>
-          <p className="text-gray-300 mt-2 text-sm sm:text-base">
+          <p className={adminPage.headerSubtitle}>
             Gestiona recepcionistas y habitaciones del hotel
           </p>
         </div>
@@ -48,7 +49,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Tab Content */}
-      <div className="bg-white rounded-2xl shadow-xl border-2 border-[#222a54] overflow-hidden">
+      <div className={adminPage.cardContainer}>
         {activeTab === 'recepcionistas' && <RecepcionistasCRUD />}
         {activeTab === 'habitaciones' && <HabitacionesCRUD />}
       </div>

@@ -8,12 +8,20 @@ import {
   IUserDetailResponse
 } from "@/interfaces/users"; 
 
+// Tipo para registro de usuario por admin (incluye contraseña y rol)
+interface IAdminRegisterUserPayload {
+  email: string;
+  telefono: string;
+  nombre: string;
+  contraseña: string;
+  rol: 'admin' | 'recepcionista' | 'cliente';
+}
 
 const UsersService = {
 
   // Registrar un usuario como admin
 
-  register: async (data: IUser): Promise<IMessageResponse> => {
+  register: async (data: IAdminRegisterUserPayload): Promise<IMessageResponse> => {
     return apiFetch('users/admin/register', 'POST', data) as Promise<IMessageResponse>;
   },
 
