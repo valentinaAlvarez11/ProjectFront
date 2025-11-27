@@ -5,12 +5,16 @@ import { useParams, useRouter } from 'next/navigation';
 import { IRoom } from '@/interfaces/rooms';
 import RoomsService from '@/libs/rooms.service';
 import CreateRoomForm from '@/components/molecules/CreateRoomForm';
+import ErrorModal from '@/components/molecules/ErrorModal';
 import { useAuthStore } from '@/store/authStore';
+import { useModal } from '@/hooks/useModal';
 
 const EditRoomPage = () => {
   const params = useParams();
   const router = useRouter();
   const { isLoggedIn, user, loadingAuth, checkAuthStatus } = useAuthStore();
+  const errorModal = useModal();
+  const [errorModalMessage, setErrorModalMessage] = useState('');
   const id = Array.isArray(params?.id) 
            ? parseInt(params.id[0]) 
            : params?.id ? parseInt(params.id) : null;
@@ -29,8 +33,11 @@ const EditRoomPage = () => {
       return;
     }
     if (!loadingAuth && isLoggedIn && user?.rol !== 'admin') {
-      alert('Acceso denegado. Solo los administradores pueden editar habitaciones.');
-      router.push('/');
+      setErrorModalMessage('Acceso denegado. Solo los administradores pueden editar habitaciones.');
+      errorModal.open();
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
       return;
     }
   }, [loadingAuth, isLoggedIn, user, router]);
@@ -129,6 +136,14 @@ const EditRoomPage = () => {
           </div>
         </div>
       )}
+
+      {/* Error Modal */}
+      <ErrorModal
+        isOpen={errorModal.isOpen}
+        onClose={errorModal.close}
+        title="Acceso Denegado"
+        message={errorModalMessage}
+      />
     </div>
   );
 };

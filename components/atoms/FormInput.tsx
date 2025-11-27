@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { UseFormRegister, FieldError } from 'react-hook-form';
+import { formComponents } from '@/utils/Tokens';
 
 interface FormInputProps {
   label: string;
@@ -32,7 +33,7 @@ const FormInput: React.FC<FormInputProps> = ({
     <div className="flex flex-col space-y-2">
       <label 
         htmlFor={name} 
-        className="text-sm font-semibold text-[#0a1445]"
+        className={formComponents.label}
       >
         {label} {required && <span className="text-red-500">*</span>}
       </label>
@@ -44,21 +45,14 @@ const FormInput: React.FC<FormInputProps> = ({
         min={min}
         max={max}
         step={step}
-        className={`
-          w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 rounded-lg
-          transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-offset-1
-          text-sm sm:text-base
-          ${error 
-            ? 'border-red-400 focus:border-red-500 focus:ring-red-200' 
-            : 'border-[#222a54] focus:border-[#b6a253] focus:ring-[#b6a253]/20'
-          }
-          bg-white text-[#0a1445]
-          placeholder:text-gray-400
-        `}
+        className={`${formComponents.inputBase} ${
+          error 
+            ? formComponents.inputError
+            : formComponents.inputNormal
+        }`}
       />
       {error && (
-        <p className="text-sm text-red-500 font-medium">{error.message}</p>
+        <p className={formComponents.errorText}>{error.message}</p>
       )}
     </div>
   );

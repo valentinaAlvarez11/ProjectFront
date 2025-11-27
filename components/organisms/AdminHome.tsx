@@ -104,14 +104,14 @@ export default function AdminHome() {
       title: 'Gestionar Habitaciones',
       description: 'Crear, editar y eliminar habitaciones',
       icon: '🏨',
-      href: '/admin/dashboard',
+      href: '/admin/rooms',
       variant: 'primary' as const,
     },
     {
-      title: 'Gestionar Recepcionistas',
-      description: 'Administrar personal de recepción',
+      title: 'Gestionar Usuarios',
+      description: 'Administrar usuarios del sistema',
       icon: '👥',
-      href: '/admin/dashboard',
+      href: '/admin/users',
       variant: 'secondary' as const,
     },
     {

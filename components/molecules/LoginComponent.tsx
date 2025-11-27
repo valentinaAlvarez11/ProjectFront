@@ -28,11 +28,8 @@ export default function LoginComponent() {
       // Usar setTimeout para asegurar que el store se haya actualizado
       setTimeout(() => {
         const currentUser = useAuthStore.getState().user;
-        if (currentUser?.rol === 'admin') {
-          router.push('/admin/dashboard');
-        } else {
-          router.push('/');
-        }
+        // Todos los usuarios van al home, el AdminHome se muestra automáticamente si es admin
+        router.push('/');
       }, 100);
     },
   });

@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import AdminDashboard from '@/components/organisms/AdminDashboard';
+import ErrorModal from '@/components/molecules/ErrorModal';
+import { useModal } from '@/hooks/useModal';
 
 const AdminDashboardPage = () => {
   const router = useRouter();
   const { isLoggedIn, user, loadingAuth, checkAuthStatus } = useAuthStore();
+  const errorModal = useModal();
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     // Verificar estado de autenticación al cargar
@@ -21,10 +25,13 @@ const AdminDashboardPage = () => {
     }
     // Si está autenticado pero no es admin, mostrar mensaje de error
     if (!loadingAuth && isLoggedIn && user?.rol !== 'admin') {
-      alert('Acceso denegado. Solo los administradores pueden acceder a esta página.');
-      router.push('/');
+      setErrorMessage('Acceso denegado. Solo los administradores pueden acceder a esta página.');
+      errorModal.open();
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
     }
-  }, [loadingAuth, isLoggedIn, user, router]);
+  }, [loadingAuth, isLoggedIn, user, router, errorModal]);
 
   // Mostrar loading mientras se verifica la autenticación
   if (loadingAuth) {
@@ -44,9 +51,19 @@ const AdminDashboardPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-      <AdminDashboard />
-    </div>
+    <>
+      <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+        <AdminDashboard />
+      </div>
+
+      {/* Error Modal */}
+      <ErrorModal
+        isOpen={errorModal.isOpen}
+        onClose={errorModal.close}
+        title="Acceso Denegado"
+        message={errorMessage}
+      />
+    </>
   );
 };
 
