@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { cards, typography } from '@/utils/Tokens';
 
 interface AmenityCardProps {
   imageUrl: string;
@@ -19,7 +20,7 @@ export default function AmenityCard({
   title,
 }: AmenityCardProps) {
   return (
-    <div className="flex flex-col items-center w-full sm:w-auto sm:min-w-[250px] lg:min-w-[300px]">
+    <div className={cards.amenityCard}>
       <Image
         src={imageUrl}
         alt={imageAlt}

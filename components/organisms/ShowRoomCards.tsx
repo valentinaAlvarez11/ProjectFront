@@ -4,7 +4,12 @@ import React, { useEffect, useState } from 'react';
 import RoomCardComponent from '@/components/molecules/RoomCardsComponent';
 import RoomsService from '@/libs/rooms.service';
 import { IRoom } from '@/interfaces/rooms';
-import { sectionTitle } from '@/utils/Tokens';
+import SectionContainer from '@/components/atoms/SectionContainer';
+import SectionTitle from '@/components/atoms/SectionTitle';
+import LoadingState from '@/components/atoms/LoadingState';
+import ErrorState from '@/components/atoms/ErrorState';
+import EmptyState from '@/components/atoms/EmptyState';
+import { grids } from '@/utils/Tokens';
 
 const RoomCards: React.FC = () => {
   const [rooms, setRooms] = useState<IRoom[]>([]);
@@ -51,39 +56,21 @@ const RoomCards: React.FC = () => {
   };
 
   if (loading) {
-    return (
-      <div className="w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center">
-        <p className="text-lg sm:text-xl lg:text-2xl text-[#0a174e]">Cargando habitaciones...</p>
-      </div>
-    );
+    return <LoadingState message="Cargando habitaciones..." />;
   }
 
   if (error) {
-    return (
-      <div className="w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center">
-        <p className="text-lg sm:text-xl lg:text-2xl text-red-600">{error}</p>
-      </div>
-    );
+    return <ErrorState message={error} />;
   }
 
   if (rooms.length === 0) {
-    return (
-      <div className="w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center">
-        <p className="text-lg sm:text-xl lg:text-2xl text-[#0a174e]">No hay habitaciones disponibles en este momento.</p>
-      </div>
-    );
+    return <EmptyState message="No hay habitaciones disponibles en este momento." />;
   }
 
   return (
-    <div className="w-full bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 text-center">
-      <div className="w-full max-w-[90vw] mx-auto mb-6 sm:mb-8">
-        <hr className="border-none border-t-[4px] border-[#0a174e] mb-0.5" />
-        <hr className="border-none border-t-[2px] border-[#0a174e] mt-0" />
-      </div>
-      <h2 className={`${sectionTitle}`}>
-        HABITACIONES
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto justify-items-center">
+    <SectionContainer>
+      <SectionTitle title="HABITACIONES" />
+      <div className={grids.rooms}>
         {rooms.map((room) => (
           <RoomCardComponent
             key={room.id}
@@ -94,7 +81,7 @@ const RoomCards: React.FC = () => {
           />
         ))}
       </div>
-    </div>
+    </SectionContainer>
   );
 };
 

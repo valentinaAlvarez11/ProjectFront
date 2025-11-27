@@ -1,3 +1,185 @@
+// ============================================
+// DESIGN TOKENS - COLOR SYSTEM
+// ============================================
+export const colors = {
+  primary: {
+    dark: "#0a1445",
+    base: "#0a174e",
+    light: "#233876",
+  },
+  secondary: {
+    dark: "#222a54",
+    base: "#2a2f4a",
+    light: "#1a1f3a",
+  },
+  accent: {
+    base: "#b6a253",
+    light: "#d4c373",
+    gold: "#E2C044",
+    goldHover: "#ffd700",
+  },
+  neutral: {
+    white: "#ffffff",
+    gray50: "#f9fafb",
+    gray100: "#f3f4f6",
+    gray200: "#e5e7eb",
+    gray300: "#d1d5db",
+    gray400: "#9ca3af",
+    gray600: "#4b5563",
+    gray700: "#374151",
+    gray800: "#1f2937",
+    black: "#000000",
+  },
+  semantic: {
+    error: "#dc2626",
+    errorLight: "#fca5a5",
+    success: "#10b981",
+    successLight: "#6ee7b7",
+    warning: "#f59e0b",
+    info: "#3b82f6",
+  },
+} as const;
+
+// ============================================
+// DESIGN TOKENS - SPACING SYSTEM
+// ============================================
+export const spacing = {
+  section: {
+    padding: "py-12 sm:py-16 lg:py-20",
+    paddingX: "px-4 sm:px-6 lg:px-8",
+    container: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8",
+  },
+  card: {
+    padding: "p-4 sm:p-5 lg:p-6",
+    paddingLarge: "p-6 sm:p-8",
+  },
+  gap: {
+    small: "gap-2 sm:gap-3",
+    medium: "gap-4 sm:gap-6",
+    large: "gap-6 sm:gap-8 lg:gap-10",
+    xlarge: "gap-8 sm:gap-12 lg:gap-16",
+  },
+} as const;
+
+// ============================================
+// DESIGN TOKENS - TYPOGRAPHY
+// ============================================
+export const typography = {
+  sectionTitle: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.3em] text-[#0a174e] text-center",
+  sectionSubtitle: "text-base sm:text-lg md:text-xl lg:text-2xl text-[#233876] leading-relaxed",
+  cardTitle: "text-lg sm:text-xl lg:text-2xl font-bold",
+  cardDescription: "text-sm sm:text-base text-gray-600",
+  body: "text-sm sm:text-base leading-relaxed",
+  bodyLarge: "text-base sm:text-lg leading-relaxed",
+  button: "text-sm sm:text-base font-bold",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - BUTTONS
+// ============================================
+export const buttons = {
+  primary: "bg-[#E2C044] hover:bg-[#ffd700] text-[#0a174e] border-none rounded-full px-5 sm:px-7 py-2.5 sm:py-3 text-sm sm:text-base font-bold cursor-pointer transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#E2C044] focus:ring-offset-2",
+  primaryFull: "bg-[#E2C044] hover:bg-[#ffd700] text-[#0a174e] border-none rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-bold cursor-pointer transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#E2C044] focus:ring-offset-2 w-full sm:w-auto",
+  secondary: "bg-[#0a174e] hover:bg-[#222a54] text-white border-none rounded-lg px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base font-semibold cursor-pointer transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#b6a253]",
+  carousel: "bg-black/40 hover:bg-black/60 text-white border-none rounded-full w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-lg sm:text-xl md:text-2xl cursor-pointer flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - CARDS
+// ============================================
+export const cards = {
+  roomCard: "w-full max-w-[350px] h-[400px] sm:h-[450px] rounded-xl shadow-lg overflow-hidden relative flex flex-col justify-between items-start text-white text-left p-4 sm:p-5 cursor-pointer transition-transform duration-200 ease-in-out hover:scale-[1.03] mx-auto",
+  roomCardHorizontal: "w-full flex flex-col sm:flex-row rounded-lg shadow-md overflow-hidden bg-white hover:shadow-xl transition-shadow duration-200 ease-in-out border border-gray-200",
+  serviceCard: "group relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-[#b6a253] overflow-hidden",
+  amenityCard: "flex flex-col items-center w-full sm:w-auto sm:min-w-[250px] lg:min-w-[300px]",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - STATES
+// ============================================
+export const states = {
+  loading: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center",
+  loadingText: "text-lg sm:text-xl lg:text-2xl text-[#0a174e]",
+  error: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center",
+  errorText: "text-lg sm:text-xl lg:text-2xl text-red-600",
+  empty: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center",
+  emptyText: "text-lg sm:text-xl lg:text-2xl text-[#0a174e]",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - CAROUSEL
+// ============================================
+export const carousel = {
+  container: "relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-screen max-h-[800px] overflow-hidden bg-white",
+  button: "absolute top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white border-none rounded-full w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-lg sm:text-xl md:text-2xl cursor-pointer flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50",
+  buttonLeft: "left-2 sm:left-4 md:left-6",
+  buttonRight: "right-2 sm:right-4 md:right-6",
+  indicators: "absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-10",
+  indicator: "w-2 h-2 sm:w-3 sm:h-3 rounded-full cursor-pointer transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50",
+  indicatorActive: "bg-[#00204A] border-2 border-[#E2C044] scale-125",
+  indicatorInactive: "bg-gray-300 hover:bg-gray-400 border-2 border-transparent",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - SECTIONS
+// ============================================
+export const sections = {
+  container: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8",
+  titleContainer: "w-full max-w-[90vw] mx-auto mb-6 sm:mb-8",
+  titleLine: "border-none border-t-[4px] border-[#0a174e] mb-0.5",
+  titleLineThin: "border-none border-t-[2px] border-[#0a174e] mt-0",
+  title: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.3em] text-[#0a174e] sm:mb-7 text-center",
+  subtitle: "max-w-5xl text-center text-base sm:text-lg md:text-xl lg:text-2xl text-[#233876] mb-8 sm:mb-12 lg:mb-16 leading-relaxed px-4",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - GRIDS
+// ============================================
+export const grids = {
+  rooms: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto justify-items-center",
+  services: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 max-w-7xl mx-auto",
+  amenities: "flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-6 sm:gap-8 lg:gap-12 xl:gap-16 w-full max-w-6xl",
+  stats: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto",
+  quickActions: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - ADMIN HOME
+// ============================================
+export const admin = {
+  hero: {
+    container: "bg-gradient-to-r from-[#0a1445] via-[#0a174e] to-[#222a54] text-white",
+    content: "max-w-7xl mx-auto text-center py-6 sm:py-8 lg:py-10",
+    title: "text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3",
+    subtitle: "text-sm sm:text-base lg:text-lg text-gray-200 max-w-3xl mx-auto",
+  },
+  statCard: {
+    container: "bg-white rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 transform hover:-translate-y-1",
+    iconContainer: "w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-3xl sm:text-4xl mb-4 sm:mb-6 mx-auto",
+    iconPrimary: "bg-gradient-to-br from-[#0a174e] to-[#222a54]",
+    iconSuccess: "bg-gradient-to-br from-green-600 to-green-700",
+    iconError: "bg-gradient-to-br from-red-600 to-red-700",
+    value: "text-xl sm:text-2xl font-bold text-[#0a174e] text-center mb-2",
+    label: "text-sm sm:text-base text-gray-600 text-center",
+  },
+  actionCard: {
+    container: "bg-white rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col",
+    iconContainer: "w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-3xl sm:text-4xl mb-4 sm:mb-6 mx-auto",
+    iconPrimary: "bg-[#0a174e]",
+    iconSecondary: "bg-[#222a54]",
+    iconDark: "bg-[#0a1445]",
+    title: "text-xl sm:text-2xl font-bold text-[#0a174e] text-center mb-2 sm:mb-3",
+    description: "text-sm sm:text-base text-gray-600 text-center mb-4 sm:mb-6 flex-grow",
+  },
+  infoCard: {
+    container: "bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10 border-2 border-gray-100",
+    text: "text-base sm:text-lg text-gray-700 leading-relaxed",
+  },
+} as const;
+
+// ============================================
+// LEGACY TOKENS (mantener compatibilidad)
+// ============================================
 export const standardInput = "mt-1 w-full border border-gray-400 rounded-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
 
 // Header styles

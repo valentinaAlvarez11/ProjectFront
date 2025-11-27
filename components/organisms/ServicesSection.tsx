@@ -2,7 +2,9 @@
 
 import React from 'react';
 import ServiceCard from '@/components/molecules/ServiceCard';
-import { sectionTitle, servicesSectionContainer, servicesGrid } from '@/utils/Tokens';
+import SectionContainer from '@/components/atoms/SectionContainer';
+import SectionTitle from '@/components/atoms/SectionTitle';
+import { sections, grids } from '@/utils/Tokens';
 
 interface Service {
   icon: string;
@@ -59,14 +61,12 @@ const services: Service[] = [
  */
 const ServicesSection: React.FC = () => {
   return (
-    <div className={servicesSectionContainer}>
-      <h2 className={sectionTitle}>
-        SERVICIOS
-      </h2>
+    <SectionContainer background="gray">
+      <SectionTitle title="SERVICIOS" />
       <p className="max-w-4xl text-center text-base sm:text-lg md:text-xl text-[#233876] mb-8 sm:mb-12 lg:mb-16 leading-relaxed px-4 mx-auto">
         Disfruta de nuestros servicios premium diseñados para tu comodidad y bienestar durante tu estadía en Hotel Regatta Cartagena.
       </p>
-      <div className={servicesGrid}>
+      <div className={grids.services}>
         {services.map((service, index) => (
           <ServiceCard
             key={index}
@@ -76,7 +76,7 @@ const ServicesSection: React.FC = () => {
           />
         ))}
       </div>
-    </div>
+    </SectionContainer>
   );
 };
 
