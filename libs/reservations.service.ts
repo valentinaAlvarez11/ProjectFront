@@ -56,18 +56,18 @@ const ReservationsService = {
 
   /**
    * Actualiza los datos de una reserva (Admin).
-   * Endpoint: PUT /reservations/admin/:id
+   * Endpoint: PUT /reservations/:id
    */
   updateReservationAdmin: async (id: number, data: IReservationUpdatePayload): Promise<IMessageResponse> => {
-    return apiFetch(`reservations/admin/${id}`, 'PUT', data) as Promise<IMessageResponse>;
+    return apiFetch(`reservations/${id}`, 'PUT', data) as Promise<IMessageResponse>;
   },
 
   /**
    * Elimina una reserva por su ID (Admin).
-   * Endpoint: DELETE /reservations/admin/:id
+   * Endpoint: DELETE /reservations/:id
    */
   deleteReservationAdmin: async (id: number): Promise<IMessageResponse> => {
-    return apiFetch(`reservations/admin/${id}`, 'DELETE') as Promise<IMessageResponse>;
+    return apiFetch(`reservations/${id}`, 'DELETE') as Promise<IMessageResponse>;
   }
 };
 

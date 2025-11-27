@@ -9,6 +9,7 @@ import { headerLinkBase, headerLinkSeparator } from "@/utils/Tokens";
 import { useAuthStore } from "@/store/authStore"; 
 import { UserDropdown } from "./UserDropdown"; 
 import { AdminDropdown } from "./AdminDropdown";
+import { ClienteDropdown } from "./ClienteDropdown";
 
 interface NavLink {
   name: string;
@@ -19,6 +20,7 @@ export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isLoggedIn, user, loadingAuth } = useAuthStore();
   const isAdminOrRecep = user && (user.rol === 'admin' || user.rol === 'recepcionista');
+  const isCliente = user && user.rol === 'cliente';
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -67,10 +69,15 @@ export default function HeaderComponent() {
           
           {/* Menú de Gestión/Servicios solo para Admin/Recepcionista */}
           {isAdminOrRecep && user && (
-            // AQUI DEBEMOS HACER QUE EL CONTENEDOR DEL DROPDOWN NO TENGA UN PADDING EXTRA
-            // Usamos un div limpio y dejamos que el AdminDropdown maneje su propio padding
             <div className={`text-white`} suppressHydrationWarning>
                <AdminDropdown rol={user.rol as 'admin' | 'recepcionista'} />
+            </div>
+          )}
+
+          {/* Menú de Reservas para Clientes */}
+          {isCliente && (
+            <div className={`text-white`} suppressHydrationWarning>
+              <ClienteDropdown />
             </div>
           )}
         </nav>
@@ -127,7 +134,25 @@ export default function HeaderComponent() {
               {link.name}
             </Link>
           ))}
-            {/* Aquí deberías incluir los dropdowns en la navegación móvil si es necesario */}
+            {/* Menú de Gestión/Servicios para Admin/Recepcionista en móvil */}
+            {isAdminOrRecep && user && (
+              <div className="px-6 py-4 border-b border-[#222a54]" suppressHydrationWarning>
+                <div className="text-white">
+                  <AdminDropdown rol={user.rol as 'admin' | 'recepcionista'} />
+                </div>
+              </div>
+            )}
+
+            {/* Menú de Reservas para Clientes en móvil */}
+            {isCliente && (
+              <div className="px-6 py-4 border-b border-[#222a54]" suppressHydrationWarning>
+                <div className="text-white">
+                  <ClienteDropdown />
+                </div>
+              </div>
+            )}
+
+            {/* User Dropdown en móvil */}
             <div className="px-6 py-4 border-b border-[#222a54]" suppressHydrationWarning>
                 <UserDropdown />
             </div>
