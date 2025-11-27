@@ -175,6 +175,50 @@ export const admin = {
     container: "bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10 border-2 border-gray-100",
     text: "text-base sm:text-lg text-gray-700 leading-relaxed",
   },
+  page: {
+    container: "min-h-screen bg-gray-100",
+    contentWrapper: "max-w-7xl mx-auto",
+    cardContainer: "bg-white rounded-2xl shadow-xl border-2 overflow-hidden",
+  },
+  loading: {
+    container: "min-h-screen bg-gray-100 flex items-center justify-center",
+    spinner: "animate-spin rounded-full h-12 w-12 border-b-2 mx-auto",
+    text: "mt-4 font-semibold text-sm sm:text-base",
+  },
+  table: {
+    container: "overflow-x-auto",
+    wrapper: "min-w-full divide-y divide-gray-200",
+    header: "bg-[#0a1445]",
+    headerCell: "px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider",
+    body: "bg-white divide-y divide-gray-200",
+    row: "hover:bg-gray-50",
+    cell: "px-4 py-4 whitespace-nowrap text-sm",
+    cellText: "text-gray-900",
+    cellTextSecondary: "text-gray-600",
+    actionCell: "px-4 py-4 whitespace-nowrap text-right text-sm font-medium",
+  },
+  badge: {
+    base: "px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full",
+    admin: "bg-purple-100 text-purple-800",
+    recepcionista: "bg-blue-100 text-blue-800",
+    cliente: "bg-green-100 text-green-800",
+    default: "bg-gray-100 text-gray-800",
+  },
+  alert: {
+    error: "bg-red-50 border-2 border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6",
+    errorText: "font-semibold",
+  },
+  emptyState: {
+    container: "text-center py-12 bg-gray-50 rounded-lg",
+    text: "text-gray-600 text-lg",
+  },
+  crud: {
+    container: "p-4 sm:p-6 lg:p-8",
+    header: "flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4",
+    title: "text-xl sm:text-2xl font-bold",
+    subtitle: "text-gray-600 mt-1 text-sm sm:text-base",
+    button: "w-full sm:w-auto",
+  },
 } as const;
 
 // ============================================
@@ -220,7 +264,11 @@ export const modalWarningTextHighlight = "text-[#0a1445] font-bold"
 export const modalWarningSubtext = "text-sm text-red-600 font-medium"
 export const modalSuccessIcon = "text-6xl mb-4"
 export const modalSuccessText = "text-lg font-semibold text-gray-800"
+export const modalErrorIcon = "text-6xl mb-4"
+export const modalErrorText = "text-lg font-semibold text-gray-800"
+export const modalErrorSubtext = "text-sm text-red-600 font-medium"
 export const modalButtonContainer = "flex flex-col sm:flex-row gap-3 pt-4"
+export const modalButtonError = "flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-red-500 hover:border-red-400 transform hover:scale-105"
 export const modalButtonPrimary = "flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:from-red-400 disabled:to-red-500 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-red-500 hover:border-red-400 disabled:border-red-300 disabled:cursor-not-allowed transform hover:scale-105 disabled:hover:transform-none"
 export const modalButtonSecondary = "flex-1 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-400 hover:border-gray-300 disabled:border-gray-300 disabled:cursor-not-allowed transform hover:scale-105 disabled:hover:transform-none"
 export const modalButtonSuccess = "flex-1 bg-gradient-to-r from-[#0a1445] to-[#222a54] hover:from-[#222a54] hover:to-[#0a1445] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#b6a253] hover:border-[#d4c373] disabled:border-[#b6a253] disabled:cursor-not-allowed transform hover:scale-105 disabled:hover:transform-none"
@@ -254,4 +302,60 @@ export const restaurantInfoTitle = "text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 
 export const restaurantInfoText = "text-base sm:text-lg leading-relaxed mb-4"
 export const restaurantScheduleItem = "flex justify-between items-center py-3 sm:py-4 border-b border-white/20 last:border-0"
 export const restaurantScheduleDay = "text-lg sm:text-xl font-semibold"
-export const restaurantScheduleTime = "text-base sm:text-lg text-[#b6a253] font-medium"   
+export const restaurantScheduleTime = "text-base sm:text-lg text-[#b6a253] font-medium"
+
+// ============================================
+// DESIGN TOKENS - ADMIN PAGES
+// ============================================
+export const adminPage = {
+  container: "min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8",
+  contentWrapper: "max-w-7xl mx-auto",
+  cardContainer: "bg-white rounded-2xl shadow-xl border-2 border-[#222a54] overflow-hidden",
+  headerContainer: "bg-white rounded-2xl shadow-xl border-2 border-[#222a54] overflow-hidden mb-6",
+  headerContent: "bg-[#0a1445] border-b-[3px] border-[#b6a253] px-4 sm:px-6 lg:px-8 py-4 sm:py-6 text-center",
+  headerTitle: "text-xl sm:text-2xl lg:text-3xl font-bold text-white",
+  headerSubtitle: "text-gray-300 mt-2 text-sm sm:text-base",
+  crudContainer: "p-4 sm:p-6 lg:p-8",
+  crudHeader: "flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4",
+  crudTitle: "text-xl sm:text-2xl font-bold text-[#0a174e]",
+  crudSubtitle: "text-gray-600 mt-1 text-sm sm:text-base",
+  tableWrapper: "overflow-x-auto",
+  table: "min-w-full divide-y divide-gray-200",
+  tableHeader: "bg-[#0a1445]",
+  tableHeaderCell: "px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider",
+  tableHeaderCellRight: "px-4 py-3 text-right text-xs font-medium text-white uppercase tracking-wider",
+  tableRow: "bg-white divide-y divide-gray-200 hover:bg-gray-50",
+  tableCell: "px-4 py-4 whitespace-nowrap text-sm text-gray-900",
+  tableCellMedium: "px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900",
+  tableCellMuted: "px-4 py-4 whitespace-nowrap text-sm text-gray-600",
+  tableCellActions: "px-4 py-4 whitespace-nowrap text-right text-sm font-medium",
+  emptyState: "text-center py-12 bg-gray-50 rounded-lg",
+  emptyStateText: "text-gray-600 text-lg",
+  actionButton: "text-[#0a174e] hover:text-[#b6a253] transition-colors",
+  deleteButton: "text-red-600 hover:text-red-800 transition-colors",
+  deleteButtonDisabled: "text-gray-400 cursor-not-allowed",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - LOADING STATES
+// ============================================
+export const loadingStates = {
+  container: "p-8 text-center",
+  spinner: "animate-spin rounded-full h-12 w-12 border-b-2 border-[#0a174e] mx-auto",
+  text: "mt-4 text-[#0a174e] font-semibold",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - FORM COMPONENTS
+// ============================================
+export const formComponents = {
+  label: "text-sm font-semibold text-[#0a1445]",
+  labelRequired: "text-sm font-semibold text-[#0a1445]",
+  inputBase: "w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 text-sm sm:text-base bg-white text-[#0a1445] placeholder:text-gray-400",
+  inputNormal: "border-[#222a54] focus:border-[#b6a253] focus:ring-[#b6a253]/20",
+  inputError: "border-red-400 focus:border-red-500 focus:ring-red-200",
+  errorText: "text-sm text-red-500 font-medium",
+  selectBase: "w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 bg-white text-[#0a1445] cursor-pointer",
+  selectNormal: "border-[#222a54] focus:border-[#b6a253] focus:ring-[#b6a253]/20",
+  selectError: "border-red-400 focus:border-red-500 focus:ring-red-200",
+} as const;

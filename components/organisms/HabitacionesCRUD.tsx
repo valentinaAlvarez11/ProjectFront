@@ -7,7 +7,10 @@ import Modal from '@/components/atoms/Modal';
 import Button from '@/components/atoms/ButtonAuth';
 import CreateRoomForm from '@/components/molecules/CreateRoomForm';
 import ConfirmDeleteModal from '@/components/molecules/ConfirmDeleteModal';
+import ErrorAlert from '@/components/molecules/ErrorAlert';
+import LoadingSpinner from '@/components/atoms/LoadingSpinner';
 import { useModal } from '@/hooks/useModal';
+import { adminPage } from '@/utils/Tokens';
 
 export default function HabitacionesCRUD() {
   const [habitaciones, setHabitaciones] = useState<IRoom[]>([]);
@@ -96,21 +99,22 @@ export default function HabitacionesCRUD() {
 
   if (loading) {
     return (
-      <div className="p-8 text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0a174e] mx-auto"></div>
-        <p className="mt-4 text-[#0a174e] font-semibold">Cargando habitaciones...</p>
-      </div>
+      <LoadingSpinner 
+        size="md" 
+        message="Cargando habitaciones..." 
+        className="p-8"
+      />
     );
   }
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <div className={adminPage.crudContainer}>
+      <div className={adminPage.crudHeader}>
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-[#0a174e]">
+          <h2 className={adminPage.crudTitle}>
             Gestión de Habitaciones
           </h2>
-          <p className="text-gray-600 mt-1 text-sm sm:text-base">
+          <p className={adminPage.crudSubtitle}>
             Administra las habitaciones del hotel
           </p>
         </div>
@@ -124,56 +128,57 @@ export default function HabitacionesCRUD() {
       </div>
 
       {error && (
-        <div className="bg-red-50 border-2 border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
-          <p className="font-semibold">{error}</p>
-        </div>
+        <ErrorAlert 
+          message={error} 
+          onClose={() => setError(null)}
+        />
       )}
 
       {habitaciones.length === 0 ? (
-        <div className="text-center py-12 bg-gray-50 rounded-lg">
-          <p className="text-gray-600 text-lg">No hay habitaciones registradas</p>
+        <div className={adminPage.emptyState}>
+          <p className={adminPage.emptyStateText}>No hay habitaciones registradas</p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-[#0a1445]">
+        <div className={adminPage.tableWrapper}>
+          <table className={adminPage.table}>
+            <thead className={adminPage.tableHeader}>
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                <th className={adminPage.tableHeaderCell}>
                   ID
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                <th className={adminPage.tableHeaderCell}>
                   Número
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                <th className={adminPage.tableHeaderCell}>
                   Tipo
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                <th className={adminPage.tableHeaderCell}>
                   Precio/Noche
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                <th className={adminPage.tableHeaderCell}>
                   Disponible
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                <th className={adminPage.tableHeaderCell}>
                   Descripción
                 </th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-white uppercase tracking-wider">
+                <th className={adminPage.tableHeaderCellRight}>
                   Acciones
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className={adminPage.tableRow}>
               {habitaciones.map((habitacion) => (
                 <tr key={habitacion.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className={adminPage.tableCell}>
                     {habitacion.id}
                   </td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <td className={adminPage.tableCellMedium}>
                     {habitacion.numero}
                   </td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600">
+                  <td className={adminPage.tableCellMuted}>
                     {habitacion.tipo}
                   </td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600">
+                  <td className={adminPage.tableCellMuted}>
                     ${habitacion.precio_noche.toLocaleString()}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap">
@@ -187,20 +192,20 @@ export default function HabitacionesCRUD() {
                       {habitacion.disponible ? 'Disponible' : 'No disponible'}
                     </span>
                   </td>
-                  <td className="px-4 py-4 text-sm text-gray-600 max-w-xs truncate">
+                  <td className={`${adminPage.tableCellMuted} max-w-xs truncate`}>
                     {habitacion.descripcion || 'Sin descripción'}
                   </td>
-                  <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <td className={adminPage.tableCellActions}>
                     <div className="flex justify-end gap-2">
                       <button
                         onClick={() => handleEdit(habitacion.id)}
-                        className="text-[#0a174e] hover:text-[#b6a253] transition-colors"
+                        className={adminPage.actionButton}
                       >
                         Editar
                       </button>
                       <button
                         onClick={() => handleDeleteClick(habitacion.id)}
-                        className="text-red-600 hover:text-red-800 transition-colors"
+                        className={adminPage.deleteButton}
                       >
                         Eliminar
                       </button>
@@ -236,10 +241,11 @@ export default function HabitacionesCRUD() {
         title="Editar Habitación"
       >
         {loadingHabitacion ? (
-          <div className="p-8 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0a174e] mx-auto"></div>
-            <p className="mt-4 text-[#0a174e] font-semibold">Cargando datos...</p>
-          </div>
+          <LoadingSpinner 
+            size="md" 
+            message="Cargando datos..." 
+            className="p-8"
+          />
         ) : editingHabitacion ? (
           <div className="max-h-[80vh] overflow-y-auto -m-6">
             <CreateRoomForm 
