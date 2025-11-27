@@ -3,6 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Button from '@/components/atoms/Button';
+import { cards, colors, typography, spacing } from '@/utils/Tokens';
 
 interface RoomCardProps {
   id: number;
@@ -25,27 +27,7 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
 
   return (
     <Link href={`/room/${id}`} className="no-underline">
-      <div className="
-        w-full max-w-[350px] 
-        h-[400px] sm:h-[450px] 
-        rounded-xl 
-        shadow-lg 
-        overflow-hidden 
-        relative 
-        flex 
-        flex-col 
-        justify-between 
-        items-start 
-        text-white 
-        text-left 
-        p-4 sm:p-5 
-        cursor-pointer 
-        transition-transform 
-        duration-200 
-        ease-in-out
-        hover:scale-[1.03]
-        mx-auto
-      ">
+      <div className={cards.roomCard}>
         {/* Imagen de fondo */}
         {hasValidImage ? (
           <Image
@@ -53,6 +35,7 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
             alt={type}
             fill
             className="object-cover z-0"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         ) : (
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 z-0" />
@@ -63,52 +46,20 @@ const RoomCardComponent: React.FC<RoomCardProps> = ({ id, type, description, ima
 
         {/* Contenido de la tarjeta */}
         <div className="relative z-[2] w-full">
-          <div className="
-            bg-[#0a174e] 
-            rounded-2xl 
-            px-4 sm:px-5 
-            py-2 
-            font-bold 
-            text-lg sm:text-xl 
-            tracking-wide 
-            inline-block 
-            mb-2 sm:mb-3
-          ">
+          <div className={`bg-[#0a174e] rounded-2xl px-4 sm:px-5 py-2 font-bold ${typography.cardTitle} tracking-wide inline-block mb-2 sm:mb-3`}>
             {type}
           </div>
-          <p className="text-sm sm:text-base lg:text-lg leading-relaxed line-clamp-3 sm:line-clamp-4">
+          <p className={`${typography.body} ${typography.bodyLarge} leading-relaxed line-clamp-3 sm:line-clamp-4`}>
             {description}
           </p>
         </div>
 
         {/* Botón Ver más */}
-        <button
-          className="
-            relative 
-            z-[2] 
-            bg-[#E2C044] 
-            hover:bg-[#ffd700] 
-            text-[#0a174e] 
-            border-none 
-            rounded-full 
-            px-5 sm:px-7 
-            py-2.5 sm:py-3 
-            text-sm sm:text-base 
-            font-bold 
-            cursor-pointer 
-            self-center 
-            mt-4 sm:mt-5 
-            transition-colors 
-            duration-200 
-            ease-in-out
-            focus:outline-none 
-            focus:ring-2 
-            focus:ring-[#E2C044] 
-            focus:ring-offset-2
-          "
-        >
-          Ver más
-        </button>
+        <div className="relative z-[2] self-center mt-4 sm:mt-5">
+          <Button variant="primary">
+            Ver más
+          </Button>
+        </div>
       </div>
     </Link>
   );
