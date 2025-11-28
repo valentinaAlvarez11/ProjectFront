@@ -61,14 +61,14 @@ export default function AdminHome() {
       
       
       const available = rooms.filter(room => {
-        const isRoomAvailableInDB = room.disponible === true || room.disponible === 1;
+        const isRoomAvailableInDB = room.disponible === true;
         const hasConfirmedReservation = roomsWithConfirmedReservations.has(room.id);
         return isRoomAvailableInDB && !hasConfirmedReservation;
       }).length;
       
    
       const unavailable = rooms.filter(room => {
-        const isRoomUnavailableInDB = room.disponible === false || room.disponible === 0;
+        const isRoomUnavailableInDB = room.disponible === false;
         const hasConfirmedReservation = roomsWithConfirmedReservations.has(room.id);
         return isRoomUnavailableInDB || hasConfirmedReservation;
       }).length;
@@ -110,10 +110,10 @@ export default function AdminHome() {
       variant: 'secondary' as const,
     },
     {
-      title: 'Ver Reservas',
+      title: 'Gestionar Reservas',
       description: 'Revisar y gestionar reservas',
       icon: '📅',
-      href: '/reservas',
+      href: '/admin/reservations',
       variant: 'dark' as const,
     },
   ];

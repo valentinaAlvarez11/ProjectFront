@@ -43,7 +43,7 @@ const ReservationsService = {
    * Endpoint: GET /reservations/admin/user/:userId
    */
   getByUserAdmin: async (userId: number): Promise<IReservationsAdminListResponse> => {
-    return apiFetch(`reservations/admin/user/${userId}`, 'GET') as Promise<IReservationsAdminListResponse>;
+    return apiFetch(`reservations/user/${userId}`, 'GET') as Promise<IReservationsAdminListResponse>;
   },
   
   /**
@@ -51,7 +51,7 @@ const ReservationsService = {
    * Endpoint: GET /reservations/admin/room/:roomId
    */
   getByRoomAdmin: async (roomId: number): Promise<IReservationsAdminListResponse> => {
-    return apiFetch(`reservations/admin/room/${roomId}`, 'GET') as Promise<IReservationsAdminListResponse>;
+    return apiFetch(`reservations/room/${roomId}`, 'GET') as Promise<IReservationsAdminListResponse>;
   },
 
   /**

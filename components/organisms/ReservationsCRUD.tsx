@@ -318,8 +318,7 @@ export default function ReservationsCRUD() {
             onClose={deleteModal.close}
             onConfirm={handleDeleteConfirm}
             itemName="reserva"
-            isLoading={isDeleting}
-          />
+            isLoading={isDeleting} itemType={''}          />
 
           <SuccessModal
             isOpen={successModal.isOpen}
