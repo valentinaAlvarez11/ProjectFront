@@ -49,14 +49,14 @@ export default function ProfileComponent({ user }: ProfileComponentProps) {
         {/* Header del Perfil */}
         <div className={`${adminPage.headerContainer} mb-6 sm:mb-8`}>
           <div className={adminPage.headerContent}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <div className={adminPage.profile.headerLayout}>
               {/* Avatar/Icono */}
               <div className={`${admin.statCard.iconContainer} ${admin.statCard.iconPrimary} shrink-0`}>
                 {getRoleIcon(user.rol)}
               </div>
               
               {/* Información Principal */}
-              <div className="text-center sm:text-left">
+              <div className={adminPage.profile.headerTextAlign}>
                 <h1 className={`${adminPage.headerTitle} mb-2`}>
                   {user.nombre}
                 </h1>
@@ -75,23 +75,23 @@ export default function ProfileComponent({ user }: ProfileComponentProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {/* Card de Información Personal */}
           <InfoCard>
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 pb-4 border-b-2 border-gray-200">
-                <div className={`${admin.statCard.iconContainer} ${admin.statCard.iconPrimary} shrink-0`}>
-                  <FaUser className="text-2xl" />
+            <div className={adminPage.profile.cardSpacing}>
+              <div className={adminPage.profile.cardHeader}>
+                <div className={`${admin.statCard.iconContainer} ${adminPage.profile.iconContainerSubtle} shrink-0`}>
+                  <FaUser className={adminPage.profile.iconSubtle} />
                 </div>
-                <h2 className={`${typography.cardTitle} text-[#0a174e]`}>
+                <h2 className={`${typography.cardTitle} ${adminPage.profile.cardTitle}`}>
                   Información Personal
                 </h2>
               </div>
               
-              <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                  <div className="flex items-center gap-3 min-w-[120px]">
-                    <FaUser className="text-[#b6a253] text-xl" />
-                    <span className="text-sm font-semibold text-gray-600">Nombre:</span>
+              <div className={adminPage.profile.fieldSpacing}>
+                <div className={adminPage.profile.fieldRow}>
+                  <div className={adminPage.profile.fieldLabelContainer}>
+                    <FaUser className={adminPage.profile.fieldIcon} />
+                    <span className={adminPage.profile.fieldLabel}>Nombre:</span>
                   </div>
-                  <span className={`${typography.body} text-[#0a174e] font-medium`}>
+                  <span className={`${typography.body} ${adminPage.profile.fieldValue}`}>
                     {user.nombre}
                   </span>
                 </div>
@@ -101,38 +101,38 @@ export default function ProfileComponent({ user }: ProfileComponentProps) {
 
           {/* Card de Información de Contacto */}
           <InfoCard>
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 pb-4 border-b-2 border-gray-200">
-                <div className={`${admin.statCard.iconContainer} ${admin.statCard.iconPrimary} shrink-0`}>
-                  <FaEnvelope className="text-2xl" />
+            <div className={adminPage.profile.cardSpacing}>
+              <div className={adminPage.profile.cardHeader}>
+                <div className={`${admin.statCard.iconContainer} ${adminPage.profile.iconContainerSubtle} shrink-0`}>
+                  <FaEnvelope className={adminPage.profile.iconSubtle} />
                 </div>
-                <h2 className={`${typography.cardTitle} text-[#0a174e]`}>
+                <h2 className={`${typography.cardTitle} ${adminPage.profile.cardTitle}`}>
                   Información de Contacto
                 </h2>
               </div>
               
-              <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                  <div className="flex items-center gap-3 min-w-[120px]">
-                    <FaEnvelope className="text-[#b6a253] text-xl" />
-                    <span className="text-sm font-semibold text-gray-600">Email:</span>
+              <div className={adminPage.profile.fieldSpacing}>
+                <div className={adminPage.profile.fieldRow}>
+                  <div className={adminPage.profile.fieldLabelContainer}>
+                    <FaEnvelope className={adminPage.profile.fieldIcon} />
+                    <span className={adminPage.profile.fieldLabel}>Email:</span>
                   </div>
                   <a 
                     href={`mailto:${user.email}`}
-                    className={`${typography.body} text-[#0a174e] font-medium hover:text-[#b6a253] transition-colors break-all`}
+                    className={`${typography.body} ${adminPage.profile.fieldLinkBreak}`}
                   >
                     {user.email}
                   </a>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                  <div className="flex items-center gap-3 min-w-[120px]">
-                    <FaPhone className="text-[#b6a253] text-xl" />
-                    <span className="text-sm font-semibold text-gray-600">Teléfono:</span>
+                <div className={adminPage.profile.fieldRow}>
+                  <div className={adminPage.profile.fieldLabelContainer}>
+                    <FaPhone className={adminPage.profile.fieldIcon} />
+                    <span className={adminPage.profile.fieldLabel}>Teléfono:</span>
                   </div>
                   <a 
                     href={`tel:${user.telefono}`}
-                    className={`${typography.body} text-[#0a174e] font-medium hover:text-[#b6a253] transition-colors`}
+                    className={`${typography.body} ${adminPage.profile.fieldLink}`}
                   >
                     {user.telefono}
                   </a>
@@ -144,22 +144,22 @@ export default function ProfileComponent({ user }: ProfileComponentProps) {
 
         {/* Card de Rol y Permisos */}
         <InfoCard className="mt-6 sm:mt-8">
-          <div className="space-y-6">
-            <div className="flex items-center gap-4 pb-4 border-b-2 border-gray-200">
-              <div className={`${admin.statCard.iconContainer} ${admin.statCard.iconPrimary} shrink-0`}>
-                <FaShieldAlt className="text-2xl" />
+          <div className={adminPage.profile.cardSpacing}>
+            <div className={adminPage.profile.cardHeader}>
+              <div className={`${admin.statCard.iconContainer} ${adminPage.profile.iconContainerSubtle} shrink-0`}>
+                <FaShieldAlt className={adminPage.profile.iconSubtle} />
               </div>
-              <h2 className={`${typography.cardTitle} text-[#0a174e]`}>
+              <h2 className={`${typography.cardTitle} ${adminPage.profile.cardTitle}`}>
                 Rol y Permisos
               </h2>
             </div>
             
-            <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className={adminPage.profile.fieldSpacing}>
+              <div className={adminPage.profile.fieldRow}>
                 <div className="flex items-center gap-3">
                   <RoleBadge rol={user.rol} />
                 </div>
-                <p className={`${typography.body} text-gray-700`}>
+                <p className={`${typography.body} ${adminPage.profile.fieldText}`}>
                   {getRoleDescription(user.rol)}
                 </p>
               </div>
@@ -167,8 +167,8 @@ export default function ProfileComponent({ user }: ProfileComponentProps) {
               {/* Notas informativas según el rol */}
               {user.rol === 'admin' && (
                 <div className="mt-6 p-4 bg-gradient-to-r from-[#0a1445]/10 to-[#222a54]/10 rounded-lg border-l-4 border-[#b6a253]">
-                  <p className={`${typography.body} text-gray-700`}>
-                    <strong className="text-[#0a174e]">Nota:</strong> Como administrador, 
+                  <p className={`${typography.body} ${adminPage.profile.fieldText}`}>
+                    <strong className={adminPage.profile.fieldTextBold}>Nota:</strong> Como administrador, 
                     tienes acceso completo a todas las funcionalidades del sistema, incluyendo 
                     la gestión de usuarios, habitaciones y reservas.
                   </p>
@@ -177,8 +177,8 @@ export default function ProfileComponent({ user }: ProfileComponentProps) {
 
               {user.rol === 'recepcionista' && (
                 <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg border-l-4 border-blue-500">
-                  <p className={`${typography.body} text-gray-700`}>
-                    <strong className="text-[#0a174e]">Información:</strong> Como recepcionista, 
+                  <p className={`${typography.body} ${adminPage.profile.fieldText}`}>
+                    <strong className={adminPage.profile.fieldTextBold}>Información:</strong> Como recepcionista, 
                     puedes gestionar reservas, consultar disponibilidad de habitaciones y 
                     atender las necesidades de los huéspedes desde el panel de recepción.
                   </p>
@@ -187,8 +187,8 @@ export default function ProfileComponent({ user }: ProfileComponentProps) {
 
               {user.rol === 'cliente' && (
                 <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg border-l-4 border-green-500">
-                  <p className={`${typography.body} text-gray-700`}>
-                    <strong className="text-[#0a174e]">Bienvenido:</strong> Estamos encantados de tenerte 
+                  <p className={`${typography.body} ${adminPage.profile.fieldText}`}>
+                    <strong className={adminPage.profile.fieldTextBold}>Bienvenido:</strong> Estamos encantados de tenerte 
                     como huésped. Puedes realizar reservas, consultar nuestros servicios y 
                     disfrutar de todas las comodidades que Hotel Regatta tiene para ofrecerte.
                   </p>

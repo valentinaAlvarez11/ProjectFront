@@ -1,6 +1,4 @@
-// ============================================
 // DESIGN TOKENS - COLOR SYSTEM
-// ============================================
 export const colors = {
   primary: {
     dark: "#0a1445",
@@ -40,9 +38,7 @@ export const colors = {
   },
 } as const;
 
-// ============================================
 // DESIGN TOKENS - SPACING SYSTEM
-// ============================================
 export const spacing = {
   section: {
     padding: "py-12 sm:py-16 lg:py-20",
@@ -61,9 +57,7 @@ export const spacing = {
   },
 } as const;
 
-// ============================================
 // DESIGN TOKENS - TYPOGRAPHY
-// ============================================
 export const typography = {
   sectionTitle: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-[0.3em] text-[#0a174e] text-center",
   sectionSubtitle: "text-base sm:text-lg md:text-xl lg:text-2xl text-[#233876] leading-relaxed",
@@ -74,9 +68,7 @@ export const typography = {
   button: "text-sm sm:text-base font-bold",
 } as const;
 
-// ============================================
 // DESIGN TOKENS - BUTTONS
-// ============================================
 export const buttons = {
   primary: "bg-[#E2C044] hover:bg-[#ffd700] text-[#0a174e] border-none rounded-full px-5 sm:px-7 py-2.5 sm:py-3 text-sm sm:text-base font-bold cursor-pointer transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#E2C044] focus:ring-offset-2",
   primaryFull: "bg-[#E2C044] hover:bg-[#ffd700] text-[#0a174e] border-none rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-bold cursor-pointer transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#E2C044] focus:ring-offset-2 w-full sm:w-auto",
@@ -84,9 +76,7 @@ export const buttons = {
   carousel: "bg-black/40 hover:bg-black/60 text-white border-none rounded-full w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-lg sm:text-xl md:text-2xl cursor-pointer flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50",
 } as const;
 
-// ============================================
 // DESIGN TOKENS - CARDS
-// ============================================
 export const cards = {
   roomCard: "w-full max-w-[350px] h-[400px] sm:h-[450px] rounded-xl shadow-lg overflow-hidden relative flex flex-col justify-between items-start text-white text-left p-4 sm:p-5 cursor-pointer transition-transform duration-200 ease-in-out hover:scale-[1.03] mx-auto",
   roomCardHorizontal: "w-full flex flex-col sm:flex-row rounded-lg shadow-md overflow-hidden bg-white hover:shadow-xl transition-shadow duration-200 ease-in-out border border-gray-200",
@@ -94,21 +84,24 @@ export const cards = {
   amenityCard: "flex flex-col items-center w-full sm:w-auto sm:min-w-[250px] lg:min-w-[300px]",
 } as const;
 
-// ============================================
 // DESIGN TOKENS - STATES
-// ============================================
 export const states = {
   loading: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center",
   loadingText: "text-lg sm:text-xl lg:text-2xl text-[#0a174e]",
+  loadingContainer: "text-center py-12 sm:py-16",
+  loadingSpinner: "animate-spin rounded-full h-12 w-12 sm:h-16 sm:w-16 border-b-2 border-[#0a1445] mx-auto mb-4",
+  loadingMessage: "text-base sm:text-lg lg:text-xl text-gray-600",
   error: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center",
   errorText: "text-lg sm:text-xl lg:text-2xl text-red-600",
+  errorContainer: "text-center py-12 sm:py-16",
+  errorIcon: "text-4xl sm:text-5xl mb-4",
+  errorMessage: "text-base sm:text-lg lg:text-xl text-red-600 font-semibold px-4",
   empty: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 text-center",
   emptyText: "text-lg sm:text-xl lg:text-2xl text-[#0a174e]",
+  roomPageContainer: "min-h-screen bg-gray-100 py-6 sm:py-8 px-4 sm:px-6 lg:px-8",
 } as const;
 
-// ============================================
 // DESIGN TOKENS - CAROUSEL
-// ============================================
 export const carousel = {
   container: "relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-screen max-h-[800px] overflow-hidden bg-white",
   button: "absolute top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white border-none rounded-full w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-lg sm:text-xl md:text-2xl cursor-pointer flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50",
@@ -120,9 +113,7 @@ export const carousel = {
   indicatorInactive: "bg-gray-300 hover:bg-gray-400 border-2 border-transparent",
 } as const;
 
-// ============================================
 // DESIGN TOKENS - SECTIONS
-// ============================================
 export const sections = {
   container: "w-full bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8",
   titleContainer: "w-full max-w-[90vw] mx-auto mb-6 sm:mb-8",
@@ -132,9 +123,7 @@ export const sections = {
   subtitle: "max-w-5xl text-center text-base sm:text-lg md:text-xl lg:text-2xl text-[#233876] mb-8 sm:mb-12 lg:mb-16 leading-relaxed px-4",
 } as const;
 
-// ============================================
 // DESIGN TOKENS - GRIDS
-// ============================================
 export const grids = {
   rooms: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto justify-items-center",
   services: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 max-w-7xl mx-auto",
@@ -143,9 +132,7 @@ export const grids = {
   quickActions: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto",
 } as const;
 
-// ============================================
 // DESIGN TOKENS - ADMIN HOME
-// ============================================
 export const admin = {
   hero: {
     container: "bg-gradient-to-r from-[#0a1445] via-[#0a174e] to-[#222a54] text-white",
@@ -221,9 +208,7 @@ export const admin = {
   },
 } as const;
 
-// ============================================
 // LEGACY TOKENS (mantener compatibilidad)
-// ============================================
 export const standardInput = "mt-1 w-full border border-gray-400 rounded-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
 
 // Header styles
@@ -304,9 +289,7 @@ export const restaurantScheduleItem = "flex justify-between items-center py-3 sm
 export const restaurantScheduleDay = "text-lg sm:text-xl font-semibold"
 export const restaurantScheduleTime = "text-base sm:text-lg text-[#b6a253] font-medium"
 
-// ============================================
 // DESIGN TOKENS - ADMIN PAGES
-// ============================================
 export const adminPage = {
   container: "min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8",
   contentWrapper: "max-w-7xl mx-auto",
@@ -334,20 +317,43 @@ export const adminPage = {
   actionButton: "text-[#0a174e] hover:text-[#b6a253] transition-colors",
   deleteButton: "text-red-600 hover:text-red-800 transition-colors",
   deleteButtonDisabled: "text-gray-400 cursor-not-allowed",
+  // Profile Component Tokens
+  profile: {
+    // Layout
+    headerLayout: "flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6",
+    headerTextAlign: "text-center sm:text-left",
+    // Icon containers
+    iconContainerSubtle: "bg-gradient-to-br from-[#0a174e]/30 to-[#222a54]/30",
+    iconSubtle: "text-2xl text-[#0a174e]/70",
+    // Card headers
+    cardHeader: "flex items-center gap-4 pb-4 border-b-2 border-gray-200",
+    cardTitle: "text-[#0a174e]",
+    // Spacing
+    cardSpacing: "space-y-6",
+    fieldSpacing: "space-y-4",
+    // Field rows
+    fieldRow: "flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4",
+    fieldLabelContainer: "flex items-center gap-3 min-w-[120px]",
+    // Icons and labels
+    fieldIcon: "text-[#b6a253] text-xl",
+    fieldLabel: "text-sm font-semibold text-gray-600",
+    // Text content
+    fieldValue: "text-[#0a174e] font-medium",
+    fieldLink: "text-[#0a174e] font-medium hover:text-[#b6a253] transition-colors",
+    fieldLinkBreak: "text-[#0a174e] font-medium hover:text-[#b6a253] transition-colors break-all",
+    fieldText: "text-gray-700",
+    fieldTextBold: "text-[#0a174e]",
+  },
 } as const;
 
-// ============================================
 // DESIGN TOKENS - LOADING STATES
-// ============================================
 export const loadingStates = {
   container: "p-8 text-center",
   spinner: "animate-spin rounded-full h-12 w-12 border-b-2 border-[#0a174e] mx-auto",
   text: "mt-4 text-[#0a174e] font-semibold",
 } as const;
 
-// ============================================
 // DESIGN TOKENS - FORM COMPONENTS
-// ============================================
 export const formComponents = {
   label: "text-sm font-semibold text-[#0a1445]",
   labelRequired: "text-sm font-semibold text-[#0a1445]",
