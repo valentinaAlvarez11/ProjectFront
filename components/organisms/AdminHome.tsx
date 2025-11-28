@@ -64,7 +64,7 @@ export default function AdminHome() {
       // 1. Tiene disponible = true en la BD
       // 2. NO tiene una reserva confirmada (activa o futura)
       const available = rooms.filter(room => {
-        const isRoomAvailableInDB = room.disponible === true || room.disponible === 1;
+        const isRoomAvailableInDB = room.disponible === true;
         const hasConfirmedReservation = roomsWithConfirmedReservations.has(room.id);
         return isRoomAvailableInDB && !hasConfirmedReservation;
       }).length;
@@ -73,7 +73,7 @@ export default function AdminHome() {
       // 1. Tiene disponible = false en la BD, O
       // 2. Tiene una reserva confirmada (activa o futura)
       const unavailable = rooms.filter(room => {
-        const isRoomUnavailableInDB = room.disponible === false || room.disponible === 0;
+        const isRoomUnavailableInDB = room.disponible === false;
         const hasConfirmedReservation = roomsWithConfirmedReservations.has(room.id);
         return isRoomUnavailableInDB || hasConfirmedReservation;
       }).length;

@@ -276,7 +276,7 @@ export default function UsuariosCRUD() {
                       </button>
                       <button
                         onClick={() => handleDeleteClick(usuario.id)}
-                        disabled={currentUser && currentUser.id === usuario.id}
+                        disabled={!!(currentUser && currentUser.id === usuario.id)}
                         className={
                           currentUser && currentUser.id === usuario.id
                             ? adminPage.deleteButtonDisabled
