@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import AppLayout from "@/components/organisms/AppLayout";
 
 export const metadata: Metadata = {
-  title: "Historial de Compras - Hotel Regatta",
-  description: "Consulta tu historial de compras y pagos",
+  title: "Pago - Hotel Regatta",
+  description: "Completa el pago de tu reserva",
 };
 
-export default function RegistrosLayout({
+export default function PagoLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

@@ -7,7 +7,7 @@ import { headerLinkBase, headerLinkSeparator } from "@/utils/Tokens";
 
 /**
  * Componente reutilizable para el menú desplegable de clientes
- * Sigue el mismo patrón y diseño que AdminDropdown
+ * El botón "Reservas" navega directamente al formulario de reservas
  */
 export function ClienteDropdown() {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,33 +24,17 @@ export function ClienteDropdown() {
 
     return (
         <div className="relative">
-            {/* Botón en la barra de navegación */}
-            <button
-                onClick={() => setIsOpen(!isOpen)}
+            {/* Botón en la barra de navegación - Navega directamente al formulario de reservas */}
+            <Link
+                href="/reservas"
                 className={`p-4 text-white hover:text-[#b6a253] focus:outline-none ${headerLinkBase} ${headerLinkSeparator}`}
-                aria-label="Menú de reservas"
+                aria-label="Formulario de reservas"
             >
                 {navTitle}
-            </button>
+            </Link>
 
-            {/* Dropdown Menu */}
-            {isOpen && (
-                <div 
-                    className="absolute right-0 mt-3 w-48 bg-white border border-gray-200 rounded-lg shadow-xl py-1 z-50"
-                    onMouseLeave={() => setIsOpen(false)}
-                >
-                    {getClienteOptions().map((option) => (
-                        <Link 
-                            key={option.name} 
-                            href={option.href} 
-                            onClick={() => setIsOpen(false)}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                        >
-                            {option.name}
-                        </Link>
-                    ))}
-                </div>
-            )}
+            {/* Dropdown Menu - Se muestra al hacer hover o click en el icono de flecha (opcional) */}
+            {/* Si quieres mantener el dropdown, puedes agregar un icono de flecha junto al enlace */}
         </div>
     );
 }

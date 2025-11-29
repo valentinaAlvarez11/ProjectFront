@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HeaderComponent from "@/components/organisms/HeaderComponent";
+import AppLayout from "@/components/organisms/AppLayout";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard - Hotel Regatta",
@@ -12,10 +12,9 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="pb-20 sm:pb-24 md:pb-28">
-      <HeaderComponent />
+    <AppLayout showFooter={false} className="pb-20 sm:pb-24 md:pb-28">
       {children}
-    </main>
+    </AppLayout>
   );
 }
 

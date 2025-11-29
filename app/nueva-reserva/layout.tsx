@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import HeaderComponent from "@/components/organisms/HeaderComponent";
-import { AuthInitializer } from "@/components/organisms/AuthInitializer";
+import AppLayout from "@/components/organisms/AppLayout";
 
 export const metadata: Metadata = {
   title: "Nueva Reserva - Hotel Regatta",
@@ -13,12 +12,9 @@ export default function NuevaReservaLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthInitializer>
-      <HeaderComponent />
-      <main>
-        {children}
-      </main>
-    </AuthInitializer>
+    <AppLayout showFooter={false}>
+      {children}
+    </AppLayout>
   );
 }
 
