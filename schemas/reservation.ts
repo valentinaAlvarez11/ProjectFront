@@ -15,9 +15,8 @@ export const createReservationSchema = z.object({
   }).min(1, "La fecha de fin es requerida"),
   usuarioId: z.coerce.number().min(1, "Debe seleccionar un usuario").optional(),
 }).refine((data) => {
-  const inicio = new Date(data.fecha_inicio);
-  const fin = new Date(data.fecha_fin);
-  return fin > inicio;
+  // Comparar fechas como strings YYYY-MM-DD para evitar problemas de zona horaria
+  return data.fecha_fin > data.fecha_inicio;
 }, {
   message: "La fecha de fin debe ser posterior a la fecha de inicio",
   path: ["fecha_fin"]
@@ -40,9 +39,8 @@ export const updateReservationSchema = z.object({
     invalid_type_error: "Debe seleccionar un estado válido"
   }),
 }).refine((data) => {
-  const inicio = new Date(data.fecha_inicio);
-  const fin = new Date(data.fecha_fin);
-  return fin > inicio;
+  // Comparar fechas como strings YYYY-MM-DD para evitar problemas de zona horaria
+  return data.fecha_fin > data.fecha_inicio;
 }, {
   message: "La fecha de fin debe ser posterior a la fecha de inicio",
   path: ["fecha_fin"]

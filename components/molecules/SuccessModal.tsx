@@ -43,18 +43,19 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title={title}
+      size="small"
     >
-      <div className="space-y-6">
+      <div className="space-y-6 py-2">
         <div className="text-center">
-          <div className={modalSuccessIcon}>✅</div>
-          <p className={modalSuccessText}>
+          <div className={`${modalSuccessIcon} transform transition-all duration-300 hover:scale-110`}>✅</div>
+          <p className={`${modalSuccessText} mt-2`}>
             {message}
           </p>
         </div>
         <div className={modalButtonContainer}>
           <button
             onClick={onClose}
-            className={modalButtonSuccess}
+            className={`${modalButtonSuccess} transition-all duration-300 hover:shadow-lg hover:scale-[1.02]`}
           >
             Aceptar
           </button>

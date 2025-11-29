@@ -9,9 +9,9 @@ import LoadingState from '@/components/atoms/LoadingState';
 import SuccessModal from '@/components/molecules/SuccessModal';
 import ErrorModal from '@/components/molecules/ErrorModal';
 import { useModal } from '@/hooks/useModal';
-import { adminPage } from '@/utils/Tokens';
 import { CreateReservationFormData } from '@/schemas/reservation';
-import Modal from '@/components/atoms/Modal';
+import PageContainer from '@/components/atoms/PageContainer';
+import PageHeader from '@/components/atoms/PageHeader';
 
 export default function NuevaReservaPage() {
   const router = useRouter();
@@ -37,19 +37,30 @@ export default function NuevaReservaPage() {
   const handleSubmit = async (data: CreateReservationFormData) => {
     try {
       setIsSubmitting(true);
-      await ReservationsService.createReservation({
+      // Debug: Ver qué fechas se están enviando
+      console.log('📅 Fechas recibidas del formulario:', {
+        fecha_inicio: data.fecha_inicio,
+        fecha_fin: data.fecha_fin,
+        tipo_inicio: typeof data.fecha_inicio,
+        tipo_fin: typeof data.fecha_fin,
+      });
+      
+      const payload = {
         habitacionId: Number(data.habitacionId),
         fecha_inicio: data.fecha_inicio,
         fecha_fin: data.fecha_fin,
-      });
-      setSuccessMessage('Reserva creada exitosamente');
-      successModal.open();
-      setTimeout(() => {
-        router.push('/mis-reservas');
-      }, 2000);
+      };
+      
+      console.log('📤 Payload que se guardará para el pago:', payload);
+      
+      // Guardar los datos de la reserva en sessionStorage para la página de pago
+      sessionStorage.setItem('pendingReservation', JSON.stringify(payload));
+      
+      // Redirigir a la página de pago
+      router.push(`/pago?habitacionId=${payload.habitacionId}&fecha_inicio=${payload.fecha_inicio}&fecha_fin=${payload.fecha_fin}`);
     } catch (err: any) {
-      console.error('Error al crear reserva:', err);
-      setErrorMessage(err?.message || 'Error al crear la reserva');
+      console.error('Error al preparar el pago:', err);
+      setErrorMessage(err?.message || 'Error al preparar el pago');
       errorModal.open();
     } finally {
       setIsSubmitting(false);
@@ -70,28 +81,20 @@ export default function NuevaReservaPage() {
 
   return (
     <>
-      <div className={adminPage.container}>
-        <div className={adminPage.contentWrapper}>
-          <div className={adminPage.cardContainer}>
-            <div className={adminPage.crudContainer}>
-              <div className="mb-6">
-                <h1 className={adminPage.crudTitle}>Nueva Reserva</h1>
-                <p className={adminPage.crudSubtitle}>
-                  Completa el formulario para crear una nueva reserva
-                </p>
-              </div>
+      <PageContainer>
+        <PageHeader
+          title="Nueva Reserva"
+          subtitle="Completa el formulario para crear una nueva reserva"
+        />
 
-              <ReservationForm
-                onSubmit={handleSubmit}
-                onCancel={handleCancel}
-                isEditing={false}
-                isLoading={isSubmitting}
-                isAdmin={false}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+        <ReservationForm
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          isEditing={false}
+          isLoading={isSubmitting}
+          isAdmin={false}
+        />
+      </PageContainer>
 
       <SuccessModal
         isOpen={successModal.isOpen}

@@ -22,9 +22,15 @@ export function UserDropdown() {
     // Opciones del dropdown del perfil según el Mock-Up
     const getDropdownOptions = () => {
         if (isLoggedIn) {
+            // Si es admin o recepcionista, mostrar registros de todos los clientes
+            // Si es cliente, mostrar sus propios registros
+            const registrosHref = (user?.rol === 'admin' || user?.rol === 'recepcionista') 
+                ? "/admin/registros" 
+                : "/registros";
+            
             return [
                 { name: "Perfil", href: "/perfil" },
-                { name: "Registros", href: "/registros" }, // Historial de reservas
+                { name: "Registros", href: registrosHref },
                 { name: "Log Out", action: handleLogout, isButton: true },
             ];
         } else {

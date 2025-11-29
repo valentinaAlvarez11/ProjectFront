@@ -8,7 +8,9 @@ import { IReservation } from '@/interfaces/reservations';
 import LoadingState from '@/components/atoms/LoadingState';
 import ErrorAlert from '@/components/molecules/ErrorAlert';
 import { adminPage } from '@/utils/Tokens';
-import { FaCalendarAlt, FaBed, FaDollarSign, FaCheckCircle, FaClock, FaTimesCircle } from 'react-icons/fa';
+import { FaCalendarAlt, FaBed, FaDollarSign } from 'react-icons/fa';
+import { formatDate, formatCurrency, calculateNights } from '@/utils/formatters';
+import EstadoBadge from '@/components/atoms/EstadoBadge';
 
 export default function MisReservasPage() {
   const router = useRouter();
@@ -45,56 +47,6 @@ export default function MisReservasPage() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  const calculateNights = (fechaInicio: string, fechaFin: string) => {
-    const inicio = new Date(fechaInicio);
-    const fin = new Date(fechaFin);
-    const diffTime = Math.abs(fin.getTime() - inicio.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
-  };
-
-  const getEstadoIcon = (estado: string) => {
-    switch (estado) {
-      case 'confirmada':
-        return <FaCheckCircle className="text-green-600" />;
-      case 'pendiente':
-        return <FaClock className="text-yellow-600" />;
-      case 'cancelada':
-        return <FaTimesCircle className="text-red-600" />;
-      default:
-        return <FaClock className="text-gray-600" />;
-    }
-  };
-
-  const getEstadoBadgeColor = (estado: string) => {
-    switch (estado) {
-      case 'confirmada':
-        return 'bg-green-100 text-green-800 border-green-300';
-      case 'pendiente':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-300';
-      case 'cancelada':
-        return 'bg-red-100 text-red-800 border-red-300';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-300';
-    }
-  };
 
   if (loadingAuth || loading) {
     return <LoadingState message="Cargando tus reservas..." />;
@@ -134,45 +86,44 @@ export default function MisReservasPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {reservations.map((reservation) => (
               <div
                 key={reservation.id}
-                className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 transform hover:-translate-y-2 w-full"
               >
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {/* Header de la reserva */}
-                  <div className="flex items-center justify-between pb-4 border-b-2 border-gray-200">
-                    <div className="flex items-center gap-3">
-                      <div className="p-3 bg-gradient-to-br from-[#0a174e] to-[#222a54] rounded-lg">
-                        <FaBed className="text-white text-xl" />
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b-2 border-gray-200">
+                    <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                      <div className="p-2 sm:p-3 bg-gradient-to-br from-[#0a174e] to-[#222a54] rounded-lg flex-shrink-0">
+                        <FaBed className="text-white text-base sm:text-xl" />
                       </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-[#0a174e]">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-base sm:text-lg font-bold text-[#0a174e] truncate">
                           Reserva #{reservation.id}
                         </h3>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">
                           Habitación ID: {reservation.habitacionId}
                         </p>
                       </div>
                     </div>
-                    <div className={`px-3 py-1 rounded-full border-2 flex items-center gap-2 ${getEstadoBadgeColor(reservation.estado)}`}>
-                      {getEstadoIcon(reservation.estado)}
-                      <span className="text-xs font-semibold">
-                        {reservation.estado.charAt(0).toUpperCase() + reservation.estado.slice(1)}
-                      </span>
-                    </div>
+                    <EstadoBadge 
+                      estado={reservation.estado} 
+                      tipo="reserva"
+                      className="flex-shrink-0"
+                    />
                   </div>
 
                   {/* Información de fechas */}
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-gradient-to-br from-[#b6a253] to-[#d4c373] rounded-lg">
-                        <FaCalendarAlt className="text-white" />
+                  <div className="space-y-2 sm:space-y-3">
+                    <div className="flex items-start sm:items-center gap-2 sm:gap-3">
+                      <div className="p-2 bg-gradient-to-br from-[#b6a253] to-[#d4c373] rounded-lg flex-shrink-0">
+                        <FaCalendarAlt className="text-white text-xs sm:text-sm" />
                       </div>
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <p className="text-xs text-gray-500 font-semibold uppercase">Fechas</p>
-                        <p className="text-sm font-medium text-[#0a174e]">
+                        <p className="text-sm sm:text-base font-medium text-[#0a174e]">
                           {formatDate(reservation.fecha_inicio)} - {formatDate(reservation.fecha_fin)}
                         </p>
                         <p className="text-xs text-[#b6a253] font-semibold mt-1">
@@ -182,14 +133,14 @@ export default function MisReservasPage() {
                     </div>
 
                     {/* Precio */}
-                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#0a174e]/10 to-[#222a54]/10 rounded-lg border-l-4 border-[#b6a253]">
-                      <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-[#0a174e]/10 to-[#222a54]/10 rounded-lg border-l-4 border-[#b6a253] mt-3 sm:mt-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <div className="p-2 bg-[#b6a253] rounded-lg">
-                          <FaDollarSign className="text-white" />
+                          <FaDollarSign className="text-white text-sm sm:text-base" />
                         </div>
                         <div>
                           <p className="text-xs text-gray-500 font-semibold uppercase">Precio Total</p>
-                          <p className="text-2xl font-bold text-[#0a174e]">
+                          <p className="text-xl sm:text-2xl font-bold text-[#0a174e]">
                             {formatCurrency(reservation.precio_total)}
                           </p>
                         </div>

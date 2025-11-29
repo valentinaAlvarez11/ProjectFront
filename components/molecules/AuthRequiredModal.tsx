@@ -14,7 +14,7 @@ const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, onClose }
     <Modal isOpen={isOpen} onClose={onClose} title="Acceso Requerido">
       <div className="space-y-6">
         <div className="text-center">
-          <div className="mx-auto w-20 h-20 bg-[#0a1445] rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-[#b6a253]">
+          <div className="mx-auto w-20 h-20 bg-[#0a1445] rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-[#b6a253] transform transition-all duration-300 hover:scale-110">
             <svg 
               className="w-10 h-10 text-[#b6a253]" 
               fill="none" 
@@ -42,7 +42,7 @@ const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, onClose }
           <Link
             href="/login"
             onClick={onClose}
-            className="w-full bg-[#0a1445] hover:bg-[#222a54] text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 text-center transform border-2 border-[#b6a253] hover:border-[#b6a253]"
+            className="w-full bg-[#0a1445] hover:bg-[#222a54] text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] text-center transform border-2 border-[#b6a253] hover:border-[#b6a253]"
           >
             Iniciar Sesión
           </Link>
@@ -59,7 +59,7 @@ const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, onClose }
           <Link
             href="/register"
             onClick={onClose}
-            className="w-full bg-white border-2 border-[#0a1445] hover:border-[#222a54] font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-center transform"
+            className="w-full bg-white border-2 border-[#0a1445] hover:border-[#222a54] font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] text-center transform"
           >
             <span className="text-[#0a1445]">
               Crear Cuenta

@@ -219,6 +219,61 @@ export const admin = {
     subtitle: "text-gray-600 mt-1 text-sm sm:text-base",
     button: "w-full sm:w-auto",
   },
+  statCardRegistros: {
+    container: "bg-white rounded-xl shadow-lg p-4 border-l-4",
+    content: "flex items-center justify-between",
+    textContainer: "flex-1",
+    label: "text-sm text-gray-600 font-semibold",
+    value: "text-2xl font-bold",
+    icon: "text-3xl",
+    borderBlue: "border-blue-500",
+    borderGreen: "border-green-500",
+    borderYellow: "border-yellow-500",
+    borderRed: "border-red-500",
+    textBlue: "text-[#0a174e]",
+    textGreen: "text-green-600",
+    textYellow: "text-yellow-600",
+    textRed: "text-red-600",
+  },
+  tabs: {
+    container: "mb-6",
+    tabsWrapper: "flex border-b border-gray-200",
+    tab: "flex-1 px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base font-semibold transition-colors",
+    tabActive: "bg-[#0a1445] text-white border-b-2 border-[#b6a253]",
+    tabInactive: "bg-white text-gray-600 hover:bg-gray-50",
+    tabContent: "flex items-center justify-center gap-2",
+  },
+  filters: {
+    container: "bg-white rounded-xl shadow-lg p-4 mb-6",
+    grid: "grid grid-cols-1 md:grid-cols-2 gap-4",
+    label: "block text-sm font-semibold text-gray-700 mb-2",
+    input: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#b6a253] focus:border-transparent",
+    select: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#b6a253] focus:border-transparent",
+  },
+  recordCard: {
+    container: "bg-white rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 transform hover:-translate-y-2",
+    header: "flex items-center justify-between pb-4 border-b-2 border-gray-200",
+    headerLeft: "flex items-center gap-3",
+    iconContainer: "p-3 bg-gradient-to-br from-[#0a174e] to-[#222a54] rounded-lg",
+    icon: "text-white text-xl",
+    titleContainer: "flex-1",
+    title: "text-lg font-bold text-[#0a174e]",
+    subtitle: "text-sm text-gray-600",
+    badge: "px-3 py-1 rounded-full border-2 flex items-center gap-2",
+    infoSection: "space-y-3",
+    infoItem: "flex items-center gap-3",
+    infoIconContainer: "p-2 bg-gradient-to-br rounded-lg",
+    infoIconGold: "from-[#b6a253] to-[#d4c373]",
+    infoIconDark: "from-[#0a174e] to-[#222a54]",
+    infoContent: "flex-1",
+    infoLabel: "text-xs text-gray-500 font-semibold uppercase",
+    infoValue: "text-sm font-medium text-[#0a174e]",
+    priceContainer: "flex items-center justify-between p-4 bg-gradient-to-r from-[#0a174e]/10 to-[#222a54]/10 rounded-lg border-l-4 border-[#b6a253]",
+    priceIconContainer: "p-2 bg-[#b6a253] rounded-lg",
+    priceIcon: "text-white",
+    priceLabel: "text-xs text-gray-500 font-semibold uppercase",
+    priceValue: "text-2xl font-bold text-[#0a174e]",
+  },
 } as const;
 
 // ============================================
@@ -254,6 +309,8 @@ export const sectionTitle = "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-b
 export const modalBackdrop = "fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md transition-opacity"
 export const modalBackdropGradient = "linear-gradient(135deg, rgba(10, 20, 69, 0.95) 0%, rgba(34, 42, 84, 0.9) 50%, rgba(10, 20, 69, 0.95) 100%)"
 export const modalContainer = "bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 transform transition-all border-4 border-white/20"
+export const modalContainerSmall = "bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 transform transition-all border-4 border-white/20"
+export const modalContainerLarge = "bg-white rounded-3xl shadow-2xl max-w-[95%] sm:max-w-[90%] md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl w-full mx-4 transform transition-all border-4 border-white/20"
 export const modalHeader = "flex items-center justify-between p-6 border-b-[3px] border-[#b6a253] bg-[#0a1445]"
 export const modalTitle = "text-2xl font-bold text-white"
 export const modalCloseButton = "text-[#b6a253] hover:text-white transition-colors p-2 hover:bg-[#222a54] rounded-full"
@@ -358,4 +415,31 @@ export const formComponents = {
   selectBase: "w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 bg-white text-[#0a1445] cursor-pointer",
   selectNormal: "border-[#222a54] focus:border-[#b6a253] focus:ring-[#b6a253]/20",
   selectError: "border-red-400 focus:border-red-500 focus:ring-red-200",
+  buttonBase: "w-full font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-center text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-offset-2",
+  buttonPrimary: "bg-[#0a1445] hover:bg-[#222a54] text-white border-2 border-[#b6a253] hover:border-[#b6a253]",
+  buttonSecondary: "bg-white border-2 border-[#0a1445] hover:border-[#222a54] text-[#0a1445] hover:bg-[#0a1445] hover:text-white",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - FORM SECTIONS
+// ============================================
+export const formSections = {
+  container: "bg-white rounded-2xl shadow-xl border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 overflow-hidden",
+  headerGradient: "bg-gradient-to-r from-[#0a174e] via-[#0a174e] to-[#222a54] px-4 sm:px-6 py-4 sm:py-5",
+  headerDefault: "bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 sm:p-6 border-2 border-gray-100",
+  iconContainerGradient: "w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg",
+  iconContainerDefault: "w-10 h-10 rounded-lg bg-[#0a174e]/10 flex items-center justify-center",
+  content: "p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6",
+} as const;
+
+// ============================================
+// DESIGN TOKENS - PRICE SUMMARY
+// ============================================
+export const priceSummary = {
+  container: "bg-gradient-to-br from-[#b6a253]/15 via-[#b6a253]/10 to-[#0a174e]/10 rounded-2xl border-2 border-[#b6a253]/40 shadow-lg overflow-hidden transition-all duration-500 ease-in-out",
+  header: "bg-gradient-to-r from-[#b6a253] to-[#d4c373] px-4 sm:px-6 py-4",
+  iconContainer: "w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/30 backdrop-blur-sm flex items-center justify-center shadow-lg",
+  content: "p-4 sm:p-6 space-y-3 sm:space-y-4",
+  row: "flex justify-between items-center py-2 border-b border-gray-200",
+  totalContainer: "pt-3 sm:pt-4 mt-2 bg-gradient-to-r from-[#0a174e]/5 to-[#b6a253]/5 rounded-xl p-3 sm:p-4 border-2 border-[#b6a253]/20",
 } as const;

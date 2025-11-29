@@ -47,11 +47,19 @@ const ReservationsService = {
   },
   
   /**
-   * Busca reservas por el ID de una habitación específica.
-   * Endpoint: GET /reservations/admin/room/:roomId
+   * Busca reservas por el ID de una habitación específica (solo para admin).
+   * Endpoint: GET /reservations/admin?roomId=:roomId
    */
   getByRoomAdmin: async (roomId: number): Promise<IReservationsAdminListResponse> => {
-    return apiFetch(`reservations/room/${roomId}`, 'GET') as Promise<IReservationsAdminListResponse>;
+    return apiFetch(`reservations/admin?roomId=${roomId}`, 'GET') as Promise<IReservationsAdminListResponse>;
+  },
+
+  /**
+   * Verifica disponibilidad de fechas para una habitación (público para clientes).
+   * Endpoint: GET /reservations/availability/:roomId
+   */
+  checkAvailability: async (roomId: number): Promise<IReservationsListResponse> => {
+    return apiFetch(`reservations/availability/${roomId}`, 'GET') as Promise<IReservationsListResponse>;
   },
 
   /**

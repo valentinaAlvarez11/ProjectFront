@@ -4,33 +4,28 @@ import React from 'react';
 import { UseFormRegister, FieldError } from 'react-hook-form';
 import { formComponents } from '@/utils/Tokens';
 
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface FormSelectProps {
+interface FormDateInputProps {
   label: string;
   name: string;
   register: UseFormRegister<any>;
   error?: FieldError;
-  options: Option[];
   required?: boolean;
-  placeholder?: string;
-  defaultValue?: string;
+  min?: string;
+  max?: string;
   disabled?: boolean;
+  placeholder?: string;
 }
 
-const FormSelect: React.FC<FormSelectProps> = ({
+const FormDateInput: React.FC<FormDateInputProps> = ({
   label,
   name,
   register,
   error,
-  options,
   required = false,
-  placeholder = 'Seleccione una opción',
-  defaultValue,
+  min,
+  max,
   disabled = false,
+  placeholder,
 }) => {
   return (
     <div className="flex flex-col space-y-2">
@@ -40,24 +35,20 @@ const FormSelect: React.FC<FormSelectProps> = ({
       >
         {label} {required && <span className="text-red-500">*</span>}
       </label>
-      <select
+      <input
         {...register(name)}
+        type="date"
         id={name}
-        defaultValue={defaultValue}
+        min={min}
+        max={max}
         disabled={disabled}
-        className={`${formComponents.selectBase} ${
+        placeholder={placeholder}
+        className={`${formComponents.inputBase} ${
           error 
-            ? formComponents.selectError
-            : formComponents.selectNormal
+            ? formComponents.inputError
+            : formComponents.inputNormal
         } ${disabled ? 'bg-gray-100 cursor-not-allowed opacity-60' : ''}`}
-      >
-        {!defaultValue && <option value="">{placeholder}</option>}
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+      />
       {error && (
         <p className={formComponents.errorText}>{error.message}</p>
       )}
@@ -65,5 +56,5 @@ const FormSelect: React.FC<FormSelectProps> = ({
   );
 };
 
-export default FormSelect;
+export default FormDateInput;
 

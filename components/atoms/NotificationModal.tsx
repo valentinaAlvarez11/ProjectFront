@@ -22,7 +22,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
     switch (type) {
       case 'success':
         return (
-          <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-green-500">
+          <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-green-500 transform transition-all duration-300 hover:scale-110">
             <svg
               className="w-10 h-10 text-green-600"
               fill="none"
@@ -40,7 +40,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
         );
       case 'error':
         return (
-          <div className="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-red-500">
+          <div className="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-red-500 transform transition-all duration-300 hover:scale-110">
             <svg
               className="w-10 h-10 text-red-600"
               fill="none"
@@ -58,7 +58,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
         );
       case 'info':
         return (
-          <div className="mx-auto w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-blue-500">
+          <div className="mx-auto w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-blue-500 transform transition-all duration-300 hover:scale-110">
             <svg
               className="w-10 h-10 text-blue-600"
               fill="none"
@@ -100,7 +100,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
         </p>
         <button
           onClick={onClose}
-          className="w-full bg-[#0a1445] hover:bg-[#222a54] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 text-center transform border-2 border-[#b6a253] hover:border-[#b6a253]"
+          className="w-full bg-[#0a1445] hover:bg-[#222a54] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] text-center transform border-2 border-[#b6a253] hover:border-[#b6a253]"
         >
           Aceptar
         </button>

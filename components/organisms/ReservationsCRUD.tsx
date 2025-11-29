@@ -110,7 +110,7 @@ export default function ReservationsCRUD() {
           fecha_fin: data.fecha_fin,
         };
         
-        // Si es admin y tiene usuarioId, agregarlo
+        // Si es admin o recepcionista y tiene usuarioId, agregarlo
         if ((data as CreateReservationFormData).usuarioId) {
           payload.usuarioId = Number((data as CreateReservationFormData).usuarioId);
         }
@@ -152,11 +152,18 @@ export default function ReservationsCRUD() {
   };
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
+    // Trabajar directamente con strings YYYY-MM-DD para evitar problemas de zona horaria
+    // Si viene con formato ISO (con 'T'), tomar solo la parte de la fecha
+    const dateOnly = dateString.split('T')[0];
+    const [year, month, day] = dateOnly.split('-').map(Number);
+    
+    // Crear fecha en UTC para formatear sin problemas de zona horaria
+    const date = new Date(Date.UTC(year, month - 1, day));
     return date.toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      timeZone: 'UTC'
     });
   };
 
@@ -302,6 +309,7 @@ export default function ReservationsCRUD() {
             isOpen={isModalOpen}
             onClose={handleCancel}
             title={editingReservation ? 'Editar Reserva' : 'Crear Nueva Reserva'}
+            size="large"
           >
             <ReservationForm
               onSubmit={handleSubmit}
@@ -317,8 +325,10 @@ export default function ReservationsCRUD() {
             isOpen={deleteModal.isOpen}
             onClose={deleteModal.close}
             onConfirm={handleDeleteConfirm}
-            itemName="reserva"
-            isLoading={isDeleting} itemType={''}          />
+            itemName={deletingReservationId ? `#${deletingReservationId}` : ''}
+            itemType="reserva"
+            isLoading={isDeleting}
+          />
 
           <SuccessModal
             isOpen={successModal.isOpen}
