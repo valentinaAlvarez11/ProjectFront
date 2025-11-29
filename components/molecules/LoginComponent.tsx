@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import useLoginForm from "@/hooks/useLoginForm";
 import { useAuthStore } from "@/store/authStore";
 import FormField from "./FormField";
@@ -9,11 +10,14 @@ import SocialButton from "./SocialButton";
 import Button from "../atoms/ButtonAuth";
 import TextLink from "../atoms/TextLink";
 import Separator from "../atoms/Separator";
-import { formFieldContainer, formLabel, formErrorTextCenter, formSuccessText, loginTextLinkSmall } from "@/utils/Tokens";
+import { formFieldContainer, formLabel, formSuccessText, loginTextLinkSmall } from "@/utils/Tokens";
+import ErrorModal from "./ErrorModal";
+import { useModal } from "@/hooks/useModal";
 
 export default function LoginComponent() {
   const router = useRouter();
   const { user } = useAuthStore();
+  const errorModal = useModal();
 
   const {
     register,
@@ -34,56 +38,68 @@ export default function LoginComponent() {
     },
   });
 
+  // Mostrar modal de error cuando hay un error del servidor
+  useEffect(() => {
+    if (serverError) {
+      errorModal.open();
+    }
+  }, [serverError, errorModal]);
+
   const onSubmit = handleSubmit(submit);
 
-  return (
-    <form onSubmit={onSubmit} className="space-y-5">
-      <FormField
-        label="Email"
-        register={register("email")}
-        error={errors.email}
-        type="email"
-        id="email"
-        placeholder="mail@example.com"
-      />
-      
-      <div className={formFieldContainer}>
-        <div className="flex items-center justify-between">
-          <label htmlFor="password" className={formLabel}>
-            Password
-          </label>
-          <TextLink href="/forgot-password" className={loginTextLinkSmall}>
-            Forgot your password?
-          </TextLink>
+  return (
+    <>
+      <form onSubmit={onSubmit} className="space-y-5">
+        <FormField
+          label="Email"
+          register={register("email")}
+          error={errors.email}
+          type="email"
+          id="email"
+          placeholder="mail@example.com"
+        />
+        
+        <div className={formFieldContainer}>
+          <div className="flex items-center justify-between">
+            <label htmlFor="password" className={formLabel}>
+              Password
+            </label>
+            <TextLink href="/forgot-password" className={loginTextLinkSmall}>
+              Forgot your password?
+            </TextLink>
+          </div>
+          <PasswordField
+            label=""
+            register={register("password")}
+            error={errors.password}
+            id="password"
+            placeholder="Password"
+          />
         </div>
-        <PasswordField
-          label=""
-          register={register("password")}
-          error={errors.password}
-          id="password"
-          placeholder="Password"
-        />
-      </div>
 
-      {serverError && (
-        <p className={formErrorTextCenter}>{serverError}</p>
-      )}
+        {successMessage && (
+          <p className={formSuccessText}>{successMessage}</p>
+        )}
 
-      {successMessage && (
-        <p className={formSuccessText}>{successMessage}</p>
-      )}
+        <Button
+          type="submit"
+          variant="register"
+          className="mt-4"
+        >
+          Login
+        </Button>
 
-      <Button
-        type="submit"
-        variant="register"
-        className="mt-4"
-      >
-        Login
-      </Button>
+        <Separator />
 
-      <Separator />
+        <SocialButton />
+      </form>
 
-      <SocialButton />
-    </form>
-  );
+      <ErrorModal
+        isOpen={errorModal.isOpen}
+        onClose={errorModal.close}
+        title="Error en el Inicio de Sesión"
+        message={serverError || "Ocurrió un error al intentar iniciar sesión"}
+      />
+    </>
+  );
 }

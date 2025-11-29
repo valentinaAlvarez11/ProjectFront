@@ -35,14 +35,14 @@ const ErrorModal: React.FC<ErrorModalProps> = ({
       onClose={onClose}
       title={title}
     >
-      <div className="space-y-6">
+      <div className="space-y-6 py-2">
         <div className="text-center">
-          <div className={modalErrorIcon}>❌</div>
-          <p className={modalErrorText}>
+          <div className={`${modalErrorIcon} transform transition-all duration-300 hover:scale-110`}>❌</div>
+          <p className={`${modalErrorText} mt-2`}>
             {message}
           </p>
           {details && (
-            <p className={modalErrorSubtext}>
+            <p className={`${modalErrorSubtext} mt-2`}>
               {details}
             </p>
           )}
@@ -50,7 +50,7 @@ const ErrorModal: React.FC<ErrorModalProps> = ({
         <div className={modalButtonContainer}>
           <button
             onClick={onClose}
-            className={modalButtonError}
+            className={`${modalButtonError} transition-all duration-300 hover:shadow-lg hover:scale-[1.02]`}
           >
             Aceptar
           </button>

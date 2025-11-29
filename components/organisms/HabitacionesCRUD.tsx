@@ -23,7 +23,7 @@ export default function HabitacionesCRUD() {
   const [deletingHabitacionId, setDeletingHabitacionId] = useState<number | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  // Hook para manejar el modal de confirmación de eliminación
+  // Hook para manejar el modal de confirmaci?n de eliminaci?n
   const deleteModal = useModal();
 
   useEffect(() => {
@@ -56,8 +56,8 @@ export default function HabitacionesCRUD() {
       setEditingHabitacion(response.habitacion);
       setIsEditModalOpen(true);
     } catch (err: any) {
-      console.error('Error al cargar habitación:', err);
-      setError(err?.message || 'Error al cargar la habitación');
+      console.error('Error al cargar habitaci?n:', err);
+      setError(err?.message || 'Error al cargar la habitaci?n');
     } finally {
       setLoadingHabitacion(false);
     }
@@ -78,8 +78,8 @@ export default function HabitacionesCRUD() {
       setDeletingHabitacionId(null);
       loadHabitaciones();
     } catch (err: any) {
-      console.error('Error al eliminar habitación:', err);
-      setError(err?.message || 'Error al eliminar la habitación');
+      console.error('Error al eliminar habitaci?n:', err);
+      setError(err?.message || 'Error al eliminar la habitaci?n');
       // No cerramos el modal si hay error, para que el usuario pueda intentar de nuevo
     } finally {
       setIsDeleting(false);
@@ -147,7 +147,7 @@ export default function HabitacionesCRUD() {
                   ID
                 </th>
                 <th className={adminPage.tableHeaderCell}>
-                  Número
+                  N?mero
                 </th>
                 <th className={adminPage.tableHeaderCell}>
                   Tipo
@@ -222,6 +222,7 @@ export default function HabitacionesCRUD() {
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         title="Crear Nueva Habitación"
+        size="large"
       >
         <div className="max-h-[80vh] overflow-y-auto -m-6">
           <CreateRoomForm 
@@ -239,6 +240,7 @@ export default function HabitacionesCRUD() {
           setError(null);
         }}
         title="Editar Habitación"
+        size="large"
       >
         {loadingHabitacion ? (
           <LoadingSpinner 
@@ -258,7 +260,7 @@ export default function HabitacionesCRUD() {
         ) : null}
       </Modal>
 
-      {/* Modal de confirmación de eliminación */}
+      {/* Modal de confirmaci?n de eliminaci?n */}
       <ConfirmDeleteModal
         isOpen={deleteModal.isOpen}
         onClose={() => {

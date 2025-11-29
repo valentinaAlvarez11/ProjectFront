@@ -60,38 +60,26 @@ export default function HeaderComponent() {
     }
     
     return links;
-  }, [isLoggedIn]); 
-  
-  const headerPaddingClass = isScrolled ? 'py-2 sm:py-3' : 'py-4 sm:py-6';
-  const logoSizeClass = isScrolled ? 'w-12 h-10 sm:w-[60px] sm:h-[60px]' : 'w-16 h-14 sm:w-[80px] sm:h-[80px]';
+  }, []); 
 
-  if (loadingAuth) {
-    return (
-      <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253] sticky top-0 z-50">
-        <div className="flex items-center max-w-[1400px] mx-auto px-8 py-6">
-          <div className="text-white">Cargando sesión...</div>
-        </div>
-      </header>
-    );
-  }
-
-  return (
-    <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253] sticky top-0 z-50 transition-all duration-300 ease-in-out">
-      <div className={`flex items-center justify-between max-w-[1400px] mx-auto px-4 sm:px-8 transition-all duration-300 ease-in-out ${headerPaddingClass}`}>
-        
-        {/* Logo */}
-        <div className="flex items-center min-w-[80px] sm:min-w-[120px]">
-          <Link href="/" onClick={closeMenu}>
-            <Image
-              src="https://static.wixstatic.com/media/820831_c1a822eeac9c491b82556da918086b59~mv2.png/v1/crop/x_185,y_232,w_649,h_602/fill/w_222,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO-SIN-FONDO.png"
-              alt="Hotel Regatta Cartagena"
-              width={80}
-              height={80}
-              priority
-              className={`transition-all duration-300 ease-in-out ${logoSizeClass}`}
-            />
-          </Link>
-        </div>
+  return (
+    <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253] sticky top-0 z-50">
+      {/* CLASES CORREGIDAS: Aseguramos py-4 sm:py-6 para la altura original */}
+      <div className="flex items-center justify-between max-w-[1400px] mx-auto ">
+        {/* Logo */}
+        <div className="flex items-center min-w-[80px] sm:min-w-[120px]">
+          <Link href="/" onClick={closeMenu}>
+            {/* RUTA DEL LOGO CORREGIDA: Volvemos a la URL de Wix */}
+            <Image
+              src="https://static.wixstatic.com/media/820831_c1a822eeac9c491b82556da918086b59~mv2.png/v1/crop/x_185,y_232,w_649,h_602/fill/w_222,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO-SIN-FONDO.png"
+              alt="Hotel Regatta Cartagena"
+              width={80}
+              height={80}
+              priority
+              className="w-16 h-14 sm:w-[80px] sm:h-[80px]"
+            />
+          </Link>
+        </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center flex-1 justify-center" suppressHydrationWarning>

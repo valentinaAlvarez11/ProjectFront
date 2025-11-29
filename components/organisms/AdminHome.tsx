@@ -38,7 +38,6 @@ export default function AdminHome() {
       setLoading(true);
       setError(null);
       
-      // Cargar habitaciones y reservas en paralelo
       const [roomsResponse, reservationsResponse] = await Promise.all([
         RoomsService.getAllAdmin(),
         ReservationsService.getAllAdmin(),
@@ -47,31 +46,27 @@ export default function AdminHome() {
       const rooms: IRoom[] = roomsResponse.habitaciones;
       const reservations: IReservationAdmin[] = reservationsResponse.reservas;
       
-      // Filtrar TODAS las reservas confirmadas (sin importar fechas)
+     
       const confirmedReservations = reservations.filter(reservation => {
         return reservation.estado === 'confirmada';
       });
       
-      // Obtener IDs de habitaciones con reservas confirmadas
+      
       const roomsWithConfirmedReservations = new Set(
         confirmedReservations.map(res => res.habitacionId)
       );
       
-      // Calcular estadísticas
+ 
       const total = rooms.length;
       
-      // Una habitación está disponible si:
-      // 1. Tiene disponible = true en la BD
-      // 2. NO tiene una reserva confirmada (activa o futura)
+      
       const available = rooms.filter(room => {
         const isRoomAvailableInDB = room.disponible === true;
         const hasConfirmedReservation = roomsWithConfirmedReservations.has(room.id);
         return isRoomAvailableInDB && !hasConfirmedReservation;
       }).length;
       
-      // Una habitación NO está disponible si:
-      // 1. Tiene disponible = false en la BD, O
-      // 2. Tiene una reserva confirmada (activa o futura)
+   
       const unavailable = rooms.filter(room => {
         const isRoomUnavailableInDB = room.disponible === false;
         const hasConfirmedReservation = roomsWithConfirmedReservations.has(room.id);
@@ -115,10 +110,10 @@ export default function AdminHome() {
       variant: 'secondary' as const,
     },
     {
-      title: 'Ver Reservas',
+      title: 'Gestionar Reservas',
       description: 'Revisar y gestionar reservas',
       icon: '📅',
-      href: '/reservas',
+      href: '/admin/reservations',
       variant: 'dark' as const,
     },
   ];

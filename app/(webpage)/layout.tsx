@@ -1,8 +1,6 @@
 //webpage layout
 import type { Metadata } from "next";
-import HeaderComponent from "@/components/organisms/HeaderComponent";
-import { AuthInitializer } from "@/components/organisms/AuthInitializer";
-import FooterBooking from "@/components/organisms/FooterBooking";
+import AppLayout from "@/components/organisms/AppLayout";
 
 export const metadata: Metadata = {
   title: "Hotel Regatta Cartagena",
@@ -15,14 +13,8 @@ export default function WebpageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <AuthInitializer>
-        <HeaderComponent />
-        <main>
-          {children}
-        </main>
-        <FooterBooking />
-      </AuthInitializer>
-    </>
+    <AppLayout showFooter={true}>
+      {children}
+    </AppLayout>
   );
 }

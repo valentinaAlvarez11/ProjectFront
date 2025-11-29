@@ -19,13 +19,17 @@ export interface IReservationAdmin extends IReservation {
   nombre_usuario: string;
   email_usuario: string;
   numero_habitacion: string;
+  precio_noche?: number;
+  nombre_creador?: string;
+  email_creador?: string;
 }
 
 // Crear una Reserva
 export interface IReservationPayload {
   habitacionId: number;
   fecha_inicio: string; 
-  fecha_fin: string;  
+  fecha_fin: string;
+  usuarioId?: number; // Opcional para admin crear reservas para otros usuarios
 }
 
 // Editar 
