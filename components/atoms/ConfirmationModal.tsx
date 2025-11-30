@@ -28,7 +28,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     switch (variant) {
       case 'danger':
         return (
-          <div className="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-red-500">
+          <div className="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-red-500 transform transition-all duration-300 hover:scale-110">
             <svg
               className="w-10 h-10 text-red-600"
               fill="none"
@@ -46,7 +46,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         );
       case 'warning':
         return (
-          <div className="mx-auto w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-yellow-500">
+          <div className="mx-auto w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-yellow-500 transform transition-all duration-300 hover:scale-110">
             <svg
               className="w-10 h-10 text-yellow-600"
               fill="none"
@@ -64,7 +64,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         );
       case 'info':
         return (
-          <div className="mx-auto w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-blue-500">
+          <div className="mx-auto w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-blue-500 transform transition-all duration-300 hover:scale-110">
             <svg
               className="w-10 h-10 text-blue-600"
               fill="none"
@@ -112,13 +112,13 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         <div className="flex flex-col sm:flex-row gap-3">
           <button
             onClick={onClose}
-            className="flex-1 bg-white border-2 border-[#0a1445] hover:border-[#222a54] font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-center transform text-[#0a1445] hover:bg-gray-50"
+            className="flex-1 bg-white border-2 border-[#0a1445] hover:border-[#222a54] font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] text-center transform text-[#0a1445] hover:bg-gray-50"
           >
             {cancelText}
           </button>
           <button
             onClick={handleConfirm}
-            className={`flex-1 ${getConfirmButtonClass()} text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 text-center transform border-2`}
+            className={`flex-1 ${getConfirmButtonClass()} text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-[1.02] text-center transform border-2`}
           >
             {confirmText}
           </button>

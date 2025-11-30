@@ -43,31 +43,39 @@ const ReservationsService = {
    * Endpoint: GET /reservations/admin/user/:userId
    */
   getByUserAdmin: async (userId: number): Promise<IReservationsAdminListResponse> => {
-    return apiFetch(`reservations/admin/user/${userId}`, 'GET') as Promise<IReservationsAdminListResponse>;
+    return apiFetch(`reservations/user/${userId}`, 'GET') as Promise<IReservationsAdminListResponse>;
   },
   
   /**
-   * Busca reservas por el ID de una habitación específica.
-   * Endpoint: GET /reservations/admin/room/:roomId
+   * Busca reservas por el ID de una habitación específica (solo para admin).
+   * Endpoint: GET /reservations/admin?roomId=:roomId
    */
   getByRoomAdmin: async (roomId: number): Promise<IReservationsAdminListResponse> => {
-    return apiFetch(`reservations/admin/room/${roomId}`, 'GET') as Promise<IReservationsAdminListResponse>;
+    return apiFetch(`reservations/admin?roomId=${roomId}`, 'GET') as Promise<IReservationsAdminListResponse>;
+  },
+
+  /**
+   * Verifica disponibilidad de fechas para una habitación (público para clientes).
+   * Endpoint: GET /reservations/availability/:roomId
+   */
+  checkAvailability: async (roomId: number): Promise<IReservationsListResponse> => {
+    return apiFetch(`reservations/availability/${roomId}`, 'GET') as Promise<IReservationsListResponse>;
   },
 
   /**
    * Actualiza los datos de una reserva (Admin).
-   * Endpoint: PUT /reservations/admin/:id
+   * Endpoint: PUT /reservations/:id
    */
   updateReservationAdmin: async (id: number, data: IReservationUpdatePayload): Promise<IMessageResponse> => {
-    return apiFetch(`reservations/admin/${id}`, 'PUT', data) as Promise<IMessageResponse>;
+    return apiFetch(`reservations/${id}`, 'PUT', data) as Promise<IMessageResponse>;
   },
 
   /**
    * Elimina una reserva por su ID (Admin).
-   * Endpoint: DELETE /reservations/admin/:id
+   * Endpoint: DELETE /reservations/:id
    */
   deleteReservationAdmin: async (id: number): Promise<IMessageResponse> => {
-    return apiFetch(`reservations/admin/${id}`, 'DELETE') as Promise<IMessageResponse>;
+    return apiFetch(`reservations/${id}`, 'DELETE') as Promise<IMessageResponse>;
   }
 };
 

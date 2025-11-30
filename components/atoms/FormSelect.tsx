@@ -18,6 +18,7 @@ interface FormSelectProps {
   required?: boolean;
   placeholder?: string;
   defaultValue?: string;
+  disabled?: boolean;
 }
 
 const FormSelect: React.FC<FormSelectProps> = ({
@@ -29,6 +30,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
   required = false,
   placeholder = 'Seleccione una opción',
   defaultValue,
+  disabled = false,
 }) => {
   return (
     <div className="flex flex-col space-y-2">
@@ -42,11 +44,12 @@ const FormSelect: React.FC<FormSelectProps> = ({
         {...register(name)}
         id={name}
         defaultValue={defaultValue}
+        disabled={disabled}
         className={`${formComponents.selectBase} ${
           error 
             ? formComponents.selectError
             : formComponents.selectNormal
-        }`}
+        } ${disabled ? 'bg-gray-100 cursor-not-allowed opacity-60' : ''}`}
       >
         {!defaultValue && <option value="">{placeholder}</option>}
         {options.map((option) => (

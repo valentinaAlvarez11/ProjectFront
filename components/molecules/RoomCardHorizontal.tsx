@@ -79,8 +79,7 @@ const RoomCardHorizontal: React.FC<RoomCardHorizontalProps> = ({ room }) => {
   };
 
   return (
-    <Link href={`/room/${room.id}`} className="no-underline block">
-      <div className={cards.roomCardHorizontal}>
+    <div className={cards.roomCardHorizontal}>
         {/* Imagen a la izquierda */}
         <div className="w-full sm:w-[40%] lg:w-[35%] h-[250px] sm:h-[300px] lg:h-[280px] relative flex-shrink-0">
           {hasValidImage ? (
@@ -129,15 +128,29 @@ const RoomCardHorizontal: React.FC<RoomCardHorizontalProps> = ({ room }) => {
             )}
           </div>
 
-          {/* Botón Ver más */}
-          <div className="mt-4">
-            <Button variant="primaryFull">
-              Ver más
-            </Button>
+          {/* Botones de acción */}
+          <div className="mt-4 flex flex-col sm:flex-row gap-3">
+            <Link 
+              href={`/room/${room.id}`}
+              className="flex-1"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Button variant="secondary" className="w-full">
+                Ver más
+              </Button>
+            </Link>
+            <Link 
+              href="/nueva-reserva"
+              className="flex-1"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Button variant="primaryFull" className="w-full">
+                Reservar
+              </Button>
+            </Link>
           </div>
         </div>
-      </div>
-    </Link>
+    </div>
   );
 };
 

@@ -47,13 +47,28 @@ export default function AdminPageLayout({
         router.push('/');
       }, 2000);
     }
+    if (!requireAdmin && !loadingAuth && isLoggedIn && user?.rol !== 'admin' && user?.rol !== 'recepcionista') {
+      setErrorMessage('Acceso denegado. Solo el personal autorizado puede acceder a esta página.');
+      errorModal.open();
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+    }
   }, [loadingAuth, isLoggedIn, user, router, errorModal, requireAdmin]);
 
   if (loadingAuth) {
     return <AuthLoadingState />;
   }
 
-  if (!isLoggedIn || (requireAdmin && user?.rol !== 'admin')) {
+  if (!isLoggedIn) {
+    return null;
+  }
+
+  if (requireAdmin && user?.rol !== 'admin') {
+    return null;
+  }
+
+  if (!requireAdmin && user?.rol !== 'admin' && user?.rol !== 'recepcionista') {
     return null;
   }
 

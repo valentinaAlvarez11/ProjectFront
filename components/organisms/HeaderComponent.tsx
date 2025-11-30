@@ -1,10 +1,10 @@
-// components/organisms/HeaderComponent.tsx (Refactorizado y Corregido)
+// components/organisms/HeaderComponent.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useMemo } from "react";
-// ASUME que headerLinkBase y headerLinkSeparator son clases definidas en tu proyecto
+import { useState, useMemo, useEffect } from "react"; 
+import { usePathname } from "next/navigation"; 
 import { headerLinkBase, headerLinkSeparator } from "@/utils/Tokens";
 import { useAuthStore } from "@/store/authStore"; 
 import { UserDropdown } from "./UserDropdown"; 
@@ -17,20 +17,48 @@ interface NavLink {
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isLoggedIn, user, loadingAuth } = useAuthStore();
+  const [isScrolled, setIsScrolled] = useState(false); 
+  
+  const pathname = usePathname(); 
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const user = useAuthStore((state) => state.user);
+  const loadingAuth = useAuthStore((state) => state.loadingAuth);
+
   const isAdminOrRecep = user && (user.rol === 'admin' || user.rol === 'recepcionista');
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Determinar los enlaces principales basados en el rol (Memorizar para rendimiento)
+  useEffect(() => {
+    const handleScroll = () => {
+        const scrollThreshold = 80; 
+        const currentScroll = window.scrollY;
+        const scrolled = currentScroll > scrollThreshold;
+        if (scrolled !== isScrolled) {
+            setIsScrolled(scrolled);
+        }
+    };
+    handleScroll(); 
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isScrolled]);
+
   const mainNavLinks = useMemo(() => {
     let links: NavLink[] = [
       { name: "Inicio", href: "/" },
       { name: "Servicios", href: "/servicios" },
       { name: "Restaurante & Bar", href: "/restaurante-bar" },
     ];
-
+    // Aquí puedes añadir condicionalmente los enlaces de 'Reservas' o 'Políticas'
+    // si quieres que también tengan el color activo
+    
+    // Ejemplo: Si está logueado, se añade el enlace de Reservas
+    if (isLoggedIn) {
+        links.splice(1, 0, { name: "Reservas", href: "/reservas" });
+    }
+    
     return links;
   }, []); 
 
@@ -55,20 +83,32 @@ export default function HeaderComponent() {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center flex-1 justify-center" suppressHydrationWarning>
-          {mainNavLinks.map((link, index) => (
-            <Link 
-              key={link.name} 
-              href={link.href} 
-              className={`${headerLinkBase} ${headerLinkSeparator}`}
-            >
-              {link.name}
-            </Link>
-          ))}
+          {mainNavLinks.map((link, index) => {
+            // 🔑 DETERMINAR SI LA RUTA ES ACTIVA
+            // Compara si la ruta del enlace coincide exactamente con la ruta actual.
+            // Para 'Inicio' ('/'), a veces necesitamos ser menos estrictos si la URL es solo '/'.
+            const isActive = pathname === link.href || 
+                             (link.href === '/' && pathname === '/');
+            
+            // 🔑 CLASES CONDICIONALES
+            const activeClass = isActive 
+                                ? "text-[#b6a253] font-semibold" // Color dorado si está activo
+                                : "text-white hover:text-[#b6a253]"; // Blanco y hover dorado si no está activo
+
+            return (
+              <Link 
+                key={link.name} 
+                href={link.href} 
+                // Concatenamos las clases base, el separador y la clase activa/inactiva
+                className={`${headerLinkBase} ${headerLinkSeparator} ${activeClass} ${isScrolled ? 'text-sm' : 'text-base'}`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
           
           {/* Menú de Gestión/Servicios solo para Admin/Recepcionista */}
           {isAdminOrRecep && user && (
-            // AQUI DEBEMOS HACER QUE EL CONTENEDOR DEL DROPDOWN NO TENGA UN PADDING EXTRA
-            // Usamos un div limpio y dejamos que el AdminDropdown maneje su propio padding
             <div className={`text-white`} suppressHydrationWarning>
                <AdminDropdown rol={user.rol as 'admin' | 'recepcionista'} />
             </div>
@@ -76,34 +116,43 @@ export default function HeaderComponent() {
         </nav>
 
         {/* User Navigation (Dropdown) */}
-        <div className="hidden lg:block" suppressHydrationWarning>
+        <div className="hidden lg:flex items-center gap-4" suppressHydrationWarning>
+          {/* 🔑 NUEVA LÓGICA: Saludo al usuario logueado */}
+          {isLoggedIn && user?.nombre && (
+            <span className="text-white text-base font-light whitespace-nowrap">
+              Hola, {user.nombre}
+            </span>
+          )}
+          
           <UserDropdown />
         </div>
 
-        {/* Mobile Menu Button y Lógica Móvil (Omitido para brevedad) */}
+        {/* Mobile Menu Button y Lógica Móvil (Omitido) */}
+        {/* ... (código móvil) ... */}
+        
         <button
-          onClick={toggleMenu}
-          className="lg:hidden text-white p-2 focus:outline-none focus:ring-2 focus:ring-[#b6a253] rounded"
-          aria-label="Toggle menu"
-          aria-expanded={isMenuOpen}
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            {isMenuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-      </div>
+          onClick={toggleMenu}
+          className="lg:hidden text-white p-2 focus:outline-none focus:ring-2 focus:ring-[#b6a253] rounded"
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            {isMenuOpen ? (
+              <path d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+      </div>
 
       {/* Mobile Navigation Menu (Asegurando la coherencia) */}
       <nav
@@ -113,26 +162,26 @@ export default function HeaderComponent() {
         suppressHydrationWarning
       >
         <div className="flex flex-col">
-          {mainNavLinks.map((link, index) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={closeMenu}
-              className={`text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] transition-colors ${
-                index === 0 
-                  ? "text-[#b6a253]" // Asumimos que el primer enlace ('Inicio') tiene el color primario
-                  : "text-white hover:text-[#b6a253]"
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-            {/* Aquí deberías incluir los dropdowns en la navegación móvil si es necesario */}
+          {mainNavLinks.map((link, index) => {
+            const isActive = pathname === link.href || (link.href === '/' && pathname === '/');
+            const activeMobileClass = isActive ? "text-[#b6a253] font-semibold" : "text-white hover:text-[#b6a253]";
+            
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={closeMenu}
+                className={`text-base font-light px-6 py-4 border-b border-[#222a54] hover:bg-[#222a54] transition-colors ${activeMobileClass}`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
             <div className="px-6 py-4 border-b border-[#222a54]" suppressHydrationWarning>
                 <UserDropdown />
             </div>
         </div>
       </nav>
-    </header>
-  );
+    </header>
+  );
 }
