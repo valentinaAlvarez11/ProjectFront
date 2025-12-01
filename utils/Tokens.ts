@@ -151,12 +151,17 @@ export const admin = {
   },
   actionCard: {
     container: "bg-white rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col",
+    containerDisabled: "bg-gray-100 rounded-2xl shadow-md p-6 sm:p-8 border-2 border-gray-300 opacity-60 cursor-not-allowed h-full flex flex-col",
     iconContainer: "w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-3xl sm:text-4xl mb-4 sm:mb-6 mx-auto",
     iconPrimary: "bg-[#0a174e]",
     iconSecondary: "bg-[#222a54]",
     iconDark: "bg-[#0a1445]",
+    iconDisabled: "bg-gray-400",
     title: "text-xl sm:text-2xl font-bold text-[#0a174e] text-center mb-2 sm:mb-3",
+    titleDisabled: "text-xl sm:text-2xl font-bold text-gray-500 text-center mb-2 sm:mb-3",
     description: "text-sm sm:text-base text-gray-600 text-center mb-4 sm:mb-6 flex-grow",
+    descriptionDisabled: "text-sm sm:text-base text-gray-400 text-center mb-4 sm:mb-6 flex-grow",
+    buttonDisabled: "opacity-50 cursor-not-allowed",
   },
   infoCard: {
     container: "bg-white rounded-2xl shadow-xl p-6 sm:p-8 lg:p-10 border-2 border-gray-100",

@@ -7,6 +7,7 @@ import RoomCards from "@/components/organisms/ShowRoomCards";
 import ShowRoomCardsHorizontal from "@/components/organisms/ShowRoomCardsHorizontal";
 import ComodidadesSection from "@/components/organisms/ComodidadesSection";
 import AdminHome from "@/components/organisms/AdminHome";
+import RecepcionistaHome from "@/components/organisms/RecepcionistaHome";
 import LoadingState from '@/components/atoms/LoadingState';
 import { useHomePage } from '@/hooks/useHomePage';
 
@@ -20,6 +21,9 @@ export default function HomePageContent() {
     
     case 'admin':
       return <AdminHome />;
+    
+    case 'recepcionista':
+      return <RecepcionistaHome />;
     
     case 'loggedIn':
       return (

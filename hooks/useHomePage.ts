@@ -4,7 +4,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useAuthStore } from "@/store/authStore";
 
-export type HomeViewType = 'loading' | 'admin' | 'loggedIn' | 'guest';
+export type HomeViewType = 'loading' | 'admin' | 'recepcionista' | 'loggedIn' | 'guest';
 
 export const useHomePage = () => {
   const { isLoggedIn, loadingAuth, user } = useAuthStore();
@@ -17,14 +17,16 @@ export const useHomePage = () => {
 
   const isLoading = !mounted || loadingAuth;
   const isAdmin = isLoggedIn && user?.rol === 'admin';
+  const isRecepcionista = isLoggedIn && user?.rol === 'recepcionista';
 
   // Lógica de decisión: determinar qué tipo de vista mostrar
   const viewType = useMemo((): HomeViewType => {
     if (isLoading) return 'loading';
     if (isAdmin) return 'admin';
+    if (isRecepcionista) return 'recepcionista';
     if (isLoggedIn) return 'loggedIn';
     return 'guest';
-  }, [isLoading, isAdmin, isLoggedIn]);
+  }, [isLoading, isAdmin, isRecepcionista, isLoggedIn]);
 
   return {
     viewType,

@@ -20,7 +20,11 @@ interface HotelStats {
   unavailableRooms: number;
 }
 
-export default function AdminHome() {
+interface AdminHomeProps {
+  userRole?: 'admin' | 'recepcionista';
+}
+
+export default function AdminHome({ userRole = 'admin' }: AdminHomeProps) {
   const [stats, setStats] = useState<HotelStats>({
     totalRooms: 0,
     availableRooms: 0,
@@ -94,6 +98,9 @@ export default function AdminHome() {
     return <ErrorState message={error} />;
   }
 
+  // Determinar qué acciones están deshabilitadas según el rol
+  const isRecepcionista = userRole === 'recepcionista';
+  
   const quickActions = [
     {
       title: 'Gestionar Habitaciones',
@@ -101,6 +108,7 @@ export default function AdminHome() {
       icon: '🏨',
       href: '/admin/rooms',
       variant: 'primary' as const,
+      disabled: isRecepcionista, // Deshabilitado para recepcionistas
     },
     {
       title: 'Gestionar Usuarios',
@@ -108,6 +116,7 @@ export default function AdminHome() {
       icon: '👥',
       href: '/admin/users',
       variant: 'secondary' as const,
+      disabled: isRecepcionista, // Deshabilitado para recepcionistas
     },
     {
       title: 'Gestionar Reservas',
@@ -115,6 +124,15 @@ export default function AdminHome() {
       icon: '📅',
       href: '/admin/reservations',
       variant: 'dark' as const,
+      disabled: false, // Habilitado para todos
+    },
+    {
+      title: 'Gestionar Historial',
+      description: 'Consultar historial de reservas y pagos',
+      icon: '📋',
+      href: '/admin/registros',
+      variant: 'primary' as const,
+      disabled: false, // Habilitado para admin y recepcionista
     },
   ];
 
@@ -124,7 +142,7 @@ export default function AdminHome() {
       <SectionContainer className={admin.hero.container}>
         <div className={admin.hero.content}>
           <h1 className={admin.hero.title}>
-            Bienvenido, Administrador
+            {isRecepcionista ? 'Bienvenido, Recepcionista' : 'Bienvenido, Administrador'}
           </h1>
           <p className={admin.hero.subtitle}>
             Panel de control del Hotel Regatta Cartagena
@@ -172,6 +190,7 @@ export default function AdminHome() {
                 icon={action.icon}
                 href={action.href}
                 variant={action.variant}
+                disabled={action.disabled}
               />
             ))}
           </div>
@@ -189,8 +208,10 @@ export default function AdminHome() {
               centros comerciales y discotecas de la ciudad.
             </p>
             <p className={admin.infoCard.text}>
-              Como administrador, tienes acceso completo a la gestión de habitaciones, 
-              recepcionistas y todas las funcionalidades del sistema.
+              {isRecepcionista 
+                ? 'Como recepcionista, puedes gestionar reservas y atender las necesidades de los huéspedes. Algunas funcionalidades están restringidas para administradores.'
+                : 'Como administrador, tienes acceso completo a la gestión de habitaciones, recepcionistas y todas las funcionalidades del sistema.'
+              }
             </p>
           </InfoCard>
         </div>

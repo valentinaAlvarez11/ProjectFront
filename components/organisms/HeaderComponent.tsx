@@ -51,16 +51,14 @@ export default function HeaderComponent() {
       { name: "Servicios", href: "/servicios" },
       { name: "Restaurante & Bar", href: "/restaurante-bar" },
     ];
-    // Aquí puedes añadir condicionalmente los enlaces de 'Reservas' o 'Políticas'
-    // si quieres que también tengan el color activo
     
-    // Ejemplo: Si está logueado, se añade el enlace de Reservas
-    if (isLoggedIn) {
+    // Agregar enlace de Reservas solo si está logueado y NO es admin o recepcionista
+    if (isLoggedIn && !isAdminOrRecep) {
         links.splice(1, 0, { name: "Reservas", href: "/reservas" });
     }
     
     return links;
-  }, []); 
+  }, [isLoggedIn, isAdminOrRecep]); 
 
   return (
     <header className="bg-[#0a1445] w-full font-sans border-b-[3px] border-[#b6a253] sticky top-0 z-50">
