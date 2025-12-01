@@ -32,8 +32,8 @@ export function AdminDropdown({ rol }: AdminDropdownProps) {
         ]; 
     };
     
-    // Título del enlace en la barra de navegación (según Mock-Up)
-    const navTitle = rol === 'admin' ? "Gestión" : "Servicios"; 
+    // Título del enlace en la barra de navegación
+    const navTitle = "Gestión"; 
 
     return (
         <div className="relative">
