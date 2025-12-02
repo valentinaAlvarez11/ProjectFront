@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import PaymentForm from '@/components/molecules/PaymentForm';
@@ -22,7 +22,7 @@ interface ReservationData {
   fecha_fin: string;
 }
 
-export default function PagoPage() {
+function PagoPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isLoggedIn, user, loadingAuth, checkAuthStatus } = useAuthStore();
@@ -288,5 +288,13 @@ export default function PagoPage() {
         message={errorMessage}
       />
     </>
+  );
+}
+
+export default function PagoPage() {
+  return (
+    <Suspense fallback={<LoadingState message="Cargando..." />}>
+      <PagoPageContent />
+    </Suspense>
   );
 }

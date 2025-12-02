@@ -2,14 +2,14 @@ import { z } from 'zod';
 
 // Schema para las instalaciones
 const instalacionesSchema = z.object({
-  wifi: z.boolean().default(false),
-  television: z.boolean().default(false),
-  aireAcondicionado: z.boolean().default(false),
-  banoDucha: z.boolean().default(false),
-  plancha: z.boolean().default(false),
-  toallas: z.boolean().default(false),
-  smartTV: z.boolean().default(false),
-  refrigerador: z.boolean().default(false),
+  wifi: z.boolean(),
+  television: z.boolean(),
+  aireAcondicionado: z.boolean(),
+  banoDucha: z.boolean(),
+  plancha: z.boolean(),
+  toallas: z.boolean(),
+  smartTV: z.boolean(),
+  refrigerador: z.boolean(),
 });
 
 // Schema para las características
@@ -36,11 +36,12 @@ export const createRoomSchema = z.object({
     .nullable()
     .optional(),
   caracteristicas: caracteristicasSchema,
-  imagenes: z.array(z.string().url({ message: 'Debe ser una URL válida' }).or(z.literal('')))
+  imagenes: z
+    .array(z.string().url({ message: 'Debe ser una URL válida' }).or(z.literal('')))
     .min(0)
     .max(10, { message: 'Máximo 10 imágenes' })
     .default([])
-    .transform((arr) => arr.filter(url => url && url.trim() !== '')),
+    .transform((arr) => arr.filter((url): url is string => url !== '' && url.trim() !== '')),
 });
 
 export type CreateRoomFormData = z.infer<typeof createRoomSchema>;

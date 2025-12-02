@@ -76,7 +76,7 @@ const HabitacionForm: React.FC<HabitacionFormProps> = ({
     formState: { errors },
     reset,
   } = useForm<CreateRoomFormData>({
-    resolver: zodResolver(createRoomSchema),
+    resolver: zodResolver(createRoomSchema) as any,
     defaultValues: habitacion
       ? {
           numero: habitacion.numero,
@@ -111,7 +111,7 @@ const HabitacionForm: React.FC<HabitacionFormProps> = ({
   });
 
   const { fields, append, remove } = useFieldArray({
-    control,
+    control: control as any,
     name: 'imagenes',
   });
 
@@ -261,7 +261,7 @@ const HabitacionForm: React.FC<HabitacionFormProps> = ({
               label={inst.label}
               name={`caracteristicas.instalaciones.${inst.key}`}
               register={register}
-              error={errors.caracteristicas?.instalaciones?.[inst.key as keyof typeof errors.caracteristicas.instalaciones]}
+              error={errors.caracteristicas?.instalaciones?.[inst.key as keyof typeof errors.caracteristicas.instalaciones] as any}
             />
           ))}
         </div>
@@ -277,7 +277,7 @@ const HabitacionForm: React.FC<HabitacionFormProps> = ({
           register={register}
           append={append}
           remove={remove}
-          error={errors.imagenes}
+          error={errors.imagenes as any}
         />
       </div>
 

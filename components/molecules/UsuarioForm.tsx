@@ -23,9 +23,7 @@ const baseUsuarioSchema = z.object({
     .min(1, { message: 'El nombre es obligatorio' })
     .max(20, { message: 'El nombre no puede superar 20 caracteres' })
     .regex(/^[A-Za-zÀ-ÿÑñ ]+$/, { message: 'El nombre solo puede contener letras y espacios' }),
-  rol: z.enum(['admin', 'recepcionista', 'cliente'], {
-    required_error: 'Debe seleccionar un rol',
-  }),
+  rol: z.enum(['admin', 'recepcionista', 'cliente']),
   contraseña: z.string(),
 });
 
@@ -52,6 +50,7 @@ const editUsuarioSchema = baseUsuarioSchema.extend({
 });
 
 export type UsuarioFormData = z.infer<typeof createUsuarioSchema>;
+export type EditUsuarioFormData = z.infer<typeof editUsuarioSchema>;
 
 interface UsuarioFormProps {
   onSubmit: (data: UsuarioFormData) => Promise<void>;
@@ -86,7 +85,7 @@ export default function UsuarioForm({
     handleSubmit,
     formState: { errors },
   } = useForm<UsuarioFormData>({
-    resolver: zodResolver(usuarioSchema),
+    resolver: zodResolver(usuarioSchema) as any,
     defaultValues: initialData || {
       email: '',
       telefono: '',
