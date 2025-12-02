@@ -406,6 +406,76 @@ export const adminPage = {
     fieldText: "text-gray-700",
     fieldTextBold: "text-[#0a174e]",
   },
+  // Registros/Historial de Compras Tokens
+  registros: {
+    // Grid container
+    gridContainer: "grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8",
+    // Payment card
+    paymentCard: "bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 transform hover:-translate-y-2 w-full",
+    cardContent: "space-y-3 sm:space-y-4",
+    // Card header
+    cardHeader: "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b-2 border-gray-200",
+    headerLeft: "flex items-center gap-2 sm:gap-3 flex-1 min-w-0",
+    headerIconContainer: "p-2 sm:p-3 bg-gradient-to-br from-[#0a174e] to-[#222a54] rounded-lg flex-shrink-0",
+    headerIcon: "text-white text-base sm:text-xl",
+    headerTextContainer: "flex-1 min-w-0",
+    headerTitle: "text-base sm:text-lg font-bold text-[#0a174e] truncate",
+    headerSubtitle: "text-xs sm:text-sm text-gray-600 truncate",
+    // Info sections
+    infoSection: "space-y-2 sm:space-y-3",
+    infoRow: "flex items-start sm:items-center gap-2 sm:gap-3",
+    infoIconContainer: "p-2 bg-gradient-to-br from-[#b6a253] to-[#d4c373] rounded-lg flex-shrink-0",
+    infoIconContainerDark: "p-2 bg-gradient-to-br from-[#0a174e] to-[#222a54] rounded-lg flex-shrink-0",
+    infoIcon: "text-white text-xs sm:text-sm",
+    infoContent: "flex-1 min-w-0",
+    infoLabel: "text-xs text-gray-500 font-semibold uppercase",
+    infoValue: "text-sm sm:text-base font-medium text-[#0a174e]",
+    infoValueSecondary: "text-xs text-gray-600 mt-1",
+    // Amount section
+    amountContainer: "flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-[#0a174e]/10 to-[#222a54]/10 rounded-lg border-l-4 border-[#b6a253] mt-3 sm:mt-4",
+    amountLeft: "flex items-center gap-2 sm:gap-3",
+    amountIconContainer: "p-2 bg-[#b6a253] rounded-lg",
+    amountIcon: "text-white text-sm sm:text-base",
+    amountLabel: "text-xs text-gray-500 font-semibold uppercase",
+    amountValue: "text-xl sm:text-2xl font-bold text-[#0a174e]",
+    // Empty state icon
+    emptyStateIcon: "text-6xl text-gray-400 mx-auto mb-4",
+  },
+  // Reservas/Mis Reservas Tokens
+  reservas: {
+    // Grid container (reutilizado de registros)
+    gridContainer: "grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8",
+    // Reservation card (reutilizado de registros)
+    reservationCard: "bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 border-2 border-gray-100 hover:border-[#b6a253] transition-all duration-300 transform hover:-translate-y-2 w-full",
+    cardContent: "space-y-3 sm:space-y-4",
+    // Card header (reutilizado de registros)
+    cardHeader: "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b-2 border-gray-200",
+    headerLeft: "flex items-center gap-2 sm:gap-3 flex-1 min-w-0",
+    headerIconContainer: "p-2 sm:p-3 bg-gradient-to-br from-[#0a174e] to-[#222a54] rounded-lg flex-shrink-0",
+    headerIcon: "text-white text-base sm:text-xl",
+    headerTextContainer: "flex-1 min-w-0",
+    headerTitle: "text-base sm:text-lg font-bold text-[#0a174e] truncate",
+    headerSubtitle: "text-xs sm:text-sm text-gray-600 truncate",
+    // Info sections (reutilizado de registros)
+    infoSection: "space-y-2 sm:space-y-3",
+    // Date info row
+    dateInfoRow: "flex items-start sm:items-center gap-2 sm:gap-3",
+    dateIconContainer: "p-2 bg-gradient-to-br from-[#b6a253] to-[#d4c373] rounded-lg flex-shrink-0",
+    dateIcon: "text-white text-xs sm:text-sm",
+    dateContent: "flex-1 min-w-0",
+    dateLabel: "text-xs text-gray-500 font-semibold uppercase",
+    dateValue: "text-sm sm:text-base font-medium text-[#0a174e]",
+    nightsText: "text-xs text-[#b6a253] font-semibold mt-1",
+    // Price section (reutilizado de registros)
+    priceContainer: "flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-[#0a174e]/10 to-[#222a54]/10 rounded-lg border-l-4 border-[#b6a253] mt-3 sm:mt-4",
+    priceLeft: "flex items-center gap-2 sm:gap-3",
+    priceIconContainer: "p-2 bg-[#b6a253] rounded-lg",
+    priceIcon: "text-white text-sm sm:text-base",
+    priceLabel: "text-xs text-gray-500 font-semibold uppercase",
+    priceValue: "text-xl sm:text-2xl font-bold text-[#0a174e]",
+    // Empty state icon
+    emptyStateIcon: "text-6xl text-gray-400 mx-auto mb-4",
+  },
 } as const;
 
 // DESIGN TOKENS - LOADING STATES
