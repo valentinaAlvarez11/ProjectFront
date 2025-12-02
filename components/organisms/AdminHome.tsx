@@ -100,7 +100,7 @@ export default function AdminHome({ userRole = 'admin' }: AdminHomeProps) {
 
   // Determinar qué acciones están deshabilitadas según el rol
   const isRecepcionista = userRole === 'recepcionista';
-  
+
   const quickActions = [
     {
       title: 'Gestionar Habitaciones',
