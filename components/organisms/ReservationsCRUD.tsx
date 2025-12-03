@@ -317,7 +317,7 @@ export default function ReservationsCRUD() {
               initialData={editingReservation || undefined}
               isEditing={!!editingReservation}
               isLoading={isSubmitting}
-              isAdmin={true}
+              isAdmin={currentUser?.rol === 'admin' || currentUser?.rol === 'recepcionista'}
             />
           </Modal>
 

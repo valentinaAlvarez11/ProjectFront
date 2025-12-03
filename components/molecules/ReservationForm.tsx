@@ -294,7 +294,7 @@ export default function ReservationForm({
         }
       }
       
-      // 2. Validar que si es admin creando, debe tener usuarioId
+      // 2. Validar que si es admin o recepcionista creando, debe tener usuarioId
       if (isAdmin && !isEditing && !data.usuarioId) {
         setServerError('Debe seleccionar un usuario para crear la reserva');
         return;
