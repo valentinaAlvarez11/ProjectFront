@@ -74,12 +74,10 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
 
     const handleSelectOffer = () => {
         if (isLoggedIn) {
-            // Si el usuario está logueado, no mostrar el modal
-            // Aquí puedes agregar la lógica para redirigir a la página de reservas
-            // Por ejemplo: router.push(`/reservations/create?roomId=${room.id}`);
-            // Por ahora, simplemente no hacemos nada o podrías mostrar un mensaje
-            console.log('Usuario logueado, proceder con la reserva');
-            // TODO: Redirigir a página de reservas cuando esté disponible
+            // Si el usuario está logueado, redirigir a la página de reservas
+            // Puedes pasar el ID de la habitación como parámetro de búsqueda (opcional)
+            router.push(`/reservas`);
+            console.log('Usuario logueado, redirigiendo a /reservas');
         } else {
             // Si el usuario NO está logueado, mostrar el modal de autenticación
             setIsModalOpen(true);
@@ -266,7 +264,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({ room }) => {
                                         onClick={handleSelectOffer}
                                         className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-base"
                                     >
-                                        SELECCIONE OFERTA
+                                        SELECCIONE
                                     </button>
                                 </div>
                             </div>
