@@ -59,6 +59,10 @@ export default function useLoginForm({ onSuccess }: { onSuccess?: () => void } =
     }
   };
 
+  const clearServerError = () => {
+    setServerError(null);
+  };
+
   return {
     register: form.register,
     handleSubmit: form.handleSubmit,
@@ -67,5 +71,6 @@ export default function useLoginForm({ onSuccess }: { onSuccess?: () => void } =
     submit,
     serverError,
     successMessage,
+    clearServerError,
   };
 }

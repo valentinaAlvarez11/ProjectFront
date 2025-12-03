@@ -26,6 +26,7 @@ export default function LoginComponent() {
     submit,
     serverError,
     successMessage,
+    clearServerError,
   } = useLoginForm({
     onSuccess: () => {
       // Verificar el rol del usuario después del login
@@ -44,6 +45,11 @@ export default function LoginComponent() {
       errorModal.open();
     }
   }, [serverError, errorModal]);
+
+  const handleCloseError = () => {
+    errorModal.close();
+    clearServerError();
+  };
 
   const onSubmit = handleSubmit(submit);
 
@@ -96,7 +102,7 @@ export default function LoginComponent() {
 
       <ErrorModal
         isOpen={errorModal.isOpen}
-        onClose={errorModal.close}
+        onClose={handleCloseError}
         title="Error en el Inicio de Sesión"
         message={serverError || "Ocurrió un error al intentar iniciar sesión"}
       />
